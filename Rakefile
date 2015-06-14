@@ -1,4 +1,7 @@
-desc "Example of task with invoke"
-task :first_task do
-  Rake::Task[:second_task].invoke
+require 'rake/testtask'
+
+Rake::TestTask.new do |t|
+  t.libs = ["lib"]
+  t.test_files = FileList['test/unit/*_test.rb']
+  t.verbose = true
 end
