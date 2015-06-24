@@ -6,4 +6,11 @@ class CSVReaderTest < Test::Unit::TestCase
     file = CSVReader.new.read_csv_file
     assert_not_nil file, "Openning CSV File failed"
   end
+
+  def test_content_is_correct
+    file = CSVReader.new.read_csv_file
+    puts file[0][0]
+    assert(file[0][0] == "Rigo Tovar", "Cannot read headers")
+  end
+
 end
