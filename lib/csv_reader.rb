@@ -7,4 +7,8 @@ class CSVReader
     csv = CSV.parse(csv_text, :headers => true)
   end
 
+  def valid_csv? (file_path)
+    return true
+  end
+
 end
