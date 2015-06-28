@@ -1,7 +1,7 @@
 require 'nokogiri'
 
-class XMLWriter
-  def write_xml_file
+class XMLWriter < Writer
+  def write
     builder = Nokogiri::XML::Builder.new do |xml|
       xml.root {
       xml.objects {
