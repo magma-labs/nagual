@@ -1,5 +1,5 @@
 class Writer
-  def writer
+  def write
     raise NotImplementedError, 'Ask the subclass'
   end
 end
