@@ -1,8 +1,9 @@
 require 'csv'
+require 'reader'
 
-class CSVReader
+class CSVReader < Reader
 
-  def read_csv_file
+  def read
     csv_text = File.read('data/example.csv')
     csv = CSV.parse(csv_text, :headers => true)
   end
