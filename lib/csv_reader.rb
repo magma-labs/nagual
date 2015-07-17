@@ -1,11 +1,13 @@
 require 'csv'
 require 'reader'
+require 'configuration'
 
 class CSVReader < Reader
 
   def read
-    csv_text = File.read('data/example.csv')
-    csv = CSV.parse(csv_text, :headers => true)
+    path = Configuration.properties["csv_file"]
+    csv_text =  File.read(path)
+    CSV.parse(csv_text, :headers => true)
   end
 
   def valid_csv? (file_path)
