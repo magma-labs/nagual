@@ -5,13 +5,12 @@ require 'configuration'
 class CSVReader < Reader
 
   def read
+    rows = Array.new
     path = Configuration.properties["csv_file"]
-    csv_text =  File.read(path)
-    CSV.parse(csv_text, :headers => true)
-  end
-
-  def valid_csv? (file_path)
-    return true
+    CSV.foreach(path, :headers => true) do |row|
+       rows << row
+    end
+    return rows
   end
 
 end
