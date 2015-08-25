@@ -7,10 +7,10 @@ class CSVReader < Reader
   def read
     rows = Array.new
     path = Configuration.properties["csv_file"]
-    CSV.foreach(path, :headers => true) do |row|
-       rows << row
+    CSV.foreach(path, headers: true) do |row|
+      rows << row
     end
-    return rows
+    rows
   end
 
 end
