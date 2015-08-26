@@ -2,4 +2,4 @@
 
 For help running this code you can get the [Nahual VM](https://github.com/sawyer-effect/nagual-vm).
 
-Run the test by doing: `bundle exec rake test`
+Run the test by doing: `rake spec`

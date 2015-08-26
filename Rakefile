@@ -1,7 +1,2 @@
-require 'rake/testtask'
-
-Rake::TestTask.new do |t|
-  t.libs << "config"
-  t.test_files = FileList['test/unit/*_test.rb']
-  t.verbose = true
-end
+require 'rspec/core/rake_task'
+RSpec::Core::RakeTask.new(:spec)
