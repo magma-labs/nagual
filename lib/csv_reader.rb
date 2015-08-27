@@ -1,6 +1,6 @@
 require 'csv'
-require 'reader'
-require 'configuration'
+require_relative 'reader'
+require_relative 'configuration'
 
 class CSVReader < Reader
 

@@ -1,3 +1,5 @@
 bin
 .bundle
 .DS_Store
+input.csv
+output.xml
