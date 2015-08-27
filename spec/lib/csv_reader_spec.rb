@@ -5,7 +5,7 @@ RSpec.describe CSVReader do
 
   include_context 'data'
 
-  subject { described_class.new(Configuration.properties["csv_file"]) }
+  subject { described_class.new(Configuration.properties["test_csv_file"]) }
 
   describe 'read' do
 
