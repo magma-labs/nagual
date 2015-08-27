@@ -2,8 +2,8 @@ RSpec.shared_context 'data' do
 
   let(:parsed_content) do
     [
-      { nombre_autor: 'Rigo Tovar', cancion:  'El Testamento' },
-      { nombre_autor: 'Chico Che',  cancion:  'Quen Pompo' }
+      { :"nombre-autor" => 'Rigo Tovar', cancion:  'El Testamento' },
+      { :"nombre-autor" => 'Chico Che',  cancion:  'Quen Pompo' }
     ]
   end
 
@@ -11,11 +11,11 @@ RSpec.shared_context 'data' do
   """<?xml version=\"1.0\"?>
 <catalog>
   <product>
-    <nombre_autor>Rigo Tovar</nombre_autor>
+    <nombre-autor>Rigo Tovar</nombre-autor>
     <cancion>El Testamento</cancion>
   </product>
   <product>
-    <nombre_autor>Chico Che</nombre_autor>
+    <nombre-autor>Chico Che</nombre-autor>
     <cancion>Quen Pompo</cancion>
   </product>
 </catalog>

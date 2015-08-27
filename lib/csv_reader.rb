@@ -8,7 +8,7 @@ class CSVReader < Reader
     csv_text     = File.read(path)
     first, *rest = *CSV.parse(csv_text, :headers => true)
     @content     = rest
-    @headers     = first.map { |header| header.gsub(' ', '_').downcase.to_sym }
+    @headers     = first.map { |header| header.gsub(' ', '-').downcase.to_sym }
   end
 
   def read
