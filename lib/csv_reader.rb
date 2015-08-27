@@ -4,13 +4,27 @@ require 'configuration'
 
 class CSVReader < Reader
 
+  def initialize
+    csv_text     = File.read(path)
+    first, *rest = *CSV.parse(csv_text, :headers => true)
+    @content     = rest
+    @headers     = first.map { |header| header.gsub(' ', '_').downcase.to_sym }
+  end
+
   def read
-    rows = Array.new
-    path = Configuration.properties["csv_file"]
-    CSV.foreach(path, headers: true) do |row|
-      rows << row
+    @content.map do |line|
+      row = {}
+      line.each_with_index.map do |value, index|
+        row[@headers[index]] = value.strip
+      end
+      row
     end
-    rows
+  end
+
+  private
+
+  def path
+    Configuration.properties["csv_file"]
   end
 
 end

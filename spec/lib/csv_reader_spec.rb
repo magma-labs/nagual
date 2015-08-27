@@ -4,13 +4,19 @@ require 'csv_reader'
 RSpec.describe CSVReader do
 
   let(:file) { CSVReader.new.read }
-
-  it 'reads file into an array' do
-    expect(file.class).to eq(Array)
+  let(:expected_result) do
+    [
+      { nombre_autor: 'Rigo Tovar', cancion:  'El Testamento' },
+      { nombre_autor: 'Chico Che',  cancion:  'Quen Pompo' }
+    ]
   end
 
-  it 'contains expected content' do
-    expect(file[0][0]).to eq('Rigo Tovar')
+  describe 'read' do
+
+    it 'returns expected result' do
+      expect(subject.read).to eq(expected_result)
+    end
+
   end
 
 end
