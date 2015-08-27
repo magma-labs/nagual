@@ -4,7 +4,7 @@ require 'configuration'
 
 class CSVReader < Reader
 
-  def initialize
+  def initialize(path)
     csv_text     = File.read(path)
     first, *rest = *CSV.parse(csv_text, :headers => true)
     @content     = rest
@@ -19,12 +19,6 @@ class CSVReader < Reader
       end
       row
     end
-  end
-
-  private
-
-  def path
-    Configuration.properties["csv_file"]
   end
 
 end
