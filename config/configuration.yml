@@ -2,5 +2,5 @@
 test_csv_file: data/example.csv
 csv_file: data/input.csv
 xml_file: data/output.xml
-reader: CSVReader
-writer: XMLWriter
+reader: Nagual::CSVReader
+writer: Nagual::XMLWriter

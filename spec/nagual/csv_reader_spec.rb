@@ -1,11 +1,10 @@
 require 'spec_helper'
-require 'csv_reader'
 
-RSpec.describe CSVReader do
+RSpec.describe Nagual::CSVReader do
 
   include_context 'data'
 
-  subject { described_class.new(Configuration.properties["test_csv_file"]) }
+  subject { described_class.new(Nagual::Configuration.properties["test_csv_file"]) }
 
   describe 'read' do
 

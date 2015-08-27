@@ -1,7 +1,6 @@
 require 'spec_helper'
-require 'xml_writer'
 
-RSpec.describe XMLWriter do
+RSpec.describe Nagual::XMLWriter do
 
   include_context 'data'
 
