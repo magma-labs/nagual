@@ -5,8 +5,7 @@ require_relative 'configuration'
 module Nagual
   class CSVReader < Reader
 
-    def initialize(path)
-      csv_text     = File.read(path)
+    def initialize(csv_text)
       first, *rest = *CSV.parse(csv_text, :headers => true)
       @content     = rest
       @headers     = first.map { |header| header.gsub(' ', '-').downcase.to_sym }

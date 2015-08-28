@@ -4,12 +4,22 @@ RSpec.describe Nagual::CSVReader do
 
   include_context 'data'
 
-  subject { described_class.new(Nagual::Configuration.properties["test_csv_file"]) }
-
   describe 'read' do
 
-    it 'returns expected result' do
-      expect(subject.read).to eq(parsed_content)
+    context 'with correct data' do
+
+      let(:csv_text) do
+        %Q{Nombre Autor,Cancion
+          Rigo Tovar, El Testamento
+          Chico Che, Quen Pompo}
+      end
+
+      subject { described_class.new(csv_text) }
+
+      it 'returns parsed content' do
+        expect(subject.read).to eq(parsed_content)
+      end
+
     end
 
   end

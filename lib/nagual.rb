@@ -4,7 +4,7 @@ Dir.glob(project_root, &method(:require))
 module Nagual
 
   def self.run
-    input  = Configuration.properties['csv_file']
+    input  = File.read(Configuration.properties['csv_file'])
     output = Configuration.properties['xml_file']
     reader = Object.const_get(Configuration.properties['reader'])
     writer = Object.const_get(Configuration.properties['writer'])
