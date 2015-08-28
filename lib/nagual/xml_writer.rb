@@ -21,17 +21,9 @@ module Nagual
       array.each do |hash|
         xml.send(label) do
           hash.each do |key, value|
-            process_value(value, key, xml)
+            xml.send(key, value)
           end
         end
-      end
-    end
-
-    def process_value(value, key, xml)
-      if value.is_a?(Array)
-        process_array(key, value, xml)
-      else
-        xml.send(key, value)
       end
     end
 
