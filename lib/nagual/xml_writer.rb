@@ -21,7 +21,9 @@ module Nagual
       array.each do |hash|
         xml.send(label) do
           hash.each do |key, value|
-            xml.send(key, value)
+            if key != :attributes
+              xml.send(key, value)
+            end
           end
         end
       end

@@ -2,13 +2,13 @@ require 'spec_helper'
 
 RSpec.describe Nagual::CSVReader do
 
-  include_context 'data'
-
   describe 'read' do
 
     subject { described_class.new(csv_text) }
 
     context 'with correct data' do
+
+      include_context 'data'
 
       let(:csv_text) do
         %Q{Nombre Autor,Cancion

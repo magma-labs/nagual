@@ -2,12 +2,48 @@ require 'spec_helper'
 
 RSpec.describe Nagual::XMLWriter do
 
-  include_context 'data'
+  describe 'write' do
 
-  subject { described_class.new(parsed_content) }
+    context 'with correct data' do
 
-  it 'writes' do
-    expect(subject.write).to eq(raw_xml)
+      include_context 'data'
+
+      subject { described_class.new(parsed_content) }
+
+      it 'generates expected xml' do
+        expect(subject.write).to eq(xml_content)
+      end
+
+    end
+
+    context 'with attributes' do
+
+      let(:parsed_content) do
+        [
+          { attributes: {id: "xd", mode: "w"}, other: 'element' }
+        ]
+      end
+
+      let(:xml_content) do
+<<-XML
+<?xml version=\"1.0\"?>
+<catalog>
+  <product id=\"xd\" mode=\"w\">
+    <other>element</other>
+  </product>
+</catalog>
+XML
+      end
+
+      subject { described_class.new(parsed_content) }
+
+      it 'generates correct structure' do
+        pending
+        expect(subject.write).to eq(xml_content)
+      end
+
+    end
+
   end
 
 end

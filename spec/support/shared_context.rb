@@ -7,7 +7,7 @@ RSpec.shared_context 'data' do
     ]
   end
 
-  let(:raw_xml) do
+  let(:xml_content) do
   """<?xml version=\"1.0\"?>
 <catalog>
   <product>
