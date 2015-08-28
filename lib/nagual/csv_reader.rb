@@ -15,7 +15,8 @@ module Nagual
       @content.map do |line|
         row = {}
         line.each_with_index.map do |value, index|
-          row[@headers[index]] = value.strip
+          value = value.nil? ? "" : value.strip
+          row[@headers[index]] = value
         end
         row
       end
