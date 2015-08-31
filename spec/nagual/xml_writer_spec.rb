@@ -38,7 +38,6 @@ XML
       subject { described_class.new(parsed_content) }
 
       it 'generates correct structure' do
-        pending
         expect(subject.write).to eq(xml_content)
       end
 
