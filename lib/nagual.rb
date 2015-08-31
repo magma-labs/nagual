@@ -4,16 +4,17 @@ Dir.glob(project_root, &method(:require))
 module Nagual
 
   def self.run
-    input  = File.read(Configuration.properties['csv_file'])
-    output = Configuration.properties['xml_file']
-    reader = Object.const_get(Configuration.properties['reader'])
-    writer = Object.const_get(Configuration.properties['writer'])
+    input      = File.read(Configuration.properties['csv_file'])
+    output     = Configuration.properties['xml_file']
+    reader     = Object.const_get(Configuration.properties['reader'])
+    writer     = Object.const_get(Configuration.properties['writer'])
+    attributes = {xmlns: 'http://www.demandware.com/xml/impex/catalog/2006-10-31'}
 
     File.open(output, 'w') do |file|
       csv_content = reader.new(input).read
-      xml_content = writer.new(csv_content).write
+      writer      = writer.new('catalog', 'product', attributes, csv_content)
 
-      file.write(xml_content)
+      file.write(writer.write)
     end
   end
 

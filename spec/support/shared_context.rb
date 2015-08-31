@@ -9,7 +9,7 @@ RSpec.shared_context 'data' do
 
   let(:xml_content) do
   """<?xml version=\"1.0\" encoding=\"UTF-8\"?>
-<catalog>
+<catalog xmls=\"xmls\">
   <product>
     <nombre-autor>Rigo Tovar</nombre-autor>
     <cancion>El Testamento</cancion>

@@ -4,11 +4,15 @@ RSpec.describe Nagual::XMLWriter do
 
   describe 'write' do
 
+    let(:attributes) { {xmls: 'xmls'} }
+
+    subject do
+      described_class.new('catalog', 'product', attributes, parsed_content)
+    end
+
     context 'with correct data' do
 
       include_context 'data'
-
-      subject { described_class.new(parsed_content) }
 
       it 'generates expected xml' do
         expect(subject.write).to eq(xml_content)
@@ -27,15 +31,13 @@ RSpec.describe Nagual::XMLWriter do
       let(:xml_content) do
 <<-XML
 <?xml version=\"1.0\" encoding=\"UTF-8\"?>
-<catalog>
+<catalog xmls="xmls">
   <product id=\"xd\" mode=\"w\">
     <other>element</other>
   </product>
 </catalog>
 XML
       end
-
-      subject { described_class.new(parsed_content) }
 
       it 'generates correct structure' do
         expect(subject.write).to eq(xml_content)
