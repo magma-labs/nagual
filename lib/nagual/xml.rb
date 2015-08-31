@@ -10,22 +10,23 @@ module Nagual
       @root_attributes = attributes
     end
 
-    def build(attribute_keys=[])
+    def build
       Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |xml|
         xml.send(@root_label, @root_attributes) {
-          add_nodes(@node_label, xml, attribute_keys)
+          add_nodes(@node_label, xml)
         }
       end.to_xml
     end
 
     private
 
-    def add_nodes(label, xml, attribute_keys)
+    def add_nodes(label, xml)
       @content.each do |hash|
-        attributes = attribute_keys.map {|attr| [attr, hash[attr]] }.to_h
-        xml.send(label, attributes) do
-          hash.each do |key, value|
-            xml.send(key, value) unless attribute_keys.include?(key)
+        hash[:elements].each do |element|
+          xml.send(label, hash[:attributes]) do
+            element.each do |key, value|
+              xml.send(key, value)
+            end
           end
         end
       end

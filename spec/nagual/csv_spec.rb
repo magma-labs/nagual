@@ -30,11 +30,15 @@ RSpec.describe Nagual::CSV do
       end
 
       let(:parsed_content) do
-        [{:name=>"Oscar", :address=>"", :phone=>"333358390"}]
+        [
+          {
+            attributes: {name: "Oscar"},
+            elements: [{address: "", phone: "333358390"}] }
+        ]
       end
 
       it 'parses to empty string' do
-        expect(subject.to_hash).to eq(parsed_content)
+        expect(subject.to_hash([:name])).to eq(parsed_content)
       end
 
     end

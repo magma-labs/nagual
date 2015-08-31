@@ -2,8 +2,18 @@ RSpec.shared_context 'data' do
 
   let(:parsed_content) do
     [
-      { :"nombre-autor" => 'Rigo Tovar', cancion:  'El Testamento' },
-      { :"nombre-autor" => 'Chico Che',  cancion:  'Quen Pompo' }
+      {
+        attributes: {},
+        elements: [
+          { :"nombre-autor" => 'Rigo Tovar', cancion:  'El Testamento' }
+        ]
+      },
+      {
+        attributes: {},
+        elements: [
+          { :"nombre-autor" => 'Chico Che',  cancion:  'Quen Pompo' }
+        ]
+      }
     ]
   end
 

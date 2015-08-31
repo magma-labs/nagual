@@ -24,7 +24,10 @@ RSpec.describe Nagual::XML do
 
       let(:parsed_content) do
         [
-          { id: "xd", mode: "w", other: 'element' }
+          {
+            attributes: { id: "xd", mode: "w"},
+            elements:   [{ other: 'element' }]
+          }
         ]
       end
 
@@ -40,7 +43,7 @@ XML
       end
 
       it 'generates correct structure' do
-        expect(subject.build([:id, :mode])).to eq(xml_content)
+        expect(subject.build).to eq(xml_content)
       end
 
     end
