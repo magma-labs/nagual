@@ -26,7 +26,7 @@ RSpec.describe Nagual::XMLWriter do
 
       let(:xml_content) do
 <<-XML
-<?xml version=\"1.0\"?>
+<?xml version=\"1.0\" encoding=\"UTF-8\"?>
 <catalog>
   <product id=\"xd\" mode=\"w\">
     <other>element</other>

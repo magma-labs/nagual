@@ -8,7 +8,7 @@ module Nagual
     end
 
     def write
-      Nokogiri::XML::Builder.new do |xml|
+      Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |xml|
         xml.catalog {
           add_node('product', xml)
         }
