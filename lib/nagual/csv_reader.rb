@@ -1,9 +1,8 @@
 require 'csv'
-require_relative 'reader'
 require_relative 'configuration'
 
 module Nagual
-  class CSVReader < Reader
+  class CSVReader
 
     def initialize(csv_text)
       first, *rest = *CSV.parse(csv_text, :headers => true)

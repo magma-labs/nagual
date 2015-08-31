@@ -1,7 +1,7 @@
 require 'nokogiri'
 
 module Nagual
-  class XMLWriter < Writer
+  class XMLWriter
 
     def initialize(root_label, node_label, attributes, content)
       @content         = content
