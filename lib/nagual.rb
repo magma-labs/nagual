@@ -10,7 +10,10 @@ module Nagual
 
     File.open(output, 'w') do |file|
       csv_content = CSV.new(input).to_hash
-      file.write(XML.new('catalog', 'product', attributes, csv_content).build)
+      xml         = XML.new(csv_content, 'catalog', 'product', attributes)
+      xml_content = xml.build([:'product-id'])
+
+      file.write(xml_content)
     end
   end
 
