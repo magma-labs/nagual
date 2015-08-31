@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-RSpec.describe Nagual::XMLWriter do
+RSpec.describe Nagual::XML do
 
-  describe 'write' do
+  describe 'build' do
 
     let(:attributes) { {xmls: 'xmls'} }
 
@@ -15,7 +15,7 @@ RSpec.describe Nagual::XMLWriter do
       include_context 'data'
 
       it 'generates expected xml' do
-        expect(subject.write).to eq(xml_content)
+        expect(subject.build).to eq(xml_content)
       end
 
     end
@@ -40,7 +40,7 @@ XML
       end
 
       it 'generates correct structure' do
-        expect(subject.write).to eq(xml_content)
+        expect(subject.build).to eq(xml_content)
       end
 
     end

@@ -1,7 +1,7 @@
 require 'nokogiri'
 
 module Nagual
-  class XMLWriter
+  class XML
 
     def initialize(root_label, node_label, attributes, content)
       @content         = content
@@ -10,7 +10,7 @@ module Nagual
       @root_attributes = attributes
     end
 
-    def write
+    def build
       Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |xml|
         xml.send(@root_label, @root_attributes) {
           add_nodes(@node_label, xml)

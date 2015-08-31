@@ -2,15 +2,15 @@ require 'csv'
 require_relative 'configuration'
 
 module Nagual
-  class CSVReader
+  class CSV
 
     def initialize(csv_text)
-      first, *rest = *CSV.parse(csv_text, :headers => true)
+      first, *rest = *::CSV.parse(csv_text, :headers => true)
       @content     = rest
       @headers     = first.map { |header| header.gsub(' ', '-').downcase.to_sym }
     end
 
-    def read
+    def to_hash
       @content.map do |line|
         row = {}
         line.each_with_index.map do |value, index|
