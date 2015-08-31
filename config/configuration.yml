@@ -1,5 +1,5 @@
 ---
 csv_file: data/input.csv
 xml_file: data/output.xml
-reader: Nagual::CSVReader
-writer: Nagual::XMLWriter
+attributes:
+  xmls: 'http://www.demandware.com/xml/impex/catalog/2006-10-31'

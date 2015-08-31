@@ -6,15 +6,11 @@ module Nagual
   def self.run
     input      = File.read(Configuration.properties['csv_file'])
     output     = Configuration.properties['xml_file']
-    reader     = Object.const_get(Configuration.properties['reader'])
-    writer     = Object.const_get(Configuration.properties['writer'])
-    attributes = {xmlns: 'http://www.demandware.com/xml/impex/catalog/2006-10-31'}
+    attributes = Configuration.properties['attributes']
 
     File.open(output, 'w') do |file|
-      csv_content = reader.new(input).read
-      writer      = writer.new('catalog', 'product', attributes, csv_content)
-
-      file.write(writer.write)
+      csv_content = CSV.new(input).to_hash
+      file.write(XML.new('catalog', 'product', attributes, csv_content).build)
     end
   end
 
