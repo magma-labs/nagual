@@ -7,7 +7,7 @@ RSpec.describe Nagual::XML do
     let(:attributes) { {xmls: 'xmls'} }
 
     subject do
-      described_class.new('catalog', 'product', attributes, parsed_content)
+      described_class.new(parsed_content, 'catalog', 'product', attributes)
     end
 
     context 'with correct data' do
@@ -24,7 +24,7 @@ RSpec.describe Nagual::XML do
 
       let(:parsed_content) do
         [
-          { attributes: {id: "xd", mode: "w"}, other: 'element' }
+          { id: "xd", mode: "w", other: 'element' }
         ]
       end
 
@@ -40,7 +40,7 @@ XML
       end
 
       it 'generates correct structure' do
-        expect(subject.build).to eq(xml_content)
+        expect(subject.build([:id, :mode])).to eq(xml_content)
       end
 
     end
