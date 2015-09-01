@@ -3,7 +3,7 @@ module Nagual
 
     def initialize
       content = Products.new.to_a
-      content = add_child_element(content, :images, Images.new.to_a)
+      content = CSV.add_children(content, :images, Images.new.to_a, :image)
 
       @xml = XML.new(content, 'catalog', 'product', catalog_attributes)
     end
@@ -16,15 +16,6 @@ module Nagual
 
     def catalog_attributes
       Configuration.properties['catalog']['attributes']
-    end
-
-    def add_child_element(content, key, value)
-      content.map do |item|
-        item[:elements].each do |element|
-          element[key] = value
-        end
-        item
-      end
     end
 
   end
