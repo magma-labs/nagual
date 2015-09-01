@@ -4,11 +4,11 @@ Dir.glob(project_root, &method(:require))
 module Nagual
 
   def self.run
-    input_path  = File.read(Configuration.properties['csv_file'])
-    output_path = Configuration.properties['xml_file']
+    products_path = Configuration.properties['products_file']
+    output_path   = Configuration.properties['output_file']
 
     File.open(output_path, 'w') do |file|
-      file.write(Catalog.new(input_path).to_xml)
+      file.write(Catalog.new(products_path).to_xml)
     end
   end
 
