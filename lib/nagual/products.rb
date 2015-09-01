@@ -5,8 +5,8 @@ module Nagual
       @csv = CSV.new(File.read(path))
     end
 
-    def to_hash
-      @csv.to_hash(attribute_keys)
+    def to_a
+      @csv.to_a(attribute_keys)
     end
 
     private

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 RSpec.describe Nagual::CSV do
 
-  describe 'to_hash' do
+  describe 'to_a' do
 
     subject { described_class.new(csv_text) }
 
@@ -17,7 +17,7 @@ RSpec.describe Nagual::CSV do
       end
 
       it 'returns parsed content' do
-        expect(subject.to_hash).to eq(parsed_content)
+        expect(subject.to_a).to eq(parsed_content)
       end
 
     end
@@ -38,7 +38,7 @@ RSpec.describe Nagual::CSV do
       end
 
       it 'parses to empty string' do
-        expect(subject.to_hash([:name])).to eq(parsed_content)
+        expect(subject.to_a([:name])).to eq(parsed_content)
       end
 
     end

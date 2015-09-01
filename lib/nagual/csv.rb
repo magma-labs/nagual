@@ -10,7 +10,7 @@ module Nagual
       @headers     = first.map { |header| header.gsub(' ', '-').downcase.to_sym }
     end
 
-    def to_hash(attribute_keys=[])
+    def to_a(attribute_keys=[])
       @content.map do |line|
         split_by_type(line, attribute_keys, attributes={}, elements={})
 
