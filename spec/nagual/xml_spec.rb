@@ -51,20 +51,18 @@ XML
     context 'with embedded elements' do
 
       let(:parsed_content) do
-        [
-          {
-            attributes: { id: "xd", mode: "w"},
-            elements:   [{
-              embedded: [
-                { attributes: { id: 'id' }, elements: [ {other: 'element'} ] }
-              ]}
+        [{
+          attributes: { id: "xd", mode: "w"},
+          elements:   [{
+            embedded: [
+              { attributes: { id: 'id' }, elements: [ {other: 'element'} ] }
             ]
-          }
-        ]
+          }]
+        }]
       end
 
       let(:xml_content) do
-<<-XML
+        <<-XML
 <?xml version=\"1.0\" encoding=\"UTF-8\"?>
 <catalog xmls="xmls">
   <product id=\"xd\" mode=\"w\">
@@ -73,7 +71,7 @@ XML
     </embedded>
   </product>
 </catalog>
-XML
+        XML
       end
 
       it 'generates correct structure' do
