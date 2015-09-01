@@ -30,11 +30,10 @@ RSpec.describe Nagual::CSV do
       end
 
       let(:parsed_content) do
-        [
-          {
-            attributes: {name: "Oscar"},
-            elements: [{address: "", phone: "333358390"}] }
-        ]
+        [{
+          attributes: {name: "Oscar"},
+          elements: [{address: "", phone: "333358390"}]
+        }]
       end
 
       it 'parses to empty string' do
@@ -43,6 +42,52 @@ RSpec.describe Nagual::CSV do
 
     end
 
+  end
+
+  describe '#add_children' do
+    let(:parent) do
+      [{
+        elements: [ { children: "1,2" } ]
+      },
+      {
+        elements: [ { children: "3" } ]
+      }]
+    end
+    let(:children) do
+      [
+        { elements: [ { id: "1", value: "a" } ] },
+        { elements: [ { id: "2", value: "b" } ] },
+        { elements: [ { id: "3", value: "c" } ] }
+      ]
+    end
+    let(:combined) do
+      [{
+        elements: [{
+          children: [{
+            elements: [{
+              child: [ { elements: [ {value: "a"}, {value: "b"} ] } ]
+            }]
+          }]
+        }]
+      },
+      {
+        elements: [{
+          children: [{
+            elements: [{
+              child: [ { elements: [ {value: "c"} ] } ]
+            }]
+          }]
+        }]
+      }]
+    end
+
+    subject do
+      described_class.add_children(parent, :children, children, :child)
+    end
+
+    it 'returns parent with embedded children' do
+      expect(subject).to eq(combined)
+    end
   end
 
 end

@@ -7,3 +7,7 @@ products:
   file: data/products.csv
   attribute_keys:
     - :product-id
+images:
+  file: data/images.csv
+  attribute_keys:
+    - :path
