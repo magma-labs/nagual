@@ -2,8 +2,9 @@ module Nagual
   class Catalog
 
     def initialize
-      content = Products.new.to_a
-      content = CSV.add_children(content, :images, Images.new.to_a, :image)
+      content = Database.load('products')
+      images  = Database.load('images')
+      content = CSV.add_children(content, :images, images, :image)
 
       @xml = XML.new(content, 'catalog', 'product', catalog_attributes)
     end
