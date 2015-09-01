@@ -1,9 +1,10 @@
 module Nagual
   class Catalog
 
-    def initialize(input_path)
-      content = CSV.new(input_path).to_hash(product_attribute_keys)
-      @xml    = XML.new(content, 'catalog', 'product', catalog_attributes)
+    def initialize
+      content = Products.new.to_hash
+
+      @xml = XML.new(content, 'catalog', 'product', catalog_attributes)
     end
 
     def to_xml
@@ -13,11 +14,9 @@ module Nagual
     private
 
     def catalog_attributes
-      { xmls: 'http://www.demandware.com/xml/impex/catalog/2006-10-31' }
+      Configuration.properties['catalog']['attributes']
     end
 
-    def product_attribute_keys
-      [:'product-id']
     end
 
   end

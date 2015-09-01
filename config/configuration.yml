@@ -1,3 +1,9 @@
 ---
-products_file: data/products.csv
 output_file: data/output.xml
+catalog:
+  attributes:
+    xmls: 'http://www.demandware.com/xml/impex/catalog/2006-10-31'
+products:
+  file: data/products.csv
+  attribute_keys:
+    - :product-id
