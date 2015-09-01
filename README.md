@@ -2,20 +2,17 @@
 
 For help running this code you can get the [Nahual VM](https://github.com/sawyer-effect/nagual-vm).
 
-## Setup
+## Run
+
+* Create `data/products.csv, data/images.csv` files with expect format
+* File `data/output.xml` will be created
+* Install gem
+* Use nagual command: `nagual catalog`
+* File will be generated in `data/output.xml`
+
+## Development
 
 * Install ruby
 * Install bundler
 * Install dependencies with bundler: `bundle install`
-
-## Run
-
-* Create `data/input.csv` file with expect format
-* Use rake command: `bundle exec rake run`
-* File `data/output.xml` will be created
-
-**NOTE: Input and output location can be edited in configuration file**
-
-## Test
-
-Run the test by doing: `bundle exec rake spec`
+* User `rspec` command to run tests

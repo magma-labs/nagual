@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+
+if ARGV.first == 'catalog'
+  require 'nagual'
+
+  Nagual.run
+else
+  p 'Command not recognized'
+end
