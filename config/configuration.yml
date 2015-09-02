@@ -11,3 +11,8 @@ images:
   file: data/images.csv
   attribute_keys:
     - :path
+image_groups:
+  file: data/image_groups.csv
+  attribute_keys:
+    - :view-type
+    - :variation-value
