@@ -18,7 +18,7 @@ module Nagual
       end
     end
 
-    def self.add_children(parent, parent_key, children, child_key)
+    def self.add_children(parent, parent_key, children, child_key=nil)
       parent.map do |item|
         item[:elements].map do |element|
           ids = element[parent_key].split(',')
@@ -64,9 +64,13 @@ module Nagual
     end
 
     def self.represent_elements(key, elements, attributes)
-      [{ elements: [{ "#{key}": [
-        { elements: elements, attributes: attributes }
-      ] }] }]
+      if key.nil?
+        [{ elements: elements, attributes: attributes }]
+      else
+        [{ elements: [{ "#{key}": [
+          { elements: elements, attributes: attributes }
+        ] }] }]
+      end
     end
 
   end

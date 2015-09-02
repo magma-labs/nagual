@@ -45,60 +45,97 @@ RSpec.describe Nagual::CSV do
   end
 
   describe '#add_children' do
-    let(:parent) do
-      [{
-        elements: [ { children: "1,2" } ],
-        attributes: {}
-      },
-      {
-        elements: [ { children: "3" } ],
-        attributes: {a: 'a'}
-      },
-      {
-        elements: [ { children: "" } ],
-        attributes: {}
-      }]
-    end
-    let(:children) do
-      [
-        { elements: [ { id: "1", value: "a" } ], attributes: {} },
-        { elements: [ { id: "2", value: "b" } ], attributes: {} },
-        { elements: [ { id: "3", value: "c" } ], attributes: {b: 'b'} }
-      ]
-    end
-    let(:combined) do
-      [{
-        elements: [{
-          children: [{
-            elements: [{
-              child: [ { elements: [ {value: "a"}, {value: "b"} ], attributes: {} } ]
+
+    context "with child key" do
+
+      let(:parent) do
+        [{
+          elements: [ { children: "1,2" } ],
+          attributes: {}
+        },
+        {
+          elements: [ { children: "3" } ],
+          attributes: {a: 'a'}
+        },
+        {
+          elements: [ { children: "" } ],
+          attributes: {}
+        }]
+      end
+      let(:children) do
+        [
+          { elements: [ { id: "1", value: "a" } ], attributes: {} },
+          { elements: [ { id: "2", value: "b" } ], attributes: {} },
+          { elements: [ { id: "3", value: "c" } ], attributes: {b: 'b'} }
+        ]
+      end
+      let(:combined) do
+        [{
+          elements: [{
+            children: [{
+              elements: [{
+                child: [ { elements: [ {value: "a"}, {value: "b"} ], attributes: {} } ]
+              }]
             }]
-          }]
-        }],
-        attributes: {}
-      },
-      {
-        elements: [{
-          children: [{
-            elements: [{
-              child: [ { elements: [ {value: "c"} ], attributes: {b: 'b'} } ]
+          }],
+          attributes: {}
+        },
+        {
+          elements: [{
+            children: [{
+              elements: [{
+                child: [ { elements: [ {value: "c"} ], attributes: {b: 'b'} } ]
+              }]
             }]
-          }]
-        }],
-        attributes: {a: 'a'}
-      },
-      {
-        elements: [{children: ""}],
-        attributes: {}
-      }]
+          }],
+          attributes: {a: 'a'}
+        },
+        {
+          elements: [{children: ""}],
+          attributes: {}
+        }]
+      end
+
+      subject do
+        described_class.add_children(parent, :children, children, :child)
+      end
+
+      it 'returns parent with embedded children' do
+        expect(subject).to eq(combined)
+      end
     end
 
-    subject do
-      described_class.add_children(parent, :children, children, :child)
-    end
+    context "without child key" do
 
-    it 'returns parent with embedded children' do
-      expect(subject).to eq(combined)
+      let(:parent) do
+        [{
+          elements: [ { children: "3" } ],
+          attributes: {}
+        }]
+      end
+      let(:children) do
+        [
+          { elements: [ { id: "3", value: "a" } ], attributes: {} }
+        ]
+      end
+      let(:combined) do
+        [{
+          elements: [{
+            children: [{
+              elements: [ {value: "a"} ], attributes: {}
+            }]
+          }],
+          attributes: {}
+        }]
+      end
+
+      subject do
+        described_class.add_children(parent, :children, children)
+      end
+
+      it 'returns parent with embedded children' do
+        expect(subject).to eq(combined)
+      end
     end
   end
 
