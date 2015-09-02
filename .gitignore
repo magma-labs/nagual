@@ -3,8 +3,4 @@
 .DS_Store
 coverage
 Gemfile.lock
-images.csv
-image_groups.csv
-output.xml
-page_attributes.csv
-products.csv
+data
