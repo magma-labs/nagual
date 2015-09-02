@@ -1,9 +1,10 @@
+*.gem
 .bundle
 .DS_Store
-products.csv
+coverage
+Gemfile.lock
 images.csv
 image_groups.csv
 output.xml
-coverage
-Gemfile.lock
-*.gem
+page_attributes.csv
+products.csv

@@ -16,3 +16,7 @@ image_groups:
   attribute_keys:
     - :view-type
     - :variation-value
+page_attributes:
+  file: data/page_attributes.csv
+  attribute_keys:
+    -
