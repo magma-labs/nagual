@@ -7,11 +7,15 @@ module Nagual
       images     = Database.load('images')
       attributes = Database.load('page_attributes')
       products   = Database.load('bundled_products')
+      sets       = Database.load('product_set_products')
 
       groups  = CSV.add_children(groups, :images, images, :image)
       content = CSV.add_children(content, :images, groups, :'image-group')
       content = CSV.add_children(content, :'page-attributes', attributes)
-      content = CSV.add_children(content, :'bundled-products', products, :'bundled-product')
+      content = CSV.add_children(content, :'bundled-products', products,
+                                 :'bundled-product')
+      content = CSV.add_children(content, :'product-set-products', sets,
+                                 :'product-set-product')
 
       @xml = XML.new(content, 'catalog', 'product', catalog_attributes)
     end

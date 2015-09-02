@@ -24,3 +24,7 @@ bundled_products:
   file: data/bundled_products.csv
   attribute_keys:
     - :product-id
+product_set_products:
+  file: data/product_set_products.csv
+  attribute_keys:
+    - :product-id
