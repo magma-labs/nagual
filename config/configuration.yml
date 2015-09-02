@@ -3,6 +3,10 @@ output_file: data/output.xml
 catalog:
   attributes:
     xmls: 'http://www.demandware.com/xml/impex/catalog/2006-10-31'
+tests:
+  file: data_examples/products.csv
+  attribute_keys:
+    -
 products:
   file: data/products.csv
   attribute_keys:
