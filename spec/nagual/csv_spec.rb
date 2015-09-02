@@ -47,17 +47,23 @@ RSpec.describe Nagual::CSV do
   describe '#add_children' do
     let(:parent) do
       [{
-        elements: [ { children: "1,2" } ]
+        elements: [ { children: "1,2" } ],
+        attributes: {}
       },
       {
-        elements: [ { children: "3" } ]
+        elements: [ { children: "3" } ],
+        attributes: {a: 'a'}
+      },
+      {
+        elements: [ { children: "" } ],
+        attributes: {}
       }]
     end
     let(:children) do
       [
-        { elements: [ { id: "1", value: "a" } ] },
-        { elements: [ { id: "2", value: "b" } ] },
-        { elements: [ { id: "3", value: "c" } ] }
+        { elements: [ { id: "1", value: "a" } ], attributes: {} },
+        { elements: [ { id: "2", value: "b" } ], attributes: {} },
+        { elements: [ { id: "3", value: "c" } ], attributes: {b: 'b'} }
       ]
     end
     let(:combined) do
@@ -65,19 +71,25 @@ RSpec.describe Nagual::CSV do
         elements: [{
           children: [{
             elements: [{
-              child: [ { elements: [ {value: "a"}, {value: "b"} ] } ]
+              child: [ { elements: [ {value: "a"}, {value: "b"} ], attributes: {} } ]
             }]
           }]
-        }]
+        }],
+        attributes: {}
       },
       {
         elements: [{
           children: [{
             elements: [{
-              child: [ { elements: [ {value: "c"} ] } ]
+              child: [ { elements: [ {value: "c"} ], attributes: {b: 'b'} } ]
             }]
           }]
-        }]
+        }],
+        attributes: {a: 'a'}
+      },
+      {
+        elements: [{children: ""}],
+        attributes: {}
       }]
     end
 

@@ -21,9 +21,13 @@ module Nagual
     def self.add_children(parent, parent_key, children, child_key)
       parent.map do |item|
         item[:elements].map do |element|
-          ids                 = element[parent_key].split(',')
-          elements            = children_elements(children, ids)
-          element[parent_key] = represent_elements(child_key, elements)
+          ids = element[parent_key].split(',')
+          break if ids.empty?
+
+          selected_children   = find_children(children, ids)
+          elements            = merge_elements(selected_children)
+          element[parent_key] = represent_elements(child_key, elements,
+                                                   selected_children.first[:attributes])
           element
         end
         item
@@ -45,18 +49,24 @@ module Nagual
       end
     end
 
-    def self.children_elements(children, ids)
+    def self.find_children(children, ids)
       children.select do |child|
         ids.include?(child[:elements].first[:id])
-      end.map do |child|
+      end
+    end
+
+    def self.merge_elements(children)
+      children.map do |child|
         elements = child[:elements].first
         elements.delete(:id)
         elements
       end
     end
 
-    def self.represent_elements(key, elements)
-      [{ elements: [{ "#{key}": [{ elements: elements }] }] }]
+    def self.represent_elements(key, elements, attributes)
+      [{ elements: [{ "#{key}": [
+        { elements: elements, attributes: attributes }
+      ] }] }]
     end
 
   end
