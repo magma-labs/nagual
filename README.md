@@ -4,7 +4,7 @@ For help running this code you can get the [Nahual VM](https://github.com/sawyer
 
 ## Run
 
-* Create `data` files with expect format, you can use `data/*.example.csv` for reference
+* Create `data` files with expect format, you can use `data_examples/` for reference
 * File `data/output.xml` will be created
 * Install gem
 * Use nagual command: `nagual catalog`
