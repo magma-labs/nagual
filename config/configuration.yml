@@ -20,3 +20,7 @@ page_attributes:
   file: data/page_attributes.csv
   attribute_keys:
     -
+bundled_products:
+  file: data/bundled_products.csv
+  attribute_keys:
+    - :product-id
