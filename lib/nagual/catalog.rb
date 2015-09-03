@@ -11,6 +11,7 @@ module Nagual
       options    = Database.load('options')
       values     = Database.load('option_values')
       prices     = Database.load('option_value_prices')
+      links      = Database.load('product_links')
 
       groups  = CSV.add_children(groups, :images, images, :image)
       values  = CSV.add_children(values, :'option-value-prices', prices,
@@ -25,6 +26,8 @@ module Nagual
       content = CSV.add_children(content, :'product-set-products', sets,
                                  :'product-set-product')
       content = CSV.add_children(content, :'options', options, :option)
+      content = CSV.add_children(content, :'product-links', links,
+                                 :'product-link')
       @xml = XML.new(content, 'catalog', 'product', catalog_attributes)
     end
 
