@@ -32,3 +32,18 @@ product_set_products:
   file: data/product_set_products.csv
   attribute_keys:
     - :product-id
+options:
+  file: data/options.csv
+  attribute_keys:
+    - :mode
+    - :option-id
+option_values:
+  file: data/option_values.csv
+  attribute_keys:
+    - :value-id
+    - :default
+option_value_prices:
+  file: data/option_value_prices.csv
+  attribute_keys:
+    - :currency
+
