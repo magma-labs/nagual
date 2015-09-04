@@ -1,6 +1,5 @@
 module Nagual
   class Database
-
     def self.load(model)
       new(model).to_a
     end
@@ -23,6 +22,5 @@ module Nagual
     def path
       Configuration.properties[@model]['file']
     end
-
   end
 end

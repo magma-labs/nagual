@@ -3,22 +3,21 @@ require_relative 'configuration'
 
 module Nagual
   class CSV
-
     def initialize(csv_text)
-      first, *rest = *::CSV.parse(csv_text, :headers => true)
+      first, *rest = *::CSV.parse(csv_text, headers: true)
       @content     = rest
-      @headers     = first.map { |header| header.gsub(' ', '-').downcase.to_sym }
+      @headers     = first.map { |header| header.tr(' ', '-').downcase.to_sym }
     end
 
-    def to_a(attribute_keys=[])
+    def to_a(attribute_keys = [])
       @content.map do |line|
-        split_by_type(line, attribute_keys, attributes={}, elements={})
+        split_by_type(line, attribute_keys, attributes = {}, elements = {})
 
         { attributes: attributes, elements: [elements] }
       end
     end
 
-    def self.add_children(parent, parent_key, children, child_key=nil)
+    def self.add_children(parent, parent_key, children, child_key = nil)
       parent.map do |item|
         item[:elements].map do |element|
           ids = element[parent_key].split(',')
@@ -26,8 +25,9 @@ module Nagual
 
           selected_children   = find_children(children, ids)
           elements            = merge_elements(selected_children)
-          element[parent_key] = represent_elements(child_key, elements,
-                                                   selected_children.first[:attributes])
+          element[parent_key] =
+            represent_elements(child_key, elements,
+                               selected_children.first[:attributes])
           element
         end
         item
@@ -39,7 +39,7 @@ module Nagual
     def split_by_type(line, attribute_keys, attributes, elements)
       line.each_with_index do |value, index|
         key   = @headers[index]
-        value = value.nil? ? "" : value.strip
+        value = value.nil? ? '' : value.strip
 
         if attribute_keys.include?(key)
           attributes[key] = value
@@ -72,6 +72,5 @@ module Nagual
         ] }] }]
       end
     end
-
   end
 end

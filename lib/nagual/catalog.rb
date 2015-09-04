@@ -1,6 +1,5 @@
 module Nagual
   class Catalog
-
     def initialize
       @groups      = Database.load('image_groups')
       @options     = Database.load('options')
@@ -15,14 +14,14 @@ module Nagual
     end
 
     def to_xml
-      content = Collection.new(@products).
-        add_image_groups(@groups, @images).
-        add_page_attributes(@attributes).
-        add_bundled_products(@bundled).
-        add_set_products(@sets).
-        add_options(@options, @values, @prices).
-        add_product_links(@links)
-        to_a
+      content = Collection.new(@products)
+                .add_image_groups(@groups, @images)
+                .add_page_attributes(@attributes)
+                .add_bundled_products(@bundled)
+                .add_set_products(@sets)
+                .add_options(@options, @values, @prices)
+                .add_product_links(@links)
+                .to_a
 
       XML.new(content, 'catalog', 'product', catalog_attributes).build
     end
@@ -32,6 +31,5 @@ module Nagual
     def catalog_attributes
       Configuration.properties['catalog']['attributes']
     end
-
   end
 end
