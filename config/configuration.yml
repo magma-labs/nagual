@@ -1,33 +1,43 @@
 ---
 output_file: data/output.xml
-catalog:
-  attributes:
-    xmls: 'http://www.demandware.com/xml/impex/catalog/2006-10-31'
-tests:
-  file: data_examples/products.csv
-  attribute_keys:
-    -
-products:
-  file: data/products.csv
-  attribute_keys:
-    - :product-id
-images:
-  file: data/images.csv
-  attribute_keys:
-    - :path
-image_groups:
-  file: data/image_groups.csv
-  attribute_keys:
-    - :view-type
-    - :variation-value
-page_attributes:
-  file: data/page_attributes.csv
+attributes:
+  file: data/attributes.csv
   attribute_keys:
     -
 bundled_products:
   file: data/bundled_products.csv
   attribute_keys:
     - :product-id
+catalog:
+  attributes:
+    xmls: 'http://www.demandware.com/xml/impex/catalog/2006-10-31'
+image_groups:
+  file: data/image_groups.csv
+  attribute_keys:
+    - :view-type
+    - :variation-value
+images:
+  file: data/images.csv
+  attribute_keys:
+    - :path
+option_value_prices:
+  file: data/option_value_prices.csv
+  attribute_keys:
+    - :currency
+option_values:
+  file: data/option_values.csv
+  attribute_keys:
+    - :value-id
+    - :default
+options:
+  file: data/options.csv
+  attribute_keys:
+    - :mode
+    - :option-id
+page_attributes:
+  file: data/page_attributes.csv
+  attribute_keys:
+    -
 product_links:
   file: data/product_links.csv
   attribute_keys:
@@ -37,18 +47,37 @@ product_set_products:
   file: data/product_set_products.csv
   attribute_keys:
     - :product-id
-options:
-  file: data/options.csv
+products:
+  file: data/products.csv
+  attribute_keys:
+    - :product-id
+shared_variation_attributes:
+  file: data/shared_variation_attributes.csv
+  attribute_keys:
+    - :attribute-id
+    - :variation-attribute-id
+variants:
+  file: data/variants.csv
+  attribute_keys:
+    - :product-id
+    - :default
+variation_attribute_values:
+  file: data/variation_attribute_values.csv
+  attribute_keys:
+    - :value
+    - :default
+variation_attributes:
+  file: data/variation_attributes.csv
   attribute_keys:
     - :mode
-    - :option-id
-option_values:
-  file: data/option_values.csv
+    - :attribute-id
+    - :variation-attribute-id
+    - :slicing-attribute
+variations:
+  file: data/variations.csv
   attribute_keys:
-    - :value-id
-    - :default
-option_value_prices:
-  file: data/option_value_prices.csv
+    -
+tests:
+  file: data_examples/products.csv
   attribute_keys:
-    - :currency
-
+    -
