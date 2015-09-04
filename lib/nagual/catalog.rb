@@ -15,22 +15,14 @@ module Nagual
     end
 
     def to_xml
-      values  = CSV.add_children(@values, :'option-value-prices',
-                                 @prices, :'option-value-price')
-      groups  = CSV.add_children(@groups, :images, @images, :image)
-      options = CSV.add_children(@options, :'option-values',
-                                 values, :'option-value')
-
-      content = @products
-      content = CSV.add_children(content, :images, groups, :'image-group')
-      content = CSV.add_children(content, :'page-attributes', @attributes)
-      content = CSV.add_children(content, :'bundled-products',
-                                 @bundled, :'bundled-product')
-      content = CSV.add_children(content, :'product-set-products',
-                                 @sets, :'product-set-product')
-      content = CSV.add_children(content, :'options', options, :option)
-      content = CSV.add_children(content, :'product-links',
-                                 @links, :'product-link')
+      content = Collection.new(@products).
+        add_image_groups(@groups, @images).
+        add_page_attributes(@attributes).
+        add_bundled_products(@bundled).
+        add_set_products(@sets).
+        add_options(@options, @values, @prices).
+        add_product_links(@links)
+        to_a
 
       XML.new(content, 'catalog', 'product', catalog_attributes).build
     end
