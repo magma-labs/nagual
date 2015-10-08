@@ -38,11 +38,10 @@ RSpec.describe Nagual::CSV do
   end
 
   describe '#add_children' do
-
     let(:parent) do
       [
-        { elements: [ {} ], attributes: {} },
-        { elements: [ {} ], attributes: {} }
+        { elements: [{}], attributes: {} },
+        { elements: [{}], attributes: {} }
       ]
     end
     let(:children) do
@@ -61,16 +60,16 @@ RSpec.describe Nagual::CSV do
           }],
           attributes: {}
         },
-        {
-          elements: [{
-            children: [{
-              elements: [{
-                child: [{ elements: [{ value: 'a' }], attributes: { b: 'b' } }]
-              }]
-            }]
-          }],
-          attributes: {}
-        }]
+         {
+           elements: [{
+             children: [{
+               elements: [{
+                 child: [{ elements: [{ value: 'a' }], attributes: { b: 'b' } }]
+               }]
+             }]
+           }],
+           attributes: {}
+         }]
       end
 
       subject do
@@ -92,14 +91,14 @@ RSpec.describe Nagual::CSV do
           }],
           attributes: {}
         },
-        {
-          elements: [{
-            children: [{
-              elements: [{ value: 'a' }], attributes: { b: 'b' }
-            }]
-          }],
-          attributes: {}
-        }]
+         {
+           elements: [{
+             children: [{
+               elements: [{ value: 'a' }], attributes: { b: 'b' }
+             }]
+           }],
+           attributes: {}
+         }]
       end
 
       subject do
