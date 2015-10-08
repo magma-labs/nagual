@@ -5,8 +5,7 @@ module Nagual
     end
 
     def to_xml
-      content = Collection.new(@products).to_a
-      XML.new(content, 'catalog', 'product', catalog_attributes).build
+      XML.new(@products, 'catalog', 'product', catalog_attributes).build
     end
 
     private
