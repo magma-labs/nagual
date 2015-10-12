@@ -1,8 +1,11 @@
 ---
-output_file: data/output.xml
+input_file: data/products.csv
+output_file: data/catalog.xml
+
 catalog:
   attributes:
-    xmls: 'http://www.demandware.com/xml/impex/catalog/2006-10-31'
-products:
+    xmls: http://www.demandware.com/xml/impex/catalog/2006-10-31
+    catalog-id: apparel-catalog
+product:
   attribute_keys:
     - :product-id

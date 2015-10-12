@@ -13,18 +13,6 @@ module Nagual
       @content.map { |line| split_by_type(line, attribute_keys) }
     end
 
-    def self.add_children(parent, parent_key, children, child_key = nil)
-      parent.map do |item|
-        item[:elements].map do |element|
-          element[parent_key] =
-            represent_elements(child_key, children[:elements],
-                               children[:attributes])
-          element
-        end
-        item
-      end
-    end
-
     private
 
     def split_by_type(line, attribute_keys)
@@ -43,16 +31,6 @@ module Nagual
       end
 
       { attributes: attributes, elements: [elements] }
-    end
-
-    def self.represent_elements(key, elements, attributes)
-      if key.nil?
-        [{ elements: elements, attributes: attributes }]
-      else
-        [{ elements: [{ "#{key}": [
-          { elements: elements, attributes: attributes }
-        ] }] }]
-      end
     end
   end
 end
