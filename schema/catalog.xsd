@@ -8,7 +8,7 @@
     elementFormDefault   = "qualified"
     attributeFormDefault = "unqualified">
 
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd" />
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="schema/xml.xsd" />
 
     <xsd:element name="catalog">
         <xsd:complexType mixed="false">

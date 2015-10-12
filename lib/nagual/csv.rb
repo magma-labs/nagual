@@ -10,36 +10,19 @@ module Nagual
     end
 
     def to_a(attribute_keys = [])
-      @content.map do |line|
-        split_by_type(line, attribute_keys, attributes = {}, elements = {})
-
-        { attributes: attributes, elements: [elements] }
-      end
-    end
-
-    def self.add_children(parent, parent_key, children, child_key = nil)
-      parent.map do |item|
-        item[:elements].map do |element|
-          ids = element[parent_key].split(',')
-          break if ids.empty?
-
-          selected_children   = find_children(children, ids)
-          elements            = merge_elements(selected_children)
-          element[parent_key] =
-            represent_elements(child_key, elements,
-                               selected_children.first[:attributes])
-          element
-        end
-        item
-      end
+      @content.map { |line| split_by_type(line, attribute_keys) }
     end
 
     private
 
-    def split_by_type(line, attribute_keys, attributes, elements)
+    def split_by_type(line, attribute_keys)
+      attributes = {}
+      elements   = {}
+
       line.each_with_index do |value, index|
+        next if value.nil?
         key   = @headers[index]
-        value = value.nil? ? '' : value.strip
+        value = value.strip
 
         if attribute_keys.include?(key)
           attributes[key] = value
@@ -47,30 +30,8 @@ module Nagual
           elements[key] = value
         end
       end
-    end
 
-    def self.find_children(children, ids)
-      children.select do |child|
-        ids.include?(child[:elements].first[:id])
-      end
-    end
-
-    def self.merge_elements(children)
-      children.map do |child|
-        elements = child[:elements].first
-        elements.delete(:id)
-        elements
-      end
-    end
-
-    def self.represent_elements(key, elements, attributes)
-      if key.nil?
-        [{ elements: elements, attributes: attributes }]
-      else
-        [{ elements: [{ "#{key}": [
-          { elements: elements, attributes: attributes }
-        ] }] }]
-      end
+      { attributes: attributes, elements: [elements] }
     end
   end
 end

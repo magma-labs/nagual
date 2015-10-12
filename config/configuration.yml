@@ -1,83 +1,14 @@
 ---
-output_file: data/output.xml
-attributes:
-  file: data/attributes.csv
-  attribute_keys:
-    -
-bundled_products:
-  file: data/bundled_products.csv
-  attribute_keys:
-    - :product-id
+input_file: data/products.csv
+input_test_file: data_examples/products.csv
+output_file: data/catalog.xml
+catalog_xsd: schema/catalog.xsd
+
 catalog:
   attributes:
-    xmls: 'http://www.demandware.com/xml/impex/catalog/2006-10-31'
-image_groups:
-  file: data/image_groups.csv
+    xmlns: http://www.demandware.com/xml/impex/catalog/2006-10-31
+    catalog-id: nagual-catalog
+product:
   attribute_keys:
-    - :view-type
-    - :variation-value
-images:
-  file: data/images.csv
-  attribute_keys:
-    - :path
-option_value_prices:
-  file: data/option_value_prices.csv
-  attribute_keys:
-    - :currency
-option_values:
-  file: data/option_values.csv
-  attribute_keys:
-    - :value-id
-    - :default
-options:
-  file: data/options.csv
-  attribute_keys:
+    - :product-id
     - :mode
-    - :option-id
-page_attributes:
-  file: data/page_attributes.csv
-  attribute_keys:
-    -
-product_links:
-  file: data/product_links.csv
-  attribute_keys:
-    - :product-id
-    - :type
-product_set_products:
-  file: data/product_set_products.csv
-  attribute_keys:
-    - :product-id
-products:
-  file: data/products.csv
-  attribute_keys:
-    - :product-id
-shared_variation_attributes:
-  file: data/shared_variation_attributes.csv
-  attribute_keys:
-    - :attribute-id
-    - :variation-attribute-id
-variants:
-  file: data/variants.csv
-  attribute_keys:
-    - :product-id
-    - :default
-variation_attribute_values:
-  file: data/variation_attribute_values.csv
-  attribute_keys:
-    - :value
-    - :default
-variation_attributes:
-  file: data/variation_attributes.csv
-  attribute_keys:
-    - :mode
-    - :attribute-id
-    - :variation-attribute-id
-    - :slicing-attribute
-variations:
-  file: data/variations.csv
-  attribute_keys:
-    -
-tests:
-  file: data_examples/products.csv
-  attribute_keys:
-    -

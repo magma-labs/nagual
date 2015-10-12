@@ -1,35 +1,22 @@
 module Nagual
   class Catalog
-    def initialize
-      @groups      = Database.load('image_groups')
-      @options     = Database.load('options')
-      @values      = Database.load('option_values')
-      @images      = Database.load('images')
-      @prices      = Database.load('option_value_prices')
-      @products    = Database.load('products')
-      @attributes  = Database.load('page_attributes')
-      @bundled     = Database.load('bundled_products')
-      @sets        = Database.load('product_set_products')
-      @links       = Database.load('product_links')
+    def initialize(input_file)
+      @products = CSV.new(input_file).to_a(product_attribute_keys)
+      @document = XML.new(@products, 'catalog', 'product', catalog_attributes)
     end
 
     def to_xml
-      content = Collection.new(@products)
-                .add_image_groups(@groups, @images)
-                .add_page_attributes(@attributes)
-                .add_bundled_products(@bundled)
-                .add_set_products(@sets)
-                .add_options(@options, @values, @prices)
-                .add_product_links(@links)
-                .to_a
-
-      XML.new(content, 'catalog', 'product', catalog_attributes).build
+      @document.build
     end
 
     private
 
     def catalog_attributes
       Configuration.properties['catalog']['attributes']
+    end
+
+    def product_attribute_keys
+      Configuration.properties['product']['attribute_keys']
     end
   end
 end
