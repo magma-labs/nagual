@@ -27,7 +27,7 @@ RSpec.describe Nagual::CSV do
       let(:parsed_content) do
         [{
           attributes: { name: 'Oscar' },
-          elements: [{ address: '', phone: '333358390' }]
+          elements: [{ phone: '333358390' }]
         }]
       end
 

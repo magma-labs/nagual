@@ -20,8 +20,9 @@ module Nagual
       elements   = {}
 
       line.each_with_index do |value, index|
+        next if value.nil?
         key   = @headers[index]
-        value = value.nil? ? '' : value.strip
+        value = value.strip
 
         if attribute_keys.include?(key)
           attributes[key] = value
