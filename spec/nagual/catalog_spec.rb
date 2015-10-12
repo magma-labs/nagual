@@ -1,10 +1,11 @@
 require 'spec_helper'
 
 RSpec.describe Nagual::Catalog do
-
-  let(:input)    { File.read(Nagual::Configuration.properties['input_test_file']) }
   let(:xsd_path) { Nagual::Configuration.properties['catalog_xsd'] }
   let(:xsd)      { Nokogiri::XML::Schema(File.read(xsd_path)) }
+  let(:input) do
+    File.read(Nagual::Configuration.properties['input_test_file'])
+  end
 
   subject do
     Nokogiri::XML.parse(described_class.new(input).to_xml)
