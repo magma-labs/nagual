@@ -2,24 +2,15 @@ require 'nokogiri'
 
 module Nagual
   class XML
-    def initialize(content, root_label, node_label, attributes)
-      @content         = content
-      @root_label      = root_label
-      @node_label      = node_label
-      @root_attributes = attributes
-    end
-
-    def build
+    def self.document(content, root_label, node_label, root_attributes)
       Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |xml|
-        xml.send(@root_label, @root_attributes) do
-          add_nodes(@node_label, @content, xml)
+        xml.send(root_label, root_attributes) do
+          add_nodes(node_label, content, xml)
         end
-      end.to_xml
+      end.doc
     end
 
-    private
-
-    def add_nodes(label, array, xml)
+    def self.add_nodes(label, array, xml)
       array.each do |hash|
         hash[:elements].each do |element|
           xml.send(label, hash[:attributes]) do

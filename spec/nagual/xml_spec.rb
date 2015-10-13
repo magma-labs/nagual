@@ -1,18 +1,19 @@
 require 'spec_helper'
 
 RSpec.describe Nagual::XML do
-  describe 'build' do
+  describe 'document' do
     let(:attributes) { { xmls: 'xmls' } }
 
     subject do
-      described_class.new(parsed_content, 'catalog', 'product', attributes)
+      described_class.document(parsed_content, 'catalog', 'product',
+                               attributes).to_xml
     end
 
     context 'with correct data' do
       include_context 'data'
 
       it 'generates expected xml' do
-        expect(subject.build).to eq(xml_content)
+        expect(subject).to eq(xml_content)
       end
     end
 
@@ -38,7 +39,7 @@ XML
       end
 
       it 'generates correct structure' do
-        expect(subject.build).to eq(xml_content)
+        expect(subject).to eq(xml_content)
       end
     end
 
@@ -68,7 +69,7 @@ XML
       end
 
       it 'generates correct structure' do
-        expect(subject.build).to eq(xml_content)
+        expect(subject).to eq(xml_content)
       end
     end
   end
