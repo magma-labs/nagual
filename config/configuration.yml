@@ -12,3 +12,22 @@ product:
   attribute_keys:
     - :product-id
     - :mode
+header:
+  :elements:
+    -
+      image-settings:
+      -
+        :elements:
+        -
+          internal-location:
+          - :elements: [{}]
+            :attributes:
+              base-path: '/images'
+          view-types:
+          - :elements:
+            - view-type: default
+            :attributes: {}
+          alt-pattern: ${productname}
+          title-pattern: ${productname}
+        :attributes: {}
+  :attributes: {}

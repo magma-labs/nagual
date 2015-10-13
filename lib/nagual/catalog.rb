@@ -4,6 +4,7 @@ module Nagual
       @products = CSV.new(input_file).to_a(product_attribute_keys)
       @document = XMLDocument.new('catalog', catalog_attributes)
 
+      @document.add_child('header', header)
       @document.add_child('product', @products)
     end
 
@@ -20,5 +21,10 @@ module Nagual
     def product_attribute_keys
       Configuration.properties['product']['attribute_keys']
     end
+
+    def header
+      [ Configuration.properties['header'] ]
+    end
+
   end
 end
