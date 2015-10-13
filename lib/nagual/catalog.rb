@@ -23,8 +23,7 @@ module Nagual
     end
 
     def header
-      [ Configuration.properties['header'] ]
+      [Configuration.properties['header']]
     end
-
   end
 end
