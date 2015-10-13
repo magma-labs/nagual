@@ -1,12 +1,13 @@
 require 'spec_helper'
 
-RSpec.describe Nagual::XML do
-  describe 'document' do
+RSpec.describe Nagual::XMLDocument do
+  describe 'create_document' do
     let(:attributes) { { xmls: 'xmls' } }
 
     subject do
-      described_class.document(parsed_content, 'catalog', 'product',
-                               attributes).to_xml
+      described_class.new('catalog', attributes)
+        .add_child('product', parsed_content)
+        .to_xml
     end
 
     context 'with correct data' do
