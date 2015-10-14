@@ -35,6 +35,5 @@ module Nagual
     def product_element_keys
       Configuration.properties['product']['element_keys']
     end
-
   end
 end

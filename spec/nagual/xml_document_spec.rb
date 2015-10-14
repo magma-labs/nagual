@@ -134,7 +134,6 @@ XML
   end
 
   describe 'custom_sort' do
-
     include_context 'data'
 
     let(:xml_content) do
@@ -159,10 +158,8 @@ XML
         .to_xml
     end
 
-
     it 'generates expected xml' do
       expect(subject).to eq(xml_content)
     end
-
   end
 end

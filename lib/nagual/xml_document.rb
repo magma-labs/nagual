@@ -33,7 +33,7 @@ module Nagual
         sorted = parent.children.sort_by do |element|
           ordered_keys.index(element.node_name) || 0
         end
-        sorted.each{ |n| parent << n  }
+        sorted.each { |n| parent << n }
       end
 
       XMLDocument.new(@document)
