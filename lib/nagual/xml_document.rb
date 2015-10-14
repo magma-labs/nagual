@@ -28,6 +28,17 @@ module Nagual
       XMLDocument.new(@document)
     end
 
+    def custom_sort(label, ordered_keys)
+      @document.css("//#{label}").each do |parent|
+        sorted = parent.children.sort_by do |element|
+          ordered_keys.index(element.node_name) || 0
+        end
+        sorted.each{ |n| parent << n  }
+      end
+
+      XMLDocument.new(@document)
+    end
+
     def to_xml
       @document.to_xml
     end
