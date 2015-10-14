@@ -1,7 +1,7 @@
 module Nagual
   class Catalog
     def initialize(input_file)
-      @products = CSV.new(input_file).to_a(product_attribute_keys)
+      @products = Input.new(input_file).to_a(product_attribute_keys)
 
       @document = XMLDocument.create('catalog', catalog_attributes)
                   .add_child('header', header)

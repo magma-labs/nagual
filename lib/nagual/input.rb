@@ -2,7 +2,7 @@ require 'csv'
 require_relative 'configuration'
 
 module Nagual
-  class CSV
+  class Input
     def initialize(csv_text)
       first, *rest = *::CSV.parse(csv_text, headers: true)
       @content     = rest

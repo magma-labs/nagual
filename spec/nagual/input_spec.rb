@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe Nagual::CSV do
+RSpec.describe Nagual::Input do
   describe 'to_a' do
     subject { described_class.new(csv_text) }
 
