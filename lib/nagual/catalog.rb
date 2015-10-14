@@ -2,10 +2,12 @@ module Nagual
   class Catalog
     def initialize(input_file)
       @products = CSV.new(input_file).to_a(product_attribute_keys)
+
       @document = XMLDocument.create('catalog', catalog_attributes)
                   .add_child('header', header)
                   .add_child('product', @products)
-
+                  .add_child_below('product', 'images', images)
+                  .custom_sort('product', product_element_keys)
     end
 
     def to_xml
@@ -18,12 +20,21 @@ module Nagual
       Configuration.properties['catalog']['attributes']
     end
 
+    def header
+      [Configuration.properties['header']]
+    end
+
+    def images
+      [Configuration.properties['images']]
+    end
+
     def product_attribute_keys
       Configuration.properties['product']['attribute_keys']
     end
 
-    def header
-      [Configuration.properties['header']]
+    def product_element_keys
+      Configuration.properties['product']['element_keys']
     end
+
   end
 end

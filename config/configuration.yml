@@ -12,14 +12,36 @@ product:
   attribute_keys:
     - :product-id
     - :mode
+  element_keys:
+    - ean
+    - upc
+    - unit
+    - min-order-quantity
+    - step-quantity
+    - display-name
+    - short-description
+    - long-description
+    - online-flag
+    - online-from
+    - online-to
+    - searchable-flag
+    - searchable-if-unavailable-flag
+    - images
+    - template
+    - tax-class-id
+    - brand
+    - manufacturer-name
+    - manufacturer-sku
+    - search-placement
+    - search-rank
+    - sitemap-included-flag
+    - sitemap-changefrequency
+    - sitemap-priority
 header:
   :elements:
-    -
-      image-settings:
-      -
-        :elements:
-        -
-          internal-location:
+    - image-settings:
+      - :elements:
+        - internal-location:
           - :elements: [{}]
             :attributes:
               base-path: '/images'
@@ -30,4 +52,15 @@ header:
           alt-pattern: ${productname}
           title-pattern: ${productname}
         :attributes: {}
+  :attributes: {}
+images:
+  :elements:
+    - image-group:
+      - :elements:
+        - image:
+          - :elements: [{}]
+            :attributes:
+              path: 'default/'
+        :attributes:
+          view-type: default
   :attributes: {}
