@@ -2,16 +2,26 @@ require 'nokogiri'
 
 module Nagual
   class XMLDocument
-    def initialize(label, attributes = nil)
-      @document = Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |xml|
+
+    def self.create(label, attributes = nil)
+      document = Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |xml|
         xml.send(label, attributes)
       end.doc
+
+      XMLDocument.new(document)
+    end
+
+    def initialize(document)
+      @document = document
     end
 
     def add_child(label, content)
-      add_nodes(label, content, @document.root)
+      document = @document.dup
+      add_nodes(label, content, document.root)
+      XMLDocument.new(document)
+    end
 
-      @document
+      XMLDocument.new(document)
     end
 
     def to_xml
