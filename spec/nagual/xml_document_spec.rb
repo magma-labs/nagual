@@ -76,7 +76,6 @@ XML
   end
 
   describe 'add_child_in' do
-
     let(:parent) do
       [
         {
@@ -103,8 +102,8 @@ XML
       ]
     end
 
-  let(:xml_content) do
-    ''"<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+    let(:xml_content) do
+''"<?xml version=\"1.0\" encoding=\"UTF-8\"?>
 <root>
   <parent>
     <label>value-1</label>
@@ -120,7 +119,7 @@ XML
   </parent>
 </root>
 "''
-  end
+    end
 
     subject do
       described_class.create('root')
@@ -132,6 +131,5 @@ XML
     it 'generates correct structure' do
       expect(subject).to eq(xml_content)
     end
-
   end
 end

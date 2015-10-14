@@ -2,7 +2,6 @@ require 'nokogiri'
 
 module Nagual
   class XMLDocument
-
     def self.create(label, attributes = nil)
       document = Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |xml|
         xml.send(label, attributes)
