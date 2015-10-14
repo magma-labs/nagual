@@ -74,4 +74,64 @@ XML
       end
     end
   end
+
+  describe 'add_child_in' do
+
+    let(:parent) do
+      [
+        {
+          attributes: {},
+          elements: [
+            { 'label': 'value-1' }
+          ]
+        },
+        {
+          attributes: {},
+          elements: [
+            { 'label': 'value-2' }
+          ]
+        }
+      ]
+    end
+
+    let(:child) do
+      [
+        {
+          attributes: {},
+          elements:   [{ other: 'element' }]
+        }
+      ]
+    end
+
+  let(:xml_content) do
+    ''"<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<root>
+  <parent>
+    <label>value-1</label>
+    <child-label>
+      <other>element</other>
+    </child-label>
+  </parent>
+  <parent>
+    <label>value-2</label>
+    <child-label>
+      <other>element</other>
+    </child-label>
+  </parent>
+</root>
+"''
+  end
+
+    subject do
+      described_class.create('root')
+        .add_child('parent', parent)
+        .add_child_in('parent', 'child-label', child)
+        .to_xml
+    end
+
+    it 'generates correct structure' do
+      expect(subject).to eq(xml_content)
+    end
+
+  end
 end

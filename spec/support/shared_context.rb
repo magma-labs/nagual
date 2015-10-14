@@ -4,13 +4,13 @@ RSpec.shared_context 'data' do
       {
         attributes: {},
         elements: [
-          { "nombre-autor": 'Rigo Tovar', cancion: 'El Testamento' }
+          { 'nombre-autor': 'Rigo Tovar', cancion: 'El Testamento' }
         ]
       },
       {
         attributes: {},
         elements: [
-          { "nombre-autor": 'Chico Che', cancion: 'Quen Pompo' }
+          { 'nombre-autor': 'Chico Che', cancion: 'Quen Pompo' }
         ]
       }
     ]
