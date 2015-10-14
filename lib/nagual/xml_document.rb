@@ -15,18 +15,17 @@ module Nagual
     end
 
     def add_child(label, content)
-      document = @document.dup
-      add_nodes(label, content, document.root)
-      XMLDocument.new(document)
+      add_nodes(label, content, @document.root)
+
+      XMLDocument.new(@document)
     end
 
-    def add_child_in(label, parent, content)
-      document = @document.dup
-      document.css(label).each do |element|
+    def add_child_below(label, parent, content)
+      @document.css(label).each do |element|
         add_nodes(parent, content, element)
       end
 
-      XMLDocument.new(document)
+      XMLDocument.new(@document)
     end
 
     def to_xml

@@ -75,7 +75,7 @@ XML
     end
   end
 
-  describe 'add_child_in' do
+  describe 'add_child_below' do
     let(:parent) do
       [
         {
@@ -124,7 +124,7 @@ XML
     subject do
       described_class.create('root')
         .add_child('parent', parent)
-        .add_child_in('parent', 'child-label', child)
+        .add_child_below('parent', 'child-label', child)
         .to_xml
     end
 
