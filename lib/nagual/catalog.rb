@@ -3,7 +3,7 @@ module Nagual
     def initialize(input_file)
       @products = Input.new(input_file).to_a(product_attribute_keys)
 
-      @document = XMLDocument.create('catalog', catalog_attributes)
+      @document = Document.create('catalog', catalog_attributes)
                   .add_child('header', header)
                   .add_child('product', @products)
                   .add_child_below('product', 'images', images)

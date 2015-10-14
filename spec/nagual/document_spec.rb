@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe Nagual::XMLDocument do
+RSpec.describe Nagual::Document do
   describe 'add_child' do
     let(:attributes) { { xmls: 'xmls' } }
 

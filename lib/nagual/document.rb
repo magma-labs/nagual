@@ -1,13 +1,13 @@
 require 'nokogiri'
 
 module Nagual
-  class XMLDocument
+  class Document
     def self.create(label, attributes = nil)
       document = Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |xml|
         xml.send(label, attributes)
       end.doc
 
-      XMLDocument.new(document)
+      Document.new(document)
     end
 
     def initialize(document)
@@ -17,7 +17,7 @@ module Nagual
     def add_child(label, content)
       add_nodes(label, content, @document.root)
 
-      XMLDocument.new(@document)
+      Document.new(@document)
     end
 
     def add_child_below(label, parent, content)
@@ -25,7 +25,7 @@ module Nagual
         add_nodes(parent, content, element)
       end
 
-      XMLDocument.new(@document)
+      Document.new(@document)
     end
 
     def custom_sort(label, ordered_keys)
@@ -36,7 +36,7 @@ module Nagual
         sorted.each { |n| parent << n }
       end
 
-      XMLDocument.new(@document)
+      Document.new(@document)
     end
 
     def to_xml
