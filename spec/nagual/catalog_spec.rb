@@ -4,7 +4,7 @@ RSpec.describe Nagual::Catalog do
   let(:xsd_path) { Nagual::Configuration.properties['catalog_xsd'] }
   let(:xsd)      { Nokogiri::XML::Schema(File.read(xsd_path)) }
   let(:input) do
-    File.read(Nagual::Configuration.properties['input_test_file'])
+    File.read('data_examples/products.csv')
   end
 
   subject do

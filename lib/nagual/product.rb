@@ -1,3 +1,5 @@
+require 'nokogiri'
+
 module Nagual
   class Product
     ATTRIBUTES     = [:product_id, :mode]
@@ -28,7 +30,7 @@ module Nagual
     end
 
     def output
-      Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |xml|
+      Nokogiri::XML::Builder.new do |xml|
         xml.send('product', attributes) do
           add_elements(xml, FIRST_ELEMENTS)
           xml.images do
