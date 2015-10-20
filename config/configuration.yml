@@ -24,14 +24,3 @@ header:
           title-pattern: ${productname}
         :attributes: {}
   :attributes: {}
-images:
-  :elements:
-    - image-group:
-      - :elements:
-        - image:
-          - :elements: [{}]
-            :attributes:
-              path: 'default/'
-        :attributes:
-          view-type: default
-  :attributes: {}

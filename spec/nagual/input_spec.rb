@@ -13,8 +13,6 @@ RSpec.describe Nagual::Input do
         expect(subject.products.count).to eq(2)
         expect(subject.products.first.class).to eq(Nagual::Product)
       end
-
-      it 'represents itself correctly'
     end
   end
 end
