@@ -38,6 +38,7 @@ RSpec.describe Nagual::Product do
       "  <sitemap-included-flag/>\n" \
       "  <sitemap-changefrequency/>\n" \
       "  <sitemap-priority/>\n" \
+      "  <page-attributes/>\n" \
       '</product>'
       expect(subject.output.to_xml).to eq(expected_xml)
     end

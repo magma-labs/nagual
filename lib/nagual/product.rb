@@ -9,13 +9,16 @@ module Nagual
       :online_to, :searchable_flag, :searchable_if_unavailable_flag
     ]
     LAST_ELEMENTS = [
-      :template, :tax_class_id,
-      :brand, :manufacturer_name, :manufacturer_sku, :search_placement,
-      :search_rank, :sitemap_included_flag, :sitemap_changefrequency,
-      :sitemap_priority
+      :template, :tax_class_id, :brand, :manufacturer_name, :manufacturer_sku,
+      :search_placement, :search_rank, :sitemap_included_flag,
+      :sitemap_changefrequency, :sitemap_priority
     ]
 
-    PROPERTIES = ATTRIBUTES + FIRST_ELEMENTS + LAST_ELEMENTS
+    PAGE_ELEMENTS = [
+      :page_title, :page_description, :page_keywords, :page_url
+    ]
+
+    PROPERTIES = ATTRIBUTES + FIRST_ELEMENTS + LAST_ELEMENTS + PAGE_ELEMENTS
     PROPERTIES.each do |attribute|
       attr_reader attribute
     end
@@ -39,6 +42,9 @@ module Nagual
             end
           end
           add_elements(xml, LAST_ELEMENTS)
+          xml.send('page-attributes') do
+            add_elements(xml, defined_page_attributes)
+          end
         end
       end.doc.root
     end
@@ -64,6 +70,10 @@ module Nagual
       elements.each do |element|
         xml.send(attribute_name(element), send(element))
       end
+    end
+
+    def defined_page_attributes
+      PAGE_ELEMENTS.reject { |elem| send(elem).nil? }
     end
   end
 end
