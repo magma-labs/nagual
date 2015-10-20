@@ -1,10 +1,15 @@
+require 'nokogiri'
+
 module Nagual
   class Catalog
     def initialize(products)
       @document = Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |xml|
-        xml.send('catalog', catalog_attributes)
+        xml.send('catalog', attributes)
       end.doc
-      products.each { |product| @document.at('catalog') << product.output }
+      @document.at('catalog') << Header.new.output
+      products.each do |product|
+        @document.at('catalog') << product.output
+      end
     end
 
     def output
@@ -13,12 +18,11 @@ module Nagual
 
     private
 
-    def catalog_attributes
-      Configuration.properties['catalog']['attributes']
-    end
-
-    def header
-      [Configuration.properties['header']]
+    def attributes
+      {
+        xmlns:        'http://www.demandware.com/xml/impex/catalog/2006-10-31',
+        'catalog-id': 'nagual-catalog'
+      }
     end
   end
 end

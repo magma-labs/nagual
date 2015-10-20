@@ -1,26 +1,4 @@
 ---
 input_file: data/products.csv
-input_test_file: data_examples/products.csv
 output_file: data/catalog.xml
 catalog_xsd: schema/catalog.xsd
-
-catalog:
-  attributes:
-    xmlns: http://www.demandware.com/xml/impex/catalog/2006-10-31
-    catalog-id: nagual-catalog
-header:
-  :elements:
-    - image-settings:
-      - :elements:
-        - internal-location:
-          - :elements: [{}]
-            :attributes:
-              base-path: '/images'
-          view-types:
-          - :elements:
-            - view-type: default
-            :attributes: {}
-          alt-pattern: ${productname}
-          title-pattern: ${productname}
-        :attributes: {}
-  :attributes: {}
