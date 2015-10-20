@@ -4,34 +4,17 @@ require_relative 'configuration'
 module Nagual
   class Input
     def initialize(csv_text)
-      first, *rest = *::CSV.parse(csv_text, headers: true)
-      @content     = rest
-      @headers     = first.map { |header| header.tr(' ', '-').downcase.to_sym }
-    end
+      header, *rest = *::CSV.parse(csv_text, headers: true)
 
-    def to_a(attribute_keys = [])
-      @content.map { |line| split_by_type(line, attribute_keys) }
-    end
-
-    private
-
-    def split_by_type(line, attribute_keys)
-      attributes = {}
-      elements   = {}
-
-      line.each_with_index do |value, index|
-        next if value.nil?
-        key   = @headers[index]
-        value = value.strip
-
-        if attribute_keys.include?(key)
-          attributes[key] = value
-        else
-          elements[key] = value
-        end
+      @content = rest.map.each_with_index do |value, index|
+        hash = {}
+        hash[header[index]] = value[index]
+        hash
       end
+    end
 
-      { attributes: attributes, elements: [elements] }
+    def products
+      @content.map { |attributes| Product.new(attributes) }
     end
   end
 end

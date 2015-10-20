@@ -20,25 +20,6 @@ module Nagual
       Document.new(@document)
     end
 
-    def add_child_below(label, parent, content)
-      @document.css(label).each do |element|
-        add_nodes(parent, content, element)
-      end
-
-      Document.new(@document)
-    end
-
-    def custom_sort(label, ordered_keys)
-      @document.css("//#{label}").each do |parent|
-        sorted = parent.children.sort_by do |element|
-          ordered_keys.index(element.node_name) || 0
-        end
-        sorted.each { |n| parent << n }
-      end
-
-      Document.new(@document)
-    end
-
     def output
       @document.to_xml
     end

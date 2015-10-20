@@ -5,35 +5,16 @@ RSpec.describe Nagual::Input do
     subject { described_class.new(csv_text) }
 
     context 'with correct data' do
-      include_context 'data'
-
       let(:csv_text) do
-        %(Nombre Autor,Cancion
-          Rigo Tovar, El Testamento
-          Chico Che, Quen Pompo)
+        %(product_id,ean\n1234, EAN1\n2345, EAN2)
       end
 
-      it 'returns parsed content' do
-        expect(subject.to_a).to eq(parsed_content)
-      end
-    end
-
-    context 'with empty values' do
-      let(:csv_text) do
-        %(Name,Address,Phone
-           Oscar,,333358390)
+      it 'returns array of products' do
+        expect(subject.products.count).to eq(2)
+        expect(subject.products.first.class).to eq(Nagual::Product)
       end
 
-      let(:parsed_content) do
-        [{
-          attributes: { name: 'Oscar' },
-          elements: [{ phone: '333358390' }]
-        }]
-      end
-
-      it 'parses to empty string' do
-        expect(subject.to_a([:name])).to eq(parsed_content)
-      end
+      it 'represents itself correctly'
     end
   end
 end
