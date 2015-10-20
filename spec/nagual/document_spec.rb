@@ -7,7 +7,7 @@ RSpec.describe Nagual::Document do
     subject do
       described_class.create('catalog', attributes)
         .add_child('product', parsed_content)
-        .to_xml
+        .output
     end
 
     context 'with correct data' do
@@ -125,7 +125,7 @@ XML
       described_class.create('root')
         .add_child('parent', parent)
         .add_child_below('parent', 'child-label', child)
-        .to_xml
+        .output
     end
 
     it 'generates correct structure' do
@@ -155,7 +155,7 @@ XML
       described_class.create('catalog')
         .add_child('product', parsed_content)
         .custom_sort('product', ['cancion', 'nombre-autor'])
-        .to_xml
+        .output
     end
 
     it 'generates expected xml' do

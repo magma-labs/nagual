@@ -1,17 +1,16 @@
 module Nagual
   class Catalog
     def initialize(input_file)
-      @products = Input.new(input_file).to_a(product_attribute_keys)
-
+      products  = Input.new(input_file).to_a(product_attribute_keys)
       @document = Document.create('catalog', catalog_attributes)
                   .add_child('header', header)
-                  .add_child('product', @products)
+                  .add_child('product', products)
                   .add_child_below('product', 'images', images)
                   .custom_sort('product', product_element_keys)
     end
 
-    def to_xml
-      @document.to_xml
+    def output
+      @document.output
     end
 
     private

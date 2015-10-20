@@ -39,7 +39,7 @@ module Nagual
       Document.new(@document)
     end
 
-    def to_xml
+    def output
       @document.to_xml
     end
 
