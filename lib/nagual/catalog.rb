@@ -1,14 +1,14 @@
 module Nagual
   class Catalog
-    def initialize(input_file)
-      # TODO: Add products to document
-      _products = Input.new(input_file).products
-      @document = Document.create('catalog', catalog_attributes)
-                  .add_child('header', header)
+    def initialize(products)
+      @document = Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |xml|
+        xml.send('catalog', catalog_attributes)
+      end.doc
+      products.each { |product| @document.at('catalog') << product.output }
     end
 
     def output
-      @document.output
+      @document.to_xml
     end
 
     private

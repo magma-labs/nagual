@@ -4,11 +4,13 @@ require_relative 'configuration'
 module Nagual
   class Input
     def initialize(csv_text)
-      header, *rest = *::CSV.parse(csv_text, headers: true)
+      attributes, *content = *::CSV.parse(csv_text, headers: true)
 
-      @content = rest.map.each_with_index do |value, index|
+      @content = content.map do |values|
         hash = {}
-        hash[header[index]] = value[index]
+        values.each_with_index do |value, index|
+          hash[attributes[index]] = value
+        end
         hash
       end
     end

@@ -8,7 +8,8 @@ RSpec.describe Nagual::Catalog do
   end
 
   subject do
-    Nokogiri::XML.parse(described_class.new(input).output)
+    products = Nagual::Input.new(input).products
+    Nokogiri::XML.parse(described_class.new(products).output)
   end
 
   it 'conforms to catalog xsd' do
