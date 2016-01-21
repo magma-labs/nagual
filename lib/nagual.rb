@@ -5,7 +5,7 @@ module Nagual
   def self.run
     File.open(Configuration.properties['output_file'], 'w') do |file|
       csv   = File.read(Configuration.properties['input_file'])
-      input = Input.new(csv_input)
+      input = Input.new(csv)
 
       file.write(Catalog.new(input).output)
     end
