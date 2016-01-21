@@ -3,13 +3,13 @@ require 'spec_helper'
 RSpec.describe Nagual::Catalog do
   let(:xsd_path) { Nagual::Configuration.properties['catalog_xsd'] }
   let(:xsd)      { Nokogiri::XML::Schema(File.read(xsd_path)) }
-  let(:input) do
+  let(:csv) do
     File.read('data_examples/products.csv')
   end
 
   subject do
-    products = Nagual::Input.new(input).products
-    Nokogiri::XML.parse(described_class.new(products).output)
+    input = Nagual::Input.new(csv)
+    Nokogiri::XML.parse(described_class.new(input).output)
   end
 
   it 'conforms to catalog xsd' do

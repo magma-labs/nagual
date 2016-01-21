@@ -4,10 +4,10 @@ Dir.glob(project_root, &method(:require))
 module Nagual
   def self.run
     File.open(Configuration.properties['output_file'], 'w') do |file|
-      csv_input = File.read(Configuration.properties['input_file'])
-      products  = Input.new(csv_input).products
+      csv   = File.read(Configuration.properties['input_file'])
+      input = Input.new(csv_input)
 
-      file.write(Catalog.new(products).output)
+      file.write(Catalog.new(input).output)
     end
   end
 end

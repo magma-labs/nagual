@@ -2,12 +2,12 @@ require 'nokogiri'
 
 module Nagual
   class Catalog
-    def initialize(products)
+    def initialize(input)
       @document = Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |xml|
         xml.send('catalog', attributes)
       end.doc
       @document.at('catalog') << Header.new.output
-      products.each do |product|
+      input.products.each do |product|
         @document.at('catalog') << product.output
       end
     end
