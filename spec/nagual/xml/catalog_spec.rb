@@ -9,7 +9,8 @@ RSpec.describe Nagual::XML::Catalog do
 
   it 'represents output correctly' do
     expected_xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" \
-    "<catalog xmlns=\"http://www.demandware.com/xml/impex/catalog/2006-10-31\" catalog-id=\"nagual-catalog\">\n" \
+    '<catalog xmlns="http://www.demandware.com/xml/impex/catalog/2006-10-31"' \
+    " catalog-id=\"nagual-catalog\">\n" \
     "  <header>\n" \
     "    <image-settings>\n" \
     "      <internal-location base-path=\"/images\"/>\n" \
