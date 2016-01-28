@@ -1,22 +1,10 @@
-require 'nokogiri'
-
 module Nagual
   class Catalog
-    def initialize(input)
-      @document = Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |xml|
-        xml.send('catalog', attributes)
-      end.doc
-      @document.at('catalog') << Header.new.output
-      input.products.each do |product|
-        @document.at('catalog') << product.output
-      end
+    def initialize(products)
+      @products = products
     end
 
-    def output
-      @document.to_xml
-    end
-
-    private
+    attr_reader :products
 
     def attributes
       {

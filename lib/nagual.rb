@@ -1,13 +1,13 @@
-project_root = File.dirname(File.absolute_path(__FILE__)) + '/nagual/*'
-Dir.glob(project_root, &method(:require))
+require 'nagual/catalog'
+require 'nagual/configuration'
+require 'nagual/input'
+require 'nagual/product'
+require 'nagual/xml/catalog'
 
 module Nagual
-  def self.run
-    File.open(Configuration.properties['output_file'], 'w') do |file|
-      csv   = File.read(Configuration.properties['input_file'])
-      input = Input.new(csv)
+  def self.catalog(input_file = Configuration.properties['input_file'])
+    products = Input.new(File.read(input_file)).products
 
-      file.write(Catalog.new(input).output)
-    end
+    XML::Catalog.new(Catalog.new(products)).output
   end
 end

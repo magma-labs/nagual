@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'nagual/configuration'
 
 RSpec.describe Nagual::Configuration do
   it 'contains configuration properties' do

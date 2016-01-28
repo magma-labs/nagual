@@ -1,8 +1,10 @@
 require 'rspec/core/rake_task'
-require_relative 'lib/nagual'
+require 'nagual'
 
 RSpec::Core::RakeTask.new(:spec)
 
-task :run do
-  Nagual.run
+task :catalog do
+  File.open(Configuration.properties['output_file'], 'w') do |file|
+    file.write(Nagual.catalog)
+  end
 end

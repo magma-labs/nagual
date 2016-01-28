@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'nagual/input'
 
 RSpec.describe Nagual::Input do
   describe 'to_a' do
