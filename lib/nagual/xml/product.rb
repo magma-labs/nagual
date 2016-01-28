@@ -9,11 +9,12 @@ module Nagual
 
       def output
         Nokogiri::XML::Builder.new do |xml|
-          xml.send('product', attributes) do
-            add_elements(xml, Nagual::Product::ELEMENTS)
+          xml.send('product', @product.attributes) do
+            add_fields(xml, @product.fields)
             xml.send('page-attributes') do
-              add_elements(xml, Nagual::Product::PAGE_ELEMENTS)
+              add_fields(xml, @product.page_fields)
             end
+
             xml.images do
               xml.send('image-group', 'view-type': 'default') do
                 xml.image(path: "default/#{@product.product_id}")
@@ -23,25 +24,12 @@ module Nagual
         end.doc.root.to_xml
       end
 
-      def add_elements(xml, elements)
-        elements.each do |element|
-          xml.send(attribute_name(element), @product.send(element))
-        end
-      end
+      private
 
-      def attributes
-        Nagual::Product::ATTRIBUTES.inject({}) do |result, attribute|
-          value = @product.send(attribute)
-          if value
-            result.merge!(attribute_name(attribute) => value)
-          else
-            result
-          end
+      def add_fields(xml, fields)
+        fields.each do |name, value|
+          xml.send(name, value)
         end
-      end
-
-      def attribute_name(attribute)
-        attribute.to_s.tr('_', '-')
       end
     end
   end
