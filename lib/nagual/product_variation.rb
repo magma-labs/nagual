@@ -4,7 +4,7 @@ module Nagual
 
     def initialize(id: nil, values: [])
       @id = id
-      @values = values
+      @values = values.map { |v| Value.new(v) }
     end
 
     class Value
