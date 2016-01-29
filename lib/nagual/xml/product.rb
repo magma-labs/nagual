@@ -57,9 +57,9 @@ module Nagual
       def add_variation_attributes(xml, values)
         xml.send('variation-attribute-values') do
           values.each do |value|
-            xml.send('variation-attribute-value', value: value[:value]) do
+            xml.send('variation-attribute-value', value: value.value) do
               xml.send('display-value', { 'xml:lang': 'x-default' },
-                       value[:display])
+                       value.display)
             end
           end
         end

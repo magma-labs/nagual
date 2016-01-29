@@ -22,7 +22,8 @@ RSpec.describe Nagual::XML::Product do
 
   context 'product with single variation' do
     let(:variation_values) do
-      [{ value: 'blue graphite', display: 'Blue graphite' }]
+      [Nagual::ProductVariation::Value.new(value: 'blue graphite',
+                                           display: 'Blue graphite')]
     end
     let(:variation) do
       Nagual::ProductVariation.new(id: 'color', values: variation_values)
