@@ -22,8 +22,7 @@ RSpec.describe Nagual::XML::Product do
 
   context 'product with single variation' do
     let(:variation_values) do
-      [Nagual::ProductVariation::Value.new(value: 'blue graphite',
-                                           display: 'Blue graphite')]
+      [Nagual::ProductVariation::Value.new('Blue graphite')]
     end
     let(:variation) do
       Nagual::ProductVariation.new(id: 'color', values: variation_values)
@@ -40,7 +39,7 @@ RSpec.describe Nagual::XML::Product do
         '      <variation-attribute attribute-id="color" ' \
         "variation-attribute-id=\"color\">\n" \
         "        <variation-attribute-values>\n" \
-        "          <variation-attribute-value value=\"blue graphite\">\n" \
+        "          <variation-attribute-value value=\"blue-graphite\">\n" \
         '            <display-value xml:lang="x-default">'\
         "Blue graphite</display-value>\n" \
         "          </variation-attribute-value>\n" \
@@ -65,14 +64,14 @@ RSpec.describe Nagual::XML::Product do
   context 'product with multiple variations' do
     let(:color_variation_values) do
       [
-        Nagual::ProductVariation::Value.new(value: 'blue', display: 'Blue'),
-        Nagual::ProductVariation::Value.new(value: 'red', display: 'Red')
+        Nagual::ProductVariation::Value.new('Blue'),
+        Nagual::ProductVariation::Value.new('Red')
       ]
     end
     let(:size_variation_values) do
       [
-        Nagual::ProductVariation::Value.new(value: 'S', display: 'Small'),
-        Nagual::ProductVariation::Value.new(value: 'L', display: 'Large')
+        Nagual::ProductVariation::Value.new('Small'),
+        Nagual::ProductVariation::Value.new('Large')
       ]
     end
     let(:size_variation) do
@@ -106,11 +105,11 @@ RSpec.describe Nagual::XML::Product do
         '      <variation-attribute attribute-id="size" ' \
         "variation-attribute-id=\"size\">\n" \
         "        <variation-attribute-values>\n" \
-        "          <variation-attribute-value value=\"S\">\n" \
+        "          <variation-attribute-value value=\"small\">\n" \
         '            <display-value xml:lang="x-default">'\
         "Small</display-value>\n" \
         "          </variation-attribute-value>\n" \
-        "          <variation-attribute-value value=\"L\">\n" \
+        "          <variation-attribute-value value=\"large\">\n" \
         '            <display-value xml:lang="x-default">'\
         "Large</display-value>\n" \
         "          </variation-attribute-value>\n" \

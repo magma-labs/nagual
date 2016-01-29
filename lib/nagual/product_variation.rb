@@ -8,11 +8,14 @@ module Nagual
     end
 
     class Value
-      attr_reader :value, :display
+      attr_reader :display
 
-      def initialize(value: nil, display: nil)
-        @value   = value
+      def initialize(display)
         @display = display
+      end
+
+      def value
+        @display.tr(' ', '-').downcase
       end
     end
   end
