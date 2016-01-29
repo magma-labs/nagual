@@ -10,25 +10,25 @@ module Nagual
       def output
         Nokogiri::XML::Builder.new do |xml|
           xml.send('product', @product.attributes) do
-            add_fields(xml, @product.fields)
-            add_page_attributes(xml, @product.page_fields)
+            add_attributes(xml, @product)
             add_images(xml, @product.product_id)
             add_variations(xml, @product.variations)
+            add_variants(xml, @product.product_id, @product.variants_size)
           end
         end.doc.root.to_xml
       end
 
       private
 
-      def add_fields(xml, fields)
-        fields.each do |name, value|
+      def add_attributes(xml, _product)
+        @product.fields.each do |name, value|
           xml.send(name, value) unless value.nil?
         end
-      end
 
-      def add_page_attributes(xml, fields)
         xml.send('page-attributes') do
-          add_fields(xml, fields)
+          @product.page_fields.each do |name, value|
+            xml.send(name, value) unless value.nil?
+          end
         end
       end
 
@@ -61,6 +61,14 @@ module Nagual
               xml.send('display-value', { 'xml:lang': 'x-default' },
                        value[:display])
             end
+          end
+        end
+      end
+
+      def add_variants(xml, product_id, size)
+        xml.send('variants') do
+          size.times do |index|
+            xml.send('variant', 'product-id': "#{product_id}_#{index + 1}")
           end
         end
       end

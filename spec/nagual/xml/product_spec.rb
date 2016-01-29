@@ -14,15 +14,9 @@ RSpec.describe Nagual::XML::Product do
       expected_xml = "<product product-id=\"id\">\n" \
         "  <ean>EAN</ean>\n" \
         "  <upc/>\n" \
-        "  <page-attributes/>\n" \
-        "  <images>\n" \
-        "    <image-group view-type=\"default\">\n" \
-        "      <image path=\"default/id\"/>\n" \
-        "    </image-group>\n" \
-        "  </images>\n" \
-        '</product>'
+        "  <page-attributes/>\n"
 
-      expect(subject.output).to eq(expected_xml)
+      expect(subject.output).to include(expected_xml)
     end
   end
 
@@ -57,7 +51,14 @@ RSpec.describe Nagual::XML::Product do
       expect(subject.output).to include(expected_xml)
     end
 
-    it 'has related variant'
+    it 'has related variant' do
+      expected_xml =
+        "  <variants>\n" \
+        "    <variant product-id=\"id_1\"/>\n" \
+        "  </variants>\n"
+
+      expect(subject.output).to include(expected_xml)
+    end
   end
 
   context 'product with multiple variations' do

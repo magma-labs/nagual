@@ -40,6 +40,10 @@ module Nagual
       fields_hash(PAGE_FIELDS)
     end
 
+    def variants_size
+      @variations.map { |variation| variation.values.count }.reduce(:+) || 0
+    end
+
     attr_reader :variations
 
     private
