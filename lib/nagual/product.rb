@@ -41,7 +41,7 @@ module Nagual
     end
 
     def variants_size
-      @variations.map { |variation| variation.values.count }.reduce(:+) || 0
+      @variations.map { |variation| variation.values.count }.reduce(:*) || 1
     end
 
     attr_reader :variations

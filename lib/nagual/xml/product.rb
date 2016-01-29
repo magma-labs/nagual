@@ -41,9 +41,9 @@ module Nagual
       end
 
       def add_variations(xml, variations)
-        variations.each do |variation|
-          xml.send('variations') do
-            xml.send('attributes') do
+        xml.send('variations') do
+          xml.send('attributes') do
+            variations.each do |variation|
               xml.send('variation-attribute',
                        'attribute-id': variation.id,
                        'variation-attribute-id': variation.id) do

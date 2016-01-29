@@ -63,7 +63,75 @@ RSpec.describe Nagual::XML::Product do
   end
 
   context 'product with multiple variations' do
-    it 'contains variation attributes'
-    it 'has related variants'
+    let(:color_variation_values) do
+      [
+        Nagual::ProductVariation::Value.new(value: 'blue', display: 'Blue'),
+        Nagual::ProductVariation::Value.new(value: 'red', display: 'Red')
+      ]
+    end
+    let(:size_variation_values) do
+      [
+        Nagual::ProductVariation::Value.new(value: 'S', display: 'Small'),
+        Nagual::ProductVariation::Value.new(value: 'L', display: 'Large')
+      ]
+    end
+    let(:size_variation) do
+      Nagual::ProductVariation.new(id: 'size', values: size_variation_values)
+    end
+    let(:color_variation) do
+      Nagual::ProductVariation.new(id: 'color', values: color_variation_values)
+    end
+    let(:product) do
+      Nagual::Product.new(attributes: { product_id: 'id' },
+                          variations: [color_variation, size_variation])
+    end
+
+    it 'has variation attributes' do
+      expected_xml =
+        "  <variations>\n" \
+        "    <attributes>\n" \
+        '      <variation-attribute attribute-id="color" ' \
+        "variation-attribute-id=\"color\">\n" \
+        "        <variation-attribute-values>\n" \
+        "          <variation-attribute-value value=\"blue\">\n" \
+        '            <display-value xml:lang="x-default">'\
+        "Blue</display-value>\n" \
+        "          </variation-attribute-value>\n" \
+        "          <variation-attribute-value value=\"red\">\n" \
+        '            <display-value xml:lang="x-default">'\
+        "Red</display-value>\n" \
+        "          </variation-attribute-value>\n" \
+        "        </variation-attribute-values>\n" \
+        "      </variation-attribute>\n" \
+        '      <variation-attribute attribute-id="size" ' \
+        "variation-attribute-id=\"size\">\n" \
+        "        <variation-attribute-values>\n" \
+        "          <variation-attribute-value value=\"S\">\n" \
+        '            <display-value xml:lang="x-default">'\
+        "Small</display-value>\n" \
+        "          </variation-attribute-value>\n" \
+        "          <variation-attribute-value value=\"L\">\n" \
+        '            <display-value xml:lang="x-default">'\
+        "Large</display-value>\n" \
+        "          </variation-attribute-value>\n" \
+        "        </variation-attribute-values>\n" \
+        "      </variation-attribute>\n" \
+        "    </attributes>\n" \
+        "  </variations>\n" \
+
+      expect(subject.output).to include(expected_xml)
+    end
+
+    it 'has related variant' do
+      expected_xml =
+        "  <variants>\n" \
+        "    <variant product-id=\"id_1\"/>\n" \
+        "    <variant product-id=\"id_2\"/>\n" \
+        "    <variant product-id=\"id_3\"/>\n" \
+        "    <variant product-id=\"id_4\"/>\n" \
+        "  </variants>\n"
+
+      expect(subject.output).to include(expected_xml)
+    end
   end
 end
