@@ -1,13 +1,13 @@
-require 'nagual/catalog'
 require 'nagual/configuration'
-require 'nagual/input'
-require 'nagual/product'
 require 'nagual/xml/catalog'
+require 'nagual/csv/input'
+require 'nagual/catalog'
 
 module Nagual
-  def self.catalog(input_file: Configuration.properties['input_file'])
-    products = Input.new(File.read(input_file)).products
+  def self.catalog(input: CSV::Input.new, builder_class: XML::Catalog)
+    products = input.products
+    builder  = builder_class.new(Catalog.new(products))
 
-    XML::Catalog.new(Catalog.new(products)).output
+    builder.output
   end
 end
