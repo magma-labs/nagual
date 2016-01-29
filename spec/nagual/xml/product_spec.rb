@@ -1,49 +1,67 @@
 require 'spec_helper'
 require 'nagual/product'
+require 'nagual/product_variation'
 require 'nagual/xml/product'
 
 RSpec.describe Nagual::XML::Product do
-  let(:product) { Nagual::Product.new(product_id: 'id') }
-
   subject { described_class.new(product) }
 
-  it 'represents output correctly' do
-    expected_xml = "<product product-id=\"id\">\n" \
-      "  <ean/>\n" \
-      "  <upc/>\n" \
-      "  <min-order-quantity/>\n" \
-      "  <step-quantity/>\n" \
-      "  <display-name/>\n" \
-      "  <short-description/>\n" \
-      "  <long-description/>\n" \
-      "  <online-flag/>\n" \
-      "  <online-from/>\n" \
-      "  <online-to/>\n" \
-      "  <searchable-flag/>\n" \
-      "  <searchable-if-unavailable-flag/>\n" \
-      "  <template/>\n" \
-      "  <tax-class-id/>\n" \
-      "  <brand/>\n" \
-      "  <manufacturer-name/>\n" \
-      "  <manufacturer-sku/>\n" \
-      "  <search-placement/>\n" \
-      "  <search-rank/>\n" \
-      "  <sitemap-included-flag/>\n" \
-      "  <sitemap-changefrequency/>\n" \
-      "  <sitemap-priority/>\n" \
-      "  <page-attributes>\n" \
-      "    <page-title/>\n" \
-      "    <page-description/>\n" \
-      "    <page-keywords/>\n" \
-      "    <page-url/>\n" \
-      "  </page-attributes>\n" \
-      "  <images>\n" \
-      "    <image-group view-type=\"default\">\n" \
-      "      <image path=\"default/id\"/>\n" \
-      "    </image-group>\n" \
-      "  </images>\n" \
-      '</product>'
+  context 'standard product' do
+    let(:attributes) { { product_id: 'id', ean: 'EAN', upc: '' } }
+    let(:product)    { Nagual::Product.new(attributes: attributes) }
 
-    expect(subject.output).to eq(expected_xml)
+    it 'represents output correctly' do
+      expected_xml = "<product product-id=\"id\">\n" \
+        "  <ean>EAN</ean>\n" \
+        "  <upc/>\n" \
+        "  <page-attributes/>\n" \
+        "  <images>\n" \
+        "    <image-group view-type=\"default\">\n" \
+        "      <image path=\"default/id\"/>\n" \
+        "    </image-group>\n" \
+        "  </images>\n" \
+        '</product>'
+
+      expect(subject.output).to eq(expected_xml)
+    end
+  end
+
+  context 'product with single variation' do
+    let(:variation_values) do
+      [{ value: 'blue graphite', display: 'Blue graphite' }]
+    end
+    let(:variation) do
+      Nagual::ProductVariation.new(id: 'color', values: variation_values)
+    end
+    let(:product) do
+      Nagual::Product.new(attributes: { product_id: 'id' },
+                          variations: [variation])
+    end
+
+    it 'has variation attributes' do
+      expected_xml =
+        "  <variations>\n" \
+        "    <attributes>\n" \
+        '      <variation-attribute attribute-id="color" ' \
+        "variation-attribute-id=\"color\">\n" \
+        "        <variation-attribute-values>\n" \
+        "          <variation-attribute-value value=\"blue graphite\">\n" \
+        '            <display-value xml:lang="x-default">'\
+        "Blue graphite</display-value>\n" \
+        "          </variation-attribute-value>\n" \
+        "        </variation-attribute-values>\n" \
+        "      </variation-attribute>\n" \
+        "    </attributes>\n" \
+        "  </variations>\n" \
+
+      expect(subject.output).to include(expected_xml)
+    end
+
+    it 'has related variant'
+  end
+
+  context 'product with multiple variations' do
+    it 'contains variation attributes'
+    it 'has related variants'
   end
 end

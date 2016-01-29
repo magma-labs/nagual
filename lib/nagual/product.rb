@@ -18,7 +18,8 @@ module Nagual
       attr_reader attribute
     end
 
-    def initialize(attributes)
+    def initialize(attributes: {}, variations: [])
+      @variations = variations
       valid_attributes = attributes.select do |key, _value|
         PROPERTIES.include?(key.to_sym)
       end
@@ -38,6 +39,8 @@ module Nagual
     def page_fields
       fields_hash(PAGE_FIELDS)
     end
+
+    attr_reader :variations
 
     private
 

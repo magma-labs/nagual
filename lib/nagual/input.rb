@@ -16,7 +16,7 @@ module Nagual
     end
 
     def products
-      @content.map { |attributes| Product.new(attributes) }
+      @content.map { |attributes| Product.new(attributes: attributes) }
     end
   end
 end
