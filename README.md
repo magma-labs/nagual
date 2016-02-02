@@ -8,7 +8,7 @@ For help running this code you can get the [Nagual VM](https://github.com/sawyer
 
 * Create a `data` file with the expected format, you can use `data_examples/` as a reference
 * Install the nagual gem
-* Use the following command: `nagual catalog`
+* Use the following command: `nagual`
 * A file will be generated in `data/output.xml`
 
 ## Nagual development

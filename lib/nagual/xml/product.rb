@@ -11,7 +11,7 @@ module Nagual
         Nokogiri::XML::Builder.new do |xml|
           xml.send('product', @product.attributes) do
             add_attributes(xml, @product)
-            add_images(xml, @product.product_id)
+            add_images(xml, @product.product_id, @product.images)
             add_variations(xml, @product.variations)
             add_variants(xml, @product.product_id, @product.variants_size)
           end
@@ -32,10 +32,12 @@ module Nagual
         end
       end
 
-      def add_images(xml, product_id)
+      def add_images(xml, product_id, images)
         xml.images do
-          xml.send('image-group', 'view-type': 'default') do
-            xml.image(path: "default/#{product_id}")
+          images.each do |image|
+            xml.send('image-group', 'view-type': image) do
+              xml.image(path: "images/#{product_id}_#{image}.png")
+            end
           end
         end
       end

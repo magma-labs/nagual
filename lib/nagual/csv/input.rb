@@ -26,11 +26,12 @@ module Nagual
 
       def products_for(attributes)
         product_attributes = attributes.select do |key|
-          !key.to_s.match(@variation_regex)
+          key != 'images' && !key.match(@variation_regex)
         end
 
         Nagual::Product.new(attributes: product_attributes,
-                            variations: variations_for(attributes))
+                            variations: variations_for(attributes),
+                            images: images_for(attributes))
       end
 
       def variations_for(attributes)
@@ -44,6 +45,11 @@ module Nagual
 
           Nagual::ProductVariation.new(id: id, values: values)
         end
+      end
+
+      def images_for(attributes)
+        images = attributes['images'] || ''
+        images.split(',')
       end
     end
   end

@@ -13,7 +13,7 @@ RSpec.describe Nagual::XML::Catalog do
     " catalog-id=\"nagual-catalog\">\n" \
     "  <header>\n" \
     "    <image-settings>\n" \
-    "      <internal-location base-path=\"/images\"/>\n" \
+    "      <internal-location base-path=\"/\"/>\n" \
     "      <view-types>\n" \
     "        <view-type>large</view-type>\n" \
     "        <view-type>medium</view-type>\n" \

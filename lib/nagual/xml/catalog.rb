@@ -23,7 +23,7 @@ module Nagual
       def header(xml)
         xml.send('header') do
           xml.send('image-settings') do
-            xml.send('internal-location', 'base-path': '/images')
+            xml.send('internal-location', 'base-path': '/')
             xml.send('view-types') do
               xml.send('view-type', 'large')
               xml.send('view-type', 'medium')

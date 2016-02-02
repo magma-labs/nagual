@@ -121,4 +121,25 @@ RSpec.describe Nagual::XML::Product do
       expect(subject.output).to include(expected_xml)
     end
   end
+
+  context 'product with images' do
+    let(:product) do
+      Nagual::Product.new(attributes: { product_id: 'id' },
+                          images: %w(small medium))
+    end
+
+    it 'has image settings with correct view type' do
+      expected_xml =
+        "  <images>\n" \
+        "    <image-group view-type=\"small\">\n" \
+        "      <image path=\"images/id_small.png\"/>\n" \
+        "    </image-group>\n" \
+        "    <image-group view-type=\"medium\">\n" \
+        "      <image path=\"images/id_medium.png\"/>\n" \
+        "    </image-group>\n" \
+        "  </images>\n"
+
+      expect(subject.output).to include(expected_xml)
+    end
+  end
 end

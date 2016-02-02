@@ -18,8 +18,9 @@ module Nagual
       attr_reader attribute
     end
 
-    def initialize(attributes: {}, variations: [])
+    def initialize(attributes: {}, variations: [], images: [])
       @variations = variations
+      @images     = images
       valid_attributes = attributes.select do |key, _value|
         PROPERTIES.include?(key.to_sym)
       end
@@ -44,7 +45,7 @@ module Nagual
       @variations.map { |variation| variation.values.count }.reduce(:*) || 1
     end
 
-    attr_reader :variations
+    attr_reader :variations, :images
 
     private
 
