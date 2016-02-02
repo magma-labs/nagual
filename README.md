@@ -12,6 +12,16 @@ For help running this code you can get the [Nagual VM](https://github.com/sawyer
 * Use the following command: `nagual catalog`
 * A `data/catalog.xml` file will be generated.
 
+## Custom attributes
+
+If a new column is added with a header that is not recognized as a product
+field, then a new custom attribute will be generated for the products
+that contain a value for that column.
+
+Example if column `season` and a product contains `winter` value, then
+a product custom attribute with id "season" will be generated for
+that product.
+
 ## Variations
 
 To generate a new variation for products in the catalog a column needs to be

@@ -19,13 +19,16 @@ module Nagual
     end
 
     def initialize(attributes: {}, variations: [], images: [])
-      @variations = variations
-      @images     = images
-      valid_attributes = attributes.select do |key, _value|
-        PROPERTIES.include?(key.to_sym)
-      end
-      valid_attributes.each do |key, value|
-        instance_variable_set("@#{key}", value)
+      @variations        = variations
+      @images            = images
+      @custom_attributes = {}
+
+      attributes.each do |key, value|
+        if PROPERTIES.include?(key.to_sym)
+          instance_variable_set("@#{key}", value)
+        else
+          @custom_attributes[key.to_sym] = value
+        end
       end
     end
 
@@ -45,7 +48,7 @@ module Nagual
       @variations.map { |variation| variation.values.count }.reduce(:*) || 1
     end
 
-    attr_reader :variations, :images
+    attr_reader :variations, :images, :custom_attributes
 
     private
 

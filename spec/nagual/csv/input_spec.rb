@@ -48,9 +48,21 @@ RSpec.describe Nagual::CSV::Input do
     end
 
     it 'creates product variations correctly' do
-      images = first_product.images
+      expect(first_product.images).to eq(%w(small medium))
+    end
+  end
 
-      expect(images).to eq(%w(small medium))
+  context 'with custom attributes' do
+    before do
+      allow(File)
+        .to receive(:read) do
+        "product_id,ean,other\n" \
+        "1234, EAN1,value\n" \
+      end
+    end
+
+    it 'creates product variations correctly' do
+      expect(first_product.custom_attributes).to eq(other: 'value')
     end
   end
 end

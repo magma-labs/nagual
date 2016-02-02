@@ -11,6 +11,7 @@ module Nagual
         Nokogiri::XML::Builder.new do |xml|
           xml.send('product', @product.attributes) do
             add_attributes(xml, @product)
+            add_custom_attributes(xml, @product)
             add_variations(xml, @product.variations)
           end
         end.doc.root.to_xml
@@ -29,6 +30,14 @@ module Nagual
         xml.send('page-attributes') do
           product.page_fields.each do |name, value|
             xml.send(name, value) unless value.nil?
+          end
+        end
+      end
+
+      def add_custom_attributes(xml, product)
+        xml.send('custom-attributes') do
+          product.custom_attributes.each do |key, value|
+            xml.send('custom-attribute', { 'attribute-id': key }, value)
           end
         end
       end

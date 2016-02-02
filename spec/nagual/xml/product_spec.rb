@@ -131,4 +131,20 @@ RSpec.describe Nagual::XML::Product do
       expect(subject.output).to include(expected_xml)
     end
   end
+
+  context 'product with custom attributes' do
+    let(:product) do
+      Nagual::Product.new(attributes: { product_id: 'id', other: 'value' })
+    end
+
+    it 'has image settings with correct view type' do
+      expected_xml =
+        "  <custom-attributes>\n" \
+        '    <custom-attribute attribute-id="other">value' \
+        "</custom-attribute>\n" \
+        "  </custom-attributes>\n"
+
+      expect(subject.output).to include(expected_xml)
+    end
+  end
 end
