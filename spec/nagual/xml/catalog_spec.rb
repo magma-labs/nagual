@@ -15,7 +15,10 @@ RSpec.describe Nagual::XML::Catalog do
     "    <image-settings>\n" \
     "      <internal-location base-path=\"/images\"/>\n" \
     "      <view-types>\n" \
-    "        <view-type>default</view-type>\n" \
+    "        <view-type>large</view-type>\n" \
+    "        <view-type>medium</view-type>\n" \
+    "        <view-type>small</view-type>\n" \
+    "        <view-type>swatch</view-type>\n" \
     "      </view-types>\n" \
     "      <alt-pattern>${productname}</alt-pattern>\n" \
     "      <title-pattern>${productname}</title-pattern>\n" \

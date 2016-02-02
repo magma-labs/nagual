@@ -25,7 +25,10 @@ module Nagual
           xml.send('image-settings') do
             xml.send('internal-location', 'base-path': '/images')
             xml.send('view-types') do
-              xml.send('view-type', 'default')
+              xml.send('view-type', 'large')
+              xml.send('view-type', 'medium')
+              xml.send('view-type', 'small')
+              xml.send('view-type', 'swatch')
             end
 
             xml.send('alt-pattern', '${productname}')
