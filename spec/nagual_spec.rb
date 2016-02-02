@@ -12,7 +12,9 @@ RSpec.describe Nagual do
   end
 
   it 'conforms to catalog xsd' do
-    xsd.validate(subject)
+    xsd.validate(subject).each do |error|
+      puts error.message
+    end
     expect(xsd.valid?(subject)).to be true
   end
 end

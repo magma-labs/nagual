@@ -3,7 +3,9 @@
 if ARGV.first == 'catalog'
   require 'nagual'
 
-  Nagual.run
+  File.open(Nagual::Configuration.properties['output_file'], 'w') do |file|
+    file.write(Nagual.catalog)
+  end
 else
   p 'Command not recognized'
 end

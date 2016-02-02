@@ -14,6 +14,7 @@ RSpec.describe Nagual::XML::Product do
       expected_xml = "<product product-id=\"id\">\n" \
         "  <ean>EAN</ean>\n" \
         "  <upc/>\n" \
+        "  <images/>\n" \
         "  <page-attributes/>\n"
 
       expect(subject.output).to include(expected_xml)
@@ -30,7 +31,7 @@ RSpec.describe Nagual::XML::Product do
                           variations: [variation])
     end
 
-    it 'has variation attributes' do
+    it 'has variation attributes and variants' do
       expected_xml =
         "  <variations>\n" \
         "    <attributes>\n" \
@@ -44,16 +45,10 @@ RSpec.describe Nagual::XML::Product do
         "        </variation-attribute-values>\n" \
         "      </variation-attribute>\n" \
         "    </attributes>\n" \
+        "    <variants>\n" \
+        "      <variant product-id=\"id_1\"/>\n" \
+        "    </variants>\n" \
         "  </variations>\n" \
-
-      expect(subject.output).to include(expected_xml)
-    end
-
-    it 'has related variant' do
-      expected_xml =
-        "  <variants>\n" \
-        "    <variant product-id=\"id_1\"/>\n" \
-        "  </variants>\n"
 
       expect(subject.output).to include(expected_xml)
     end
@@ -73,7 +68,7 @@ RSpec.describe Nagual::XML::Product do
                           variations: [color_variation, size_variation])
     end
 
-    it 'has variation attributes' do
+    it 'has variation attributes and variants' do
       expected_xml =
         "  <variations>\n" \
         "    <attributes>\n" \
@@ -104,19 +99,13 @@ RSpec.describe Nagual::XML::Product do
         "        </variation-attribute-values>\n" \
         "      </variation-attribute>\n" \
         "    </attributes>\n" \
+        "    <variants>\n" \
+        "      <variant product-id=\"id_1\"/>\n" \
+        "      <variant product-id=\"id_2\"/>\n" \
+        "      <variant product-id=\"id_3\"/>\n" \
+        "      <variant product-id=\"id_4\"/>\n" \
+        "    </variants>\n" \
         "  </variations>\n" \
-
-      expect(subject.output).to include(expected_xml)
-    end
-
-    it 'has related variant' do
-      expected_xml =
-        "  <variants>\n" \
-        "    <variant product-id=\"id_1\"/>\n" \
-        "    <variant product-id=\"id_2\"/>\n" \
-        "    <variant product-id=\"id_3\"/>\n" \
-        "    <variant product-id=\"id_4\"/>\n" \
-        "  </variants>\n"
 
       expect(subject.output).to include(expected_xml)
     end

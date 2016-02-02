@@ -10,7 +10,7 @@ module Nagual
             header(xml)
 
             catalog.products.each do |product|
-              Nagual::XML::Product.new(product).output
+              xml << Nagual::XML::Product.new(product).output
             end
           end
         end

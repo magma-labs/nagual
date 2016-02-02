@@ -4,9 +4,7 @@ require 'nagual/csv/input'
 require 'nagual/catalog'
 
 module Nagual
-
-  def self.catalog(input: CSV::Input.new(file: 'data/products.csv'),
-                                         builder_class: XML::Catalog)
+  def self.catalog(input: CSV::Input.new, builder_class: XML::Catalog)
     products = input.products
     builder  = builder_class.new(Catalog.new(products))
 

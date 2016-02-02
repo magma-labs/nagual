@@ -11,22 +11,23 @@ module Nagual
         Nokogiri::XML::Builder.new do |xml|
           xml.send('product', @product.attributes) do
             add_attributes(xml, @product)
-            add_images(xml, @product.product_id, @product.images)
             add_variations(xml, @product.variations)
-            add_variants(xml, @product.product_id, @product.variants_size)
           end
         end.doc.root.to_xml
       end
 
       private
 
-      def add_attributes(xml, _product)
-        @product.fields.each do |name, value|
+      def add_attributes(xml, product)
+        product.fields.each do |name, value|
+          if name == 'template'
+            add_images(xml, product.product_id, product.images)
+          end
           xml.send(name, value) unless value.nil?
         end
 
         xml.send('page-attributes') do
-          @product.page_fields.each do |name, value|
+          product.page_fields.each do |name, value|
             xml.send(name, value) unless value.nil?
           end
         end
@@ -43,6 +44,7 @@ module Nagual
       end
 
       def add_variations(xml, variations)
+        return if variations.empty?
         xml.send('variations') do
           xml.send('attributes') do
             variations.each do |variation|
@@ -53,6 +55,7 @@ module Nagual
                        end
             end
           end
+          add_variants(xml, @product.product_id, @product.variants_size)
         end
       end
 
