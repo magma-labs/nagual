@@ -4,59 +4,68 @@ module Nagual
   module XML
     class Product
       def initialize(product)
-        @product = product
+        @attributes        = product.attributes
+        @fields            = product.fields
+        @page_fields       = product.page_fields
+        @custom_attributes = product.custom_attributes
+        @images            = product.images
+        @id                = product.product_id
+        @variations        = product.variations
+        @variants_size     = product.variants_size
       end
 
       def output
-        Nokogiri::XML::Builder.new do |xml|
-          xml.send('product', @product.attributes) do
-            add_attributes(xml, @product)
-            add_custom_attributes(xml, @product)
-            add_variations(xml, @product.variations)
-          end
-        end.doc.root.to_xml
+        @output ||= build_output
       end
 
       private
 
-      def add_attributes(xml, product)
-        product.fields.each do |name, value|
-          if name == 'template'
-            add_images(xml, product.product_id, product.images)
+      def build_output
+        Nokogiri::XML::Builder.new do |xml|
+          xml.send('product', @attributes) do
+            add_attributes(xml)
+            add_custom_attributes(xml)
+            add_variations(xml)
           end
+        end.doc.root.to_xml
+      end
+
+      def add_attributes(xml)
+        @fields.each do |name, value|
+          add_images(xml) if name == 'template'
           xml.send(name, value) unless value.nil?
         end
 
         xml.send('page-attributes') do
-          product.page_fields.each do |name, value|
+          @page_fields.each do |name, value|
             xml.send(name, value) unless value.nil?
           end
         end
       end
 
-      def add_custom_attributes(xml, product)
+      def add_custom_attributes(xml)
         xml.send('custom-attributes') do
-          product.custom_attributes.each do |key, value|
+          @custom_attributes.each do |key, value|
             xml.send('custom-attribute', { 'attribute-id': key }, value)
           end
         end
       end
 
-      def add_images(xml, product_id, images)
+      def add_images(xml)
         xml.images do
-          images.each do |image|
+          @images.each do |image|
             xml.send('image-group', 'view-type': image) do
-              xml.image(path: "images/#{product_id}_#{image}.png")
+              xml.image(path: "images/#{@id}_#{image}.png")
             end
           end
         end
       end
 
-      def add_variations(xml, variations)
-        return if variations.empty?
+      def add_variations(xml)
+        return if @variations.empty?
         xml.send('variations') do
           xml.send('attributes') do
-            variations.each do |variation|
+            @variations.each do |variation|
               xml.send('variation-attribute',
                        'attribute-id': variation.id,
                        'variation-attribute-id': variation.id) do
@@ -64,7 +73,7 @@ module Nagual
                        end
             end
           end
-          add_variants(xml, @product.product_id, @product.variants_size)
+          add_variants(xml)
         end
       end
 
@@ -79,10 +88,11 @@ module Nagual
         end
       end
 
-      def add_variants(xml, product_id, size)
+      def add_variants(xml)
         xml.send('variants') do
-          size.times do |index|
-            xml.send('variant', 'product-id': "#{product_id}_#{index + 1}")
+          @variants_size.times do |index|
+            xml.send('variant',
+                     'product-id': "#{@id}_#{index + 1}")
           end
         end
       end
