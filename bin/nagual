@@ -4,7 +4,7 @@ if ARGV.first == 'catalog'
   require 'nagual'
 
   File.open(Nagual::Configuration.properties['output_file'], 'w') do |file|
-    file.write(Nagual.catalog)
+    file.write(Nagual.catalog(Nagual::Configuration.properties['input_file']))
   end
 else
   p 'Command not recognized'

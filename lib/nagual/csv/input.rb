@@ -1,12 +1,11 @@
 require 'csv'
-require 'nagual/configuration'
 require 'nagual/product'
 require 'nagual/product_variation'
 
 module Nagual
   module CSV
     class Input
-      def initialize(file: Configuration.properties['input_file'])
+      def initialize(file)
         @variation_regex    = 'variation-'
         column_names, *rows = *::CSV.parse(File.read(file), headers: true)
         @content            = rows.map { |row| Hash[column_names.zip(row)] }

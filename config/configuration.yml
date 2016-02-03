@@ -1,4 +1,3 @@
 ---
 input_file: data/products.csv
 output_file: data/catalog.xml
-catalog_xsd: schema/catalog.xsd

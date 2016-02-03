@@ -4,6 +4,8 @@ require 'nagual/csv/input'
 RSpec.describe Nagual::CSV::Input do
   let(:first_product) { subject.products.first }
 
+  subject { described_class.new('') }
+
   context 'with correct data' do
     before do
       allow(File)
