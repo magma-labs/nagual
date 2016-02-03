@@ -2,7 +2,7 @@ module Nagual
   class Product
     ATTRIBUTES = [:product_id, :mode].freeze
     FIELDS = [
-      :ean, :upc, :min_order_quantity, :step_quantity, :display_name,
+      :ean, :upc, :unit, :min_order_quantity, :step_quantity, :display_name,
       :short_description, :long_description, :online_flag, :online_from,
       :online_to, :searchable_flag, :searchable_if_unavailable_flag,
       :template, :tax_class_id, :brand, :manufacturer_name, :manufacturer_sku,
