@@ -11,11 +11,19 @@ module Nagual
         @content            = rows.map { |row| Hash[column_names.zip(row)] }
       end
 
-      def products
-        @products || parse_content_to_products
+      def valid_products
+        products.select(&:valid?)
+      end
+
+      def invalid_products
+        products.select { |product| !product.valid? }
       end
 
       private
+
+      def products
+        @products || parse_content_to_products
+      end
 
       def parse_content_to_products
         @content.map do |attributes|

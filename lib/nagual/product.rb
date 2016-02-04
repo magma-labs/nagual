@@ -45,13 +45,16 @@ module Nagual
     end
 
     def valid?
-      @errors = []
+      @valid ||= validate
+    end
+
+    private
+
+    def validate
       validate_required
       validate_by_type
       @errors.empty?
     end
-
-    private
 
     def validate_required
       REQUIRED.each { |name| validate_field(name, 'required') }
