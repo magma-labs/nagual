@@ -1,22 +1,18 @@
+require 'nagual/configuration'
+
 module Nagual
   class Product
-    ATTRIBUTES = [:product_id, :mode].freeze
-    FIELDS = [
-      :ean, :upc, :unit, :min_order_quantity, :step_quantity, :display_name,
-      :short_description, :long_description, :online_flag, :online_from,
-      :online_to, :searchable_flag, :searchable_if_unavailable_flag,
-      :template, :tax_class_id, :brand, :manufacturer_name, :manufacturer_sku,
-      :search_placement, :search_rank, :sitemap_included_flag,
-      :sitemap_changefrequency, :sitemap_priority
-    ].freeze
-    PAGE_FIELDS = [
-      :page_title, :page_description, :page_keywords, :page_url
-    ].freeze
-    PROPERTIES = ATTRIBUTES + FIELDS + PAGE_FIELDS
+    ATTRIBUTES  = Nagual::Configuration.properties['product']['attributes'].keys
+    PAGE_FIELDS = Nagual::Configuration.properties['product']['page'].keys
+    FIELD_KEYS  = Nagual::Configuration.properties['product']['fields'].keys
+
+    PROPERTIES = ATTRIBUTES + FIELD_KEYS + PAGE_FIELDS
 
     PROPERTIES.each do |attribute|
-      attr_reader attribute
+      attr_reader attribute.to_sym
     end
+
+    attr_reader :variations, :images, :custom_attributes
 
     def initialize(attributes: {}, variations: [], images: [])
       @variations        = variations
@@ -24,7 +20,7 @@ module Nagual
       @custom_attributes = {}
 
       attributes.each do |key, value|
-        if PROPERTIES.include?(key.to_sym)
+        if PROPERTIES.include?(key.to_s)
           instance_variable_set("@#{key}", value)
         else
           @custom_attributes[key.to_sym] = value
@@ -33,11 +29,11 @@ module Nagual
     end
 
     def attributes
-      { 'product-id': product_id }
+      fields_hash(ATTRIBUTES)
     end
 
     def fields
-      fields_hash(FIELDS)
+      fields_hash(FIELD_KEYS)
     end
 
     def page_fields
@@ -47,8 +43,6 @@ module Nagual
     def variants_size
       @variations.map { |variation| variation.values.count }.reduce(:*) || 1
     end
-
-    attr_reader :variations, :images, :custom_attributes
 
     private
 

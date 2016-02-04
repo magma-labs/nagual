@@ -1,3 +1,36 @@
 ---
 input_file: data/products.csv
 output_file: data/catalog.xml
+product:
+  attributes:
+    product_id: string.100.required
+  fields:
+    ean: string.256
+    upc: string.256
+    unit: string.256
+    min_order_quantity: decimal
+    step_quantity: decimal
+    display_name: string
+    short_description: string
+    long_description: string
+    online_flag: boolean
+    online_from: datetime
+    online_to: datetime
+    available_flag: boolean
+    searchable_flag: boolean
+    searchable_if_unavailable_flag: boolean
+    template: string.256
+    tax_class_id: string.256
+    brand: string.256
+    manufacturer_name: string.256
+    manufacturer_sku: string.256
+    search_placement: int
+    search_rank: int
+    sitemap_included_flag: boolean
+    sitemap_changefrequency: frequency
+    sitemap_priority: priority
+  page:
+    page_title: string
+    page_description: string
+    page_keywords: string
+    page_url: string
