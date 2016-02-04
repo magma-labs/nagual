@@ -12,12 +12,13 @@ module Nagual
       attr_reader attribute.to_sym
     end
 
-    attr_reader :variations, :images, :custom_attributes
+    attr_reader :variations, :images, :custom_attributes, :errors
 
     def initialize(attributes: {}, variations: [], images: [])
       @variations        = variations
       @images            = images
       @custom_attributes = {}
+      @errors            = []
 
       attributes.each do |key, value|
         if PROPERTIES.include?(key.to_s)

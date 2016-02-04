@@ -2,8 +2,9 @@
 input_file: data/products.csv
 output_file: data/catalog.xml
 product:
+  required: product_id
   attributes:
-    product_id: string.100.required
+    product_id: string.100
   fields:
     ean: string.256
     upc: string.256

@@ -19,18 +19,16 @@ module Nagual
 
       def parse_content_to_products
         @content.map do |attributes|
-          products_for(attributes)
+          Nagual::Product.new(attributes: product_attributes(attributes),
+                              variations: variations_for(attributes),
+                              images: images_for(attributes))
         end
       end
 
-      def products_for(attributes)
-        product_attributes = attributes.select do |key|
+      def product_attributes(attributes)
+        attributes.select do |key|
           key != 'images' && !key.match(@variation_regex)
         end
-
-        Nagual::Product.new(attributes: product_attributes,
-                            variations: variations_for(attributes),
-                            images: images_for(attributes))
       end
 
       def variations_for(attributes)
