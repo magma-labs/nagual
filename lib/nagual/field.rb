@@ -4,7 +4,7 @@ module Nagual
   class Field
     CONTRACT = {
       priority: Priority, string: Default, boolean: Boolean, decimal: Decimal,
-      int: Integer, frequency: Frequency, datetime: Datetime
+      int: Integer, frequency: Frequency, datetime: Datetime, required: Required
     }.freeze
 
     def initialize(value, type)
@@ -28,6 +28,7 @@ module Nagual
     private
 
     def valid_size?
+      return true if @value.nil?
       @max_size >= @value.size
     end
   end

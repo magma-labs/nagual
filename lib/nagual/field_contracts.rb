@@ -9,6 +9,20 @@ module Nagual
       end
     end
 
+    class Required
+      def initialize(value)
+        @value = value
+      end
+
+      def valid?
+        !@value.nil? && !@value.empty?
+      end
+
+      def error
+        'required expects non empty'
+      end
+    end
+
     class Decimal
       def initialize(value)
         @value = value

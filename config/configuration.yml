@@ -2,7 +2,8 @@
 input_file: data/products.csv
 output_file: data/catalog.xml
 product:
-  required: product_id
+  required:
+    - product_id
   attributes:
     product_id: string.100
   fields:
@@ -30,7 +31,7 @@ product:
     sitemap_included_flag: boolean
     sitemap_changefrequency: frequency
     sitemap_priority: priority
-  page:
+  page_fields:
     page_title: string
     page_description: string
     page_keywords: string

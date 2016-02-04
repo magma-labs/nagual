@@ -1,14 +1,17 @@
 require 'nagual/configuration'
+require 'nagual/field'
 
 module Nagual
   class Product
-    ATTRIBUTES  = Nagual::Configuration.properties['product']['attributes'].keys
-    PAGE_FIELDS = Nagual::Configuration.properties['product']['page'].keys
-    FIELD_KEYS  = Nagual::Configuration.properties['product']['fields'].keys
+    CONFIG      = Nagual::Configuration.properties['product']
+    ATTRIBUTES  = CONFIG['attributes']
+    PAGE_FIELDS = CONFIG['page_fields']
+    FIELDS      = CONFIG['fields']
+    REQUIRED    = CONFIG['required']
 
-    PROPERTIES = ATTRIBUTES + FIELD_KEYS + PAGE_FIELDS
+    PROPERTIES = ATTRIBUTES.merge(FIELDS).merge(PAGE_FIELDS)
 
-    PROPERTIES.each do |attribute|
+    PROPERTIES.keys.each do |attribute|
       attr_reader attribute.to_sym
     end
 
@@ -21,11 +24,7 @@ module Nagual
       @errors            = []
 
       attributes.each do |key, value|
-        if PROPERTIES.include?(key.to_s)
-          instance_variable_set("@#{key}", value)
-        else
-          @custom_attributes[key.to_sym] = value
-        end
+        set_attribute(key, value)
       end
     end
 
@@ -34,7 +33,7 @@ module Nagual
     end
 
     def fields
-      fields_hash(FIELD_KEYS)
+      fields_hash(FIELDS)
     end
 
     def page_fields
@@ -45,10 +44,42 @@ module Nagual
       @variations.map { |variation| variation.values.count }.reduce(:*) || 1
     end
 
+    def valid?
+      @errors = []
+      validate_required
+      validate_by_type
+      @errors.empty?
+    end
+
     private
 
-    def fields_hash(fields_array)
-      fields_array.map do |field|
+    def validate_required
+      REQUIRED.each { |name| validate_field(name, 'required') }
+    end
+
+    def validate_by_type
+      PROPERTIES.each do |name, type|
+        value = send(name.to_sym)
+        validate_field(name, type) if !value.nil? && !value.empty?
+      end
+    end
+
+    def validate_field(name, type)
+      value = send(name.to_sym)
+      field = Field.new(value, type)
+      @errors << "#{name} is invalid. #{field.error}" unless field.valid?
+    end
+
+    def set_attribute(key, value)
+      if PROPERTIES.keys.include?(key.to_s)
+        instance_variable_set("@#{key}", value)
+      else
+        @custom_attributes[key.to_sym] = value
+      end
+    end
+
+    def fields_hash(fields)
+      fields.map do |field, _value|
         [field.to_s.tr('_', '-'), send(field)]
       end.to_h
     end

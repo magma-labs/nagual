@@ -21,6 +21,11 @@ RSpec.describe Nagual::Field do
     include_examples 'invalid', described_class.new('1234567', 'string.6')
   end
 
+  context 'required' do
+    include_examples 'valid', described_class.new('hi', 'required')
+    include_examples 'invalid', described_class.new('', 'required')
+  end
+
   context 'boolean' do
     include_examples 'valid', described_class.new('TRUE', 'boolean')
     include_examples 'valid', described_class.new('FALSE', 'boolean')
