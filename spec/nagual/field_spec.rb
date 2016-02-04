@@ -27,8 +27,8 @@ RSpec.describe Nagual::Field do
   end
 
   context 'boolean' do
-    include_examples 'valid', described_class.new('TRUE', 'boolean')
-    include_examples 'valid', described_class.new('FALSE', 'boolean')
+    include_examples 'valid', described_class.new('true', 'boolean')
+    include_examples 'valid', described_class.new('false', 'boolean')
     include_examples 'invalid', described_class.new('not', 'boolean')
   end
 

@@ -61,11 +61,11 @@ module Nagual
       end
 
       def valid?
-        %w(TRUE FALSE).include?(@value)
+        %w(true false).include?(@value)
       end
 
       def error
-        'boolean expects values: TRUE or FALSE'
+        'boolean expects values: true or false'
       end
     end
 
