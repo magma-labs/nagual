@@ -9,8 +9,9 @@ For help running this code you can get the [Nagual VM](https://github.com/sawyer
 * Create a `data/products.csv` file with the expected format, you can use
 `data_examples/` as a reference
 * Install the nagual gem
-* Use the following command: `nagual catalog`
-* A `data/catalog.xml` file will be generated.
+* Use the following commands:
+    * `nagual review` - to validate input and see if there are invalid rows
+    * `nagual export` - to generate a `data/catalog.xml` (only valid products will be used)
 
 ## Custom attributes
 
