@@ -6,6 +6,7 @@ For help running this code you can get the [Nagual VM](https://github.com/sawyer
 
 # Usage
 
+* Create a `config/configuration.yml` file with expected format
 * Create a `data/products.csv` file with the expected format, you can use
 `data_examples/` as a reference
 * Install the nagual gem
