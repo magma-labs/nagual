@@ -14,11 +14,11 @@ For help running this code you can get the [Nagual VM](https://github.com/sawyer
 
 ## Custom attributes
 
-If a new column is added with a header that is not recognized as a product
-field, then a new custom attribute will be generated for the products
+If a new column is added with a header that has the expected regex defined
+in config file, then a new custom attribute will be generated for the products
 that contain a value for that column.
 
-Example if column `season` and a product contains `winter` value, then
+Example if column `custom-season` and a product contains `winter` value, then
 a product custom attribute with id "season" will be generated for
 that product.
 

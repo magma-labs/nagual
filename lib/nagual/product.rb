@@ -24,7 +24,7 @@ module Nagual
       @errors            = []
 
       attributes.each do |key, value|
-        set_attribute(key, value)
+        set_attribute(key.to_s, value)
       end
     end
 
@@ -74,11 +74,18 @@ module Nagual
     end
 
     def set_attribute(key, value)
-      if PROPERTIES.keys.include?(key.to_s)
+      if PROPERTIES.keys.include?(key)
         instance_variable_set("@#{key}", value)
       else
-        @custom_attributes[key.to_sym] = value
+        set_custom_attribute(key, value)
       end
+    end
+
+    def set_custom_attribute(key, value)
+      return unless key.match(CONFIG['custom_regex'])
+
+      name = key.gsub(CONFIG['custom_regex'], '').to_sym
+      @custom_attributes[name] = value
     end
 
     def fields_hash(fields)

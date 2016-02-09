@@ -81,8 +81,8 @@ RSpec.describe Nagual::CSV::Input do
     before do
       allow(File)
         .to receive(:read) do
-        "product_id,ean,other\n" \
-        "1234,EAN1,value\n" \
+        "product_id,ean,other,custom-other\n" \
+        "1234,EAN1,ignore,value\n" \
       end
     end
 

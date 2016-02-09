@@ -1,12 +1,14 @@
 require 'csv'
 require 'nagual/product'
 require 'nagual/product_variation'
+require 'nagual/configuration'
 
 module Nagual
   module CSV
     class Input
+      CONFIG = Nagual::Configuration.properties['product']
+
       def initialize(file)
-        @variation_regex    = 'variation-'
         column_names, *rows = *::CSV.parse(File.read(file), headers: true)
         @content            = rows.map { |row| Hash[column_names.zip(row)] }
       end
@@ -35,17 +37,17 @@ module Nagual
 
       def product_attributes(attributes)
         attributes.select do |key|
-          key != 'images' && !key.match(@variation_regex)
+          key != 'images' && !key.match(CONFIG['variation_regex'])
         end
       end
 
       def variations_for(attributes)
         variation_attributes = attributes.select do |key|
-          key.to_s.match(@variation_regex)
+          key.to_s.match(CONFIG['variation_regex'])
         end
 
         variation_attributes.map do |key, value|
-          id     = key.gsub(@variation_regex, '')
+          id     = key.gsub(CONFIG['variation_regex'], '')
           values = value.split(',')
 
           Nagual::ProductVariation.new(id: id, values: values)
