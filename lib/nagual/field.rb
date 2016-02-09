@@ -3,7 +3,7 @@ require 'nagual/field_contracts'
 module Nagual
   class Field
     CONTRACT = {
-      priority: Priority, string: Default, boolean: Boolean, decimal: Decimal,
+      priority: Priority, string: Contract, boolean: Boolean, decimal: Decimal,
       int: Integer, frequency: Frequency, datetime: Datetime, required: Required
     }.freeze
 
@@ -12,7 +12,7 @@ module Nagual
 
       @value    = value
       @max_size = max_size ? max_size.to_i : 4000
-      contract  = CONTRACT[base.to_sym] || Default
+      contract  = CONTRACT[base.to_sym] || Contract
       @contract = contract.new(value)
     end
 

@@ -1,19 +1,19 @@
 module Nagual
   class Field
-    class Default
+    class Contract
       def initialize(value)
+        @value = value
       end
 
       def valid?
         true
       end
+
+      def error
+      end
     end
 
-    class Required
-      def initialize(value)
-        @value = value
-      end
-
+    class Required < Contract
       def valid?
         !@value.nil? && !@value.empty?
       end
@@ -23,11 +23,7 @@ module Nagual
       end
     end
 
-    class Decimal
-      def initialize(value)
-        @value = value
-      end
-
+    class Decimal < Contract
       def valid?
         !Float(@value).nil?
       rescue
@@ -39,11 +35,7 @@ module Nagual
       end
     end
 
-    class Priority
-      def initialize(value)
-        @value = value
-      end
-
+    class Priority < Contract
       def valid?
         !Float(@value).nil? && @value.to_f <= 1.0 && @value.to_f >= 0.0
       rescue
@@ -55,11 +47,7 @@ module Nagual
       end
     end
 
-    class Boolean
-      def initialize(value)
-        @value = value
-      end
-
+    class Boolean < Contract
       def valid?
         %w(true false).include?(@value)
       end
@@ -69,11 +57,7 @@ module Nagual
       end
     end
 
-    class Integer
-      def initialize(value)
-        @value = value
-      end
-
+    class Integer < Contract
       def valid?
         !Integer(@value).nil?
       rescue
@@ -85,12 +69,8 @@ module Nagual
       end
     end
 
-    class Frequency
+    class Frequency < Contract
       VALUES = %w(always hourly daily weekly monthly yearly never).freeze
-
-      def initialize(value)
-        @value = value
-      end
 
       def valid?
         VALUES.include?(@value)
@@ -101,11 +81,7 @@ module Nagual
       end
     end
 
-    class Datetime
-      def initialize(value)
-        @value = value
-      end
-
+    class Datetime < Contract
       def valid?
         y, m, d = @value.split '-'
         Date.valid_date? y.to_i, m.to_i, d.to_i
