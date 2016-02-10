@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.summary       = 'Creates XML files for Demandware.'
   spec.description   = 'Parses input CSV files to import data to Demandware.'
   spec.homepage      = 'http://sawyereffect.com'
-  spec.license       = ''
+  spec.license       = 'Beerware'
 
   spec.files         = `git ls-files -z`.split("\x0")
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
