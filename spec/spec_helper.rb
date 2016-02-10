@@ -1,5 +1,5 @@
 require 'simplecov'
-require 'logger'
+require 'nagual'
 SimpleCov.start
 
 Dir[File.dirname(__FILE__) + '/support/**/*.rb'].each { |f| require f }

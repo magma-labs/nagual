@@ -1,6 +1,6 @@
 require 'spec_helper'
 require 'nokogiri'
-require 'nagual'
+require 'nagual/api'
 
 RSpec.describe Nagual::API do
   let(:xsd_path)   { 'schema/catalog.xsd' }
