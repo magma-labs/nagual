@@ -3,11 +3,11 @@ require 'logger'
 module Nagual
   module Logging
     def logger
-      Nagual.logger
+      @logger ||= Logger.new(STDOUT)
     end
 
-    def self.default
-      Logger.new(STDOUT)
+    def self.logger=(logger)
+      @logger = logger
     end
   end
 end

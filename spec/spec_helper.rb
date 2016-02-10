@@ -1,7 +1,6 @@
 require 'simplecov'
 require 'logger'
 SimpleCov.start
-require 'nagual'
 
 Dir[File.dirname(__FILE__) + '/support/**/*.rb'].each { |f| require f }
 
@@ -23,6 +22,6 @@ RSpec.configure do |config|
   end
 
   config.before(:suite) do
-    Nagual.logger = NullLogger.new
+    Nagual::Logging.logger = NullLogger.new
   end
 end
