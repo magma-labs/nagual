@@ -1,7 +1,16 @@
 require 'simplecov'
+require 'logger'
 SimpleCov.start
 
 Dir[File.dirname(__FILE__) + '/support/**/*.rb'].each { |f| require f }
+
+class NullLogger < Logger
+  def initialize(*args)
+  end
+
+  def add(*args, &block)
+  end
+end
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
@@ -10,5 +19,9 @@ RSpec.configure do |config|
 
   config.mock_with :rspec do |mocks|
     mocks.verify_partial_doubles = true
+  end
+
+  config.before(:suite) do
+    Nagual.logger = NullLogger.new
   end
 end
