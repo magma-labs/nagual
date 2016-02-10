@@ -4,7 +4,7 @@ require 'nagual/csv/input'
 require 'nagual/catalog'
 
 module Nagual
-  class << self
+  class API
     def review(input_path)
       input = CSV::Input.new(input_path)
       report = "#{input.valid_products.count} valid products\n"
@@ -16,6 +16,10 @@ module Nagual
       input = CSV::Input.new(input_path)
       catalog = Catalog.new(input.valid_products)
       XML::Catalog.new(catalog).output
+    end
+
+    def config
+      Nagual::Configuration.properties
     end
 
     private

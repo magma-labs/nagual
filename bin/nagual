@@ -1,12 +1,14 @@
 #!/usr/bin/env ruby
 require 'nagual'
 
+nagual = Nagual::API.new
+
 if ARGV.first == 'export'
-  File.open(Nagual::Configuration.properties['output_file'], 'w') do |file|
-    file.write(Nagual.export(Nagual::Configuration.properties['input_file']))
+  File.open(nagual.config['output_file'], 'w') do |file|
+    file.write(nagual.export(nagual.config['input_file']))
   end
 elsif ARGV.first == 'review'
-  puts Nagual.review(Nagual::Configuration.properties['input_file'])
+  puts nagual.review(nagual.config['input_file'])
 else
   puts 'Command not recognized'
 end
