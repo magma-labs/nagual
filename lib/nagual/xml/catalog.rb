@@ -19,7 +19,7 @@ module Nagual
       private
 
       def build_output
-        logger.debug('Building xml output for catalog')
+        logger.info('Building xml output for catalog')
         Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |xml|
           xml.send('catalog', @attributes) do
             add_header(xml)
