@@ -2,15 +2,20 @@ require 'csv'
 require 'nagual/product'
 require 'nagual/product_variation'
 require 'nagual/configuration'
+require 'nagual/logging'
 
 module Nagual
   module CSV
     class Input
+      include Nagual::Logging
+
       CONFIG = Nagual::Configuration.properties['product']
 
       def initialize(file)
+        logger.info("Opening #{file} to read csv content")
         column_names, *rows = *::CSV.parse(File.read(file), headers: true)
-        @content            = rows.map { |row| Hash[column_names.zip(row)] }
+        logger.debug("Column names extracted: #{column_names}")
+        @content = rows.map { |row| Hash[column_names.zip(row)] }
       end
 
       def valid_products
@@ -28,10 +33,13 @@ module Nagual
       end
 
       def parse_content_to_products
-        @content.map do |attributes|
-          Nagual::Product.new(attributes: product_attributes(attributes),
-                              variations: variations_for(attributes),
-                              images: images_for(attributes))
+        logger.debug('Parsing content to products')
+        @content.map do |attrs|
+          product = Nagual::Product.new(attributes: product_attributes(attrs),
+                                        variations: variations_for(attrs),
+                                        images: images_for(attrs))
+          logger.debug("Product created: #{product}")
+          product
         end
       end
 

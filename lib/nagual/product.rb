@@ -16,6 +16,7 @@ module Nagual
     end
 
     attr_reader :variations, :images, :custom_attributes, :errors
+    alias to_s inspect
 
     def initialize(attributes: {}, variations: [], images: [])
       @variations        = variations
