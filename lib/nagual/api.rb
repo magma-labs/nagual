@@ -7,6 +7,7 @@ require 'nagual/logging'
 module Nagual
   class API
     include Nagual::Logging
+    include Nagual::Configuration
 
     def review(input_path)
       logger.debug("CSV::Input to be created for #{input_path}")
@@ -23,10 +24,6 @@ module Nagual
       catalog = Catalog.new(input.valid_products)
 
       XML::Catalog.new(catalog).output
-    end
-
-    def config
-      Nagual::Configuration.properties
     end
 
     private

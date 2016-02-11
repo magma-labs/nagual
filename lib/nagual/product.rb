@@ -3,11 +3,13 @@ require 'nagual/field'
 
 module Nagual
   class Product
-    CONFIG      = Nagual::Configuration.properties['product']
-    ATTRIBUTES  = CONFIG['attributes']
-    PAGE_FIELDS = CONFIG['page_fields']
-    FIELDS      = CONFIG['fields']
-    REQUIRED    = CONFIG['required']
+    extend  Nagual::Configuration
+    include Nagual::Configuration
+
+    ATTRIBUTES  = config['product']['attributes']
+    PAGE_FIELDS = config['product']['page_fields']
+    FIELDS      = config['product']['fields']
+    REQUIRED    = config['product']['required']
 
     PROPERTIES = ATTRIBUTES.merge(FIELDS).merge(PAGE_FIELDS)
 
@@ -83,9 +85,9 @@ module Nagual
     end
 
     def set_custom_attribute(key, value)
-      return unless key.match(CONFIG['custom_regex'])
+      return unless key.match(config['product']['custom_regex'])
 
-      name = key.gsub(CONFIG['custom_regex'], '').to_sym
+      name = key.gsub(config['product']['custom_regex'], '').to_sym
       @custom_attributes[name] = value
     end
 

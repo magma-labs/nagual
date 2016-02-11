@@ -22,6 +22,6 @@ RSpec.configure do |config|
   end
 
   config.before(:suite) do
-    Nagual::Logging.logger = NullLogger.new
+    #Nagual::Logging.logger = NullLogger.new
   end
 end

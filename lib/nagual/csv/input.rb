@@ -8,8 +8,7 @@ module Nagual
   module CSV
     class Input
       include Nagual::Logging
-
-      CONFIG = Nagual::Configuration.properties['product']
+      include Nagual::Configuration
 
       def initialize(file)
         logger.info("Opening #{file} to read csv content")
@@ -45,17 +44,17 @@ module Nagual
 
       def product_attributes(attributes)
         attributes.select do |key|
-          key != 'images' && !key.match(CONFIG['variation_regex'])
+          key != 'images' && !key.match(config['product']['variation_regex'])
         end
       end
 
       def variations_for(attributes)
         variation_attributes = attributes.select do |key|
-          key.to_s.match(CONFIG['variation_regex'])
+          key.to_s.match(config['product']['variation_regex'])
         end
 
         variation_attributes.map do |key, value|
-          id     = key.gsub(CONFIG['variation_regex'], '')
+          id     = key.gsub(config['product']['variation_regex'], '')
           values = value.split(',')
 
           Nagual::ProductVariation.new(id: id, values: values)

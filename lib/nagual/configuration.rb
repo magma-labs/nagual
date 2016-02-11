@@ -2,7 +2,7 @@ require 'yaml'
 
 module Nagual
   module Configuration
-    def self.properties
+    def config
       path = File.join('./config/configuration.yml')
       YAML.load_file(path)
     end
