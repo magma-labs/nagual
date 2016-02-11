@@ -4,16 +4,31 @@
 
 For help running this code you can get the [Nagual VM](https://github.com/sawyer-effect/nagual-vm).
 
+
 # Usage
 
-* Create a `config/configuration.yml` file with expected format
+## Setup
+
+* Create a `config/configuration.yml` file with expected format and customize
 * Create a `data/products.csv` file with the expected format, you can use
 `data_examples/` as a reference
+
+## Nagual Command
+
 * Install the nagual gem
 * Use the following commands:
     * `nagual review` - to validate input and see if there are invalid rows
     * `nagual export` - to generate a `data/catalog.xml` (only valid products will be used)
 
+## Nagual API
+
+* If you rather use the gem inside your project you can use it like this:
+
+```ruby
+nagual = Nagual::API.new
+puts nagual.review(nagual.config['input_file'])
+nagual.export(nagual.config['input_file'])
+```
 ## Custom attributes
 
 If a new column is added with a header that has the expected regex defined
