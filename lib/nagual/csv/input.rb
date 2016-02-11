@@ -11,9 +11,9 @@ module Nagual
       include Nagual::Configuration
 
       def initialize(file)
-        logger.info("Opening #{file} to read csv content")
+        logger.info('CSV::Input') { "Opening #{file} to read csv content" }
         column_names, *rows = *::CSV.parse(File.read(file), headers: true)
-        logger.debug("Column names extracted: #{column_names}")
+        logger.debug('CSV::Input') { "Column names extracted: #{column_names}" }
         @content = rows.map { |row| Hash[column_names.zip(row)] }
       end
 
@@ -32,12 +32,12 @@ module Nagual
       end
 
       def parse_content_to_products
-        logger.debug('Parsing content to products')
+        logger.debug('CSV::Input') { 'Parsing content to products' }
         @content.map do |attrs|
           product = Nagual::Product.new(attributes: product_attributes(attrs),
                                         variations: variations_for(attrs),
                                         images: images_for(attrs))
-          logger.debug("Product created: #{product}")
+          logger.debug('CSV::Input') { "Product created: #{product}" }
           product
         end
       end

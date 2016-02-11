@@ -10,7 +10,7 @@ module Nagual
     include Nagual::Configuration
 
     def review(input_path)
-      logger.debug("CSV::Input to be created for #{input_path}")
+      logger.debug('API') { "CSV::Input to be created for #{input_path}" }
       input  = CSV::Input.new(input_path)
       report = "#{input.valid_products.count} valid products\n"
 
@@ -19,7 +19,7 @@ module Nagual
     end
 
     def export(input_path)
-      logger.debug("CSV::Input to be created for #{input_path}")
+      logger.debug('API') { "CSV::Input to be created for #{input_path}" }
       input = CSV::Input.new(input_path)
       catalog = Catalog.new(input.valid_products)
 
