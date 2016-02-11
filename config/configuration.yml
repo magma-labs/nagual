@@ -1,6 +1,10 @@
 ---
 input_file: data/products.csv
 output_file: data/catalog.xml
+log:
+  file: /dev/null
+  date_format: '%Y-%m-%d %H:%M:%S'
+  level: DEBUG
 product:
   custom_regex: custom-
   variation_regex: variation-
