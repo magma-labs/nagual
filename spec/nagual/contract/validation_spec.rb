@@ -1,18 +1,18 @@
 require 'spec_helper'
-require 'nagual/models/field'
+require 'nagual/contract/validation'
 
-RSpec.describe Nagual::Models::Field do
-  RSpec.shared_examples 'valid' do |field|
+RSpec.describe Nagual::Contract::Validation do
+  RSpec.shared_examples 'valid' do |validation|
     it 'is valid and with no errors' do
-      expect(field).to be_valid
-      expect(field.error).to be_empty
+      expect(validation).to be_valid
+      expect(validation.error).to be_empty
     end
   end
 
-  RSpec.shared_examples 'invalid' do |field|
+  RSpec.shared_examples 'invalid' do |validation|
     it 'is valid and with no errors' do
-      expect(field).not_to be_valid
-      expect(field.error).not_to be_empty
+      expect(validation).not_to be_valid
+      expect(validation.error).not_to be_empty
     end
   end
 

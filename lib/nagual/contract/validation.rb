@@ -1,12 +1,13 @@
-require 'nagual/models/field_contracts'
+require 'nagual/contract/fields'
 
 module Nagual
-  module Models
-    class Field
-      CONTRACT = {
-        priority: Priority, string: Contract, boolean: Boolean,
-        decimal: Decimal, int: Integer, frequency: Frequency,
-        datetime: Datetime, required: Required
+  module Contract
+    class Validation
+      FIELD = {
+        priority: Fields::Priority, string: Fields::Base,
+        boolean: Fields::Boolean, decimal: Fields::Decimal,
+        int: Fields::Integer, frequency: Fields::Frequency,
+        datetime: Fields::Datetime, required: Fields::Required
       }.freeze
 
       def initialize(value, type)
@@ -14,7 +15,7 @@ module Nagual
 
         @value    = value
         @max_size = max_size ? max_size.to_i : 4000
-        contract  = CONTRACT[base.to_sym] || Contract
+        contract  = FIELD[base.to_sym] || Fields::Base
         @contract = contract.new(value)
       end
 
