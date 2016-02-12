@@ -1,6 +1,5 @@
 require 'csv'
-require 'nagual/product'
-require 'nagual/product_variation'
+require 'nagual/models/product'
 require 'nagual/configuration'
 require 'nagual/logging'
 
@@ -34,9 +33,10 @@ module Nagual
       def parse_content_to_products
         logger.debug('CSV::Input') { 'Parsing content to products' }
         @content.map do |attrs|
-          product = Nagual::Product.new(attributes: product_attributes(attrs),
-                                        variations: variations_for(attrs),
-                                        images: images_for(attrs))
+          product = Nagual::Models::Product
+                    .new(attributes: product_attributes(attrs),
+                         variations: variations_for(attrs),
+                         images: images_for(attrs))
           logger.debug('CSV::Input') { "Product created: #{product}" }
           product
         end
@@ -57,7 +57,7 @@ module Nagual
           id     = key.gsub(config['product']['variation_regex'], '')
           values = value.split(',')
 
-          Nagual::ProductVariation.new(id: id, values: values)
+          Nagual::Models::ProductVariation.new(id: id, values: values)
         end
       end
 

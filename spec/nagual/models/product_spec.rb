@@ -1,12 +1,14 @@
 require 'spec_helper'
-require 'nagual/product'
+require 'nagual/models/product'
 
-RSpec.describe Nagual::Product do
-  let(:valid_product) { Nagual::Product.new(attributes: { product_id: 'id' }) }
-  let(:empty_product) { Nagual::Product.new(attributes: {}) }
+RSpec.describe Nagual::Models::Product do
+  let(:empty_product) { Nagual::Models::Product.new(attributes: {}) }
   let(:invalid_attrs) { { product_id: 'id', available_flag: 'NOT' } }
+  let(:valid_product) do
+    Nagual::Models::Product.new(attributes: { product_id: 'id' })
+  end
   let(:bad_product) do
-    Nagual::Product.new(attributes: invalid_attrs)
+    Nagual::Models::Product.new(attributes: invalid_attrs)
   end
 
   it 'creates expected attributes' do

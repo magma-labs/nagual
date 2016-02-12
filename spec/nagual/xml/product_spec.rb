@@ -1,6 +1,5 @@
 require 'spec_helper'
-require 'nagual/product'
-require 'nagual/product_variation'
+require 'nagual/models/product'
 require 'nagual/xml/product'
 
 RSpec.describe Nagual::XML::Product do
@@ -8,7 +7,7 @@ RSpec.describe Nagual::XML::Product do
 
   context 'standard product' do
     let(:attributes) { { product_id: 'id', ean: 'EAN', upc: '' } }
-    let(:product)    { Nagual::Product.new(attributes: attributes) }
+    let(:product)    { Nagual::Models::Product.new(attributes: attributes) }
 
     it 'represents output correctly' do
       expected_xml = "<product product-id=\"id\">\n" \
@@ -22,13 +21,13 @@ RSpec.describe Nagual::XML::Product do
   end
 
   context 'product with single variation' do
-    let(:variation_values) { ['Blue graphite'] }
+    let(:values) { ['Blue graphite'] }
     let(:variation) do
-      Nagual::ProductVariation.new(id: 'color', values: variation_values)
+      Nagual::Models::ProductVariation.new(id: 'color', values: values)
     end
     let(:product) do
-      Nagual::Product.new(attributes: { product_id: 'id' },
-                          variations: [variation])
+      Nagual::Models::Product.new(attributes: { product_id: 'id' },
+                                  variations: [variation])
     end
 
     it 'has variation attributes and variants' do
@@ -55,17 +54,17 @@ RSpec.describe Nagual::XML::Product do
   end
 
   context 'product with multiple variations' do
-    let(:color_variation_values) { %w(Blue Red) }
-    let(:size_variation_values)  { %w(Small Large) }
+    let(:color_values) { %w(Blue Red) }
+    let(:size_values)  { %w(Small Large) }
     let(:size_variation) do
-      Nagual::ProductVariation.new(id: 'size', values: size_variation_values)
+      Nagual::Models::ProductVariation.new(id: 'size', values: size_values)
     end
     let(:color_variation) do
-      Nagual::ProductVariation.new(id: 'color', values: color_variation_values)
+      Nagual::Models::ProductVariation.new(id: 'color', values: color_values)
     end
     let(:product) do
-      Nagual::Product.new(attributes: { product_id: 'id' },
-                          variations: [color_variation, size_variation])
+      Nagual::Models::Product.new(attributes: { product_id: 'id' },
+                                  variations: [color_variation, size_variation])
     end
 
     it 'has variation attributes and variants' do
@@ -113,8 +112,8 @@ RSpec.describe Nagual::XML::Product do
 
   context 'product with images' do
     let(:product) do
-      Nagual::Product.new(attributes: { product_id: 'id' },
-                          images: %w(small medium))
+      Nagual::Models::Product.new(attributes: { product_id: 'id' },
+                                  images: %w(small medium))
     end
 
     it 'has image settings with correct view type' do
@@ -134,8 +133,8 @@ RSpec.describe Nagual::XML::Product do
 
   context 'product with custom attributes' do
     let(:product) do
-      Nagual::Product.new(attributes: { product_id: 'id',
-                                        'custom-other': 'value' })
+      Nagual::Models::Product.new(attributes: { product_id: 'id',
+                                                'custom-other': 'value' })
     end
 
     it 'has image settings with correct view type' do

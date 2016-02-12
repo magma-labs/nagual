@@ -1,7 +1,7 @@
 require 'spec_helper'
-require 'nagual/field'
+require 'nagual/models/field'
 
-RSpec.describe Nagual::Field do
+RSpec.describe Nagual::Models::Field do
   RSpec.shared_examples 'valid' do |field|
     it 'is valid and with no errors' do
       expect(field).to be_valid

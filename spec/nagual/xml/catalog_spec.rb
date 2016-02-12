@@ -1,9 +1,9 @@
 require 'spec_helper'
-require 'nagual/catalog'
+require 'nagual/models/catalog'
 require 'nagual/xml/catalog'
 
 RSpec.describe Nagual::XML::Catalog do
-  let(:catalog) { Nagual::Catalog.new([]) }
+  let(:catalog) { Nagual::Models::Catalog.new([]) }
 
   subject { described_class.new(catalog) }
 

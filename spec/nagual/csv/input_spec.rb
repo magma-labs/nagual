@@ -18,7 +18,7 @@ RSpec.describe Nagual::CSV::Input do
 
     it 'returns array of valid products' do
       expect(subject.valid_products.count).to eq(2)
-      expect(first_product.class).to eq(Nagual::Product)
+      expect(first_product.class).to eq(Nagual::Models::Product)
       expect(first_product.variations).to eq([])
     end
 
@@ -59,7 +59,7 @@ RSpec.describe Nagual::CSV::Input do
       variations = first_product.variations
 
       expect(variations.size).to eq(2)
-      expect(variations.first.class).to eq(Nagual::ProductVariation)
+      expect(variations.first.class).to eq(Nagual::Models::ProductVariation)
     end
   end
 
