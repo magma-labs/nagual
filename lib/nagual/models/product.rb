@@ -1,5 +1,5 @@
 require 'nagual/configuration'
-require 'nagual/contract/validation'
+require 'nagual/contract/fields/validation'
 require 'nagual/models/product_variation'
 
 module Nagual
@@ -74,7 +74,7 @@ module Nagual
 
       def validate_field(name, type)
         value = send(name.to_sym)
-        field = Contract::Validation.new(value, type)
+        field = Contract::Fields::Validation.new(value, type)
         @errors << "#{name} is invalid. #{field.error}" unless field.valid?
       end
 
