@@ -1,7 +1,7 @@
 require 'spec_helper'
-require 'nagual/csv/input'
+require 'nagual/input/csv'
 
-RSpec.describe Nagual::CSV::Input do
+RSpec.describe Nagual::Input::CSV do
   let(:first_product) { subject.valid_products.first }
 
   subject { described_class.new('') }

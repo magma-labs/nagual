@@ -1,7 +1,7 @@
 require 'nagual/configuration'
 require 'nagual/logging'
 require 'nagual/xml/catalog'
-require 'nagual/csv/input'
+require 'nagual/input/csv'
 require 'nagual/models/catalog'
 
 module Nagual
@@ -10,8 +10,8 @@ module Nagual
     include Nagual::Configuration
 
     def review(input_path)
-      logger.debug('API') { "CSV::Input to be created for #{input_path}" }
-      input  = CSV::Input.new(input_path)
+      logger.debug('API') { "Input to be created for #{input_path}" }
+      input  = Input::CSV.new(input_path)
       report = "#{input.valid_products.count} valid products\n"
 
       add_invalid_information(report, input.invalid_products)
@@ -19,8 +19,8 @@ module Nagual
     end
 
     def export(input_path)
-      logger.debug('API') { "CSV::Input to be created for #{input_path}" }
-      input = CSV::Input.new(input_path)
+      logger.debug('API') { "Input to be created for #{input_path}" }
+      input = Input::CSV.new(input_path)
       catalog = Models::Catalog.new(input.valid_products)
 
       XML::Catalog.new(catalog).output

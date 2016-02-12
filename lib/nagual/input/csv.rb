@@ -4,15 +4,15 @@ require 'nagual/configuration'
 require 'nagual/logging'
 
 module Nagual
-  module CSV
-    class Input
+  module Input
+    class CSV
       include Nagual::Logging
       include Nagual::Configuration
 
       def initialize(file)
-        logger.info('CSV::Input') { "Opening #{file} to read csv content" }
+        logger.info('Input::CSV') { "Opening #{file} to read csv content" }
         column_names, *rows = *::CSV.parse(File.read(file), headers: true)
-        logger.debug('CSV::Input') { "Column names extracted: #{column_names}" }
+        logger.debug('Input::CSV') { "Column names extracted: #{column_names}" }
         @content = rows.map { |row| Hash[column_names.zip(row)] }
       end
 
@@ -31,13 +31,13 @@ module Nagual
       end
 
       def parse_content_to_products
-        logger.debug('CSV::Input') { 'Parsing content to products' }
+        logger.debug('Input::CSV') { 'Parsing content to products' }
         @content.map do |attrs|
           product = Nagual::Models::Product
                     .new(attributes: product_attributes(attrs),
                          variations: variations_for(attrs),
                          images: images_for(attrs))
-          logger.debug('CSV::Input') { "Product created: #{product}" }
+          logger.debug('Input::CSV') { "Product created: #{product}" }
           product
         end
       end
