@@ -1,10 +1,10 @@
 require 'nokogiri'
-require 'nagual/xml/product'
+require 'nagual/output/xml_product'
 require 'nagual/logging'
 
 module Nagual
-  module XML
-    class Catalog
+  module Output
+    class XMLCatalog
       include Nagual::Logging
 
       def initialize(catalog)
@@ -12,14 +12,14 @@ module Nagual
         @products   = catalog.products
       end
 
-      def output
+      def read
         @output ||= build_output
       end
 
       private
 
       def build_output
-        logger.info('XML::Catalog') { 'Building xml output for catalog' }
+        logger.info('XMLCatalog') { 'Building xml output for catalog' }
         Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |xml|
           xml.send('catalog', @attributes) do
             add_header(xml)
@@ -47,10 +47,10 @@ module Nagual
 
       def add_products(xml)
         @products.each do |product|
-          logger.debug('XML::Catalog') do
+          logger.debug('XMLCatalog') do
             "Parsing product with id: #{product.product_id}"
           end
-          xml << Nagual::XML::Product.new(product).output
+          xml << Nagual::Output::XMLProduct.new(product).read
         end
       end
     end

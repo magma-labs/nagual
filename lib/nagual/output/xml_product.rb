@@ -1,8 +1,8 @@
 require 'nokogiri'
 
 module Nagual
-  module XML
-    class Product
+  module Output
+    class XMLProduct
       def initialize(product)
         @attributes        = product.attributes
         @fields            = product.fields
@@ -14,7 +14,7 @@ module Nagual
         @variants_size     = product.variants_size
       end
 
-      def output
+      def read
         @output ||= build_output
       end
 

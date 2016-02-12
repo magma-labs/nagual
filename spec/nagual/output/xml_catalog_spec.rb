@@ -1,8 +1,8 @@
 require 'spec_helper'
 require 'nagual/models/catalog'
-require 'nagual/xml/catalog'
+require 'nagual/output/xml_catalog'
 
-RSpec.describe Nagual::XML::Catalog do
+RSpec.describe Nagual::Output::XMLCatalog do
   let(:catalog) { Nagual::Models::Catalog.new([]) }
 
   subject { described_class.new(catalog) }
@@ -26,6 +26,6 @@ RSpec.describe Nagual::XML::Catalog do
     "  </header>\n" \
     "</catalog>\n"
 
-    expect(subject.output).to eq(expected_xml)
+    expect(subject.read).to eq(expected_xml)
   end
 end

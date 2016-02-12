@@ -1,8 +1,8 @@
 require 'spec_helper'
 require 'nagual/models/product'
-require 'nagual/xml/product'
+require 'nagual/output/xml_product'
 
-RSpec.describe Nagual::XML::Product do
+RSpec.describe Nagual::Output::XMLProduct do
   subject { described_class.new(product) }
 
   context 'standard product' do
@@ -16,7 +16,7 @@ RSpec.describe Nagual::XML::Product do
         "  <images/>\n" \
         "  <page-attributes/>\n"
 
-      expect(subject.output).to include(expected_xml)
+      expect(subject.read).to include(expected_xml)
     end
   end
 
@@ -49,7 +49,7 @@ RSpec.describe Nagual::XML::Product do
         "    </variants>\n" \
         "  </variations>\n" \
 
-      expect(subject.output).to include(expected_xml)
+      expect(subject.read).to include(expected_xml)
     end
   end
 
@@ -106,7 +106,7 @@ RSpec.describe Nagual::XML::Product do
         "    </variants>\n" \
         "  </variations>\n" \
 
-      expect(subject.output).to include(expected_xml)
+      expect(subject.read).to include(expected_xml)
     end
   end
 
@@ -127,7 +127,7 @@ RSpec.describe Nagual::XML::Product do
         "    </image-group>\n" \
         "  </images>\n"
 
-      expect(subject.output).to include(expected_xml)
+      expect(subject.read).to include(expected_xml)
     end
   end
 
@@ -144,7 +144,7 @@ RSpec.describe Nagual::XML::Product do
         "</custom-attribute>\n" \
         "  </custom-attributes>\n"
 
-      expect(subject.output).to include(expected_xml)
+      expect(subject.read).to include(expected_xml)
     end
   end
 end

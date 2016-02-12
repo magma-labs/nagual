@@ -1,6 +1,6 @@
 require 'nagual/configuration'
 require 'nagual/logging'
-require 'nagual/xml/catalog'
+require 'nagual/output/xml_catalog'
 require 'nagual/input/csv'
 require 'nagual/models/catalog'
 
@@ -20,10 +20,10 @@ module Nagual
 
     def export(input_path)
       logger.debug('API') { "Input to be created for #{input_path}" }
-      input = Input::CSV.new(input_path)
+      input   = Input::CSV.new(input_path)
       catalog = Models::Catalog.new(input.valid_products)
 
-      XML::Catalog.new(catalog).output
+      Output::XMLCatalog.new(catalog).read
     end
 
     private
