@@ -1,8 +1,7 @@
 module Nagual
   module Input
     def self.from(origin)
-      fail 'Origin not implemented' unless origin == :csv
-      Input::CSV.new
+      Input.const_get(origin.to_s.upcase).new
     end
   end
 end

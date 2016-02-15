@@ -7,7 +7,7 @@ RSpec.describe Nagual::API do
   let(:xsd)        { Nokogiri::XML::Schema(File.read(xsd_path)) }
 
   context 'export' do
-    let(:output) { Nokogiri::XML.parse(subject.transform(:csv, :catalog_xml)) }
+    let(:output) { Nokogiri::XML.parse(subject.transform(:csv, :xml_catalog)) }
 
     it 'conforms to catalog xsd' do
       expect(xsd.validate(output)).to be_empty

@@ -26,7 +26,7 @@ For help running this code you can get the [Nagual VM](https://github.com/sawyer
 
 ```ruby
 nagual = Nagual::API.new
-puts nagual.transform(:csv, :catalog_xml)
+puts nagual.transform(:csv, :xml_catalog)
 puts nagual.transform(:csv, :error_report)
 ```
 ## Custom attributes

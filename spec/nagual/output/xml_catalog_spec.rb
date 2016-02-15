@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'nagual/output/xml_catalog'
 
-RSpec.describe Nagual::Output::XMLCatalog do
+RSpec.describe Nagual::Output::XmlCatalog do
   it 'represents output correctly' do
     expected_xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" \
     '<catalog xmlns="http://www.demandware.com/xml/impex/catalog/2006-10-31"' \
