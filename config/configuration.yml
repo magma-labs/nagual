@@ -76,3 +76,38 @@ contract:
       page_description: string
       page_keywords: string
       page_url: string
+mapping:
+  product:
+    columns:
+      id: product_id
+      ean: ean
+      upc: upc
+      unit: unit
+      'min order': min_order_quantity
+      step: step_quantity
+      name: display_name
+      description: short_description
+      online: online_flag
+      from: online_from
+      to: online_to
+      available?: available_flag
+      searchable?: searchable_flag
+      'searchable if unavailable?': searchable_if_unavailable_flag
+      template: template
+      'tax class id': tax_class_id
+      brand: brand
+      manufacturer: manufacturer_name
+      SKU: manufacturer_sku
+      placement: search_placement
+      rank: search_rank
+      sitemap?: sitemap_included_flag
+      'sitemap change frequency': sitemap_changefrequency
+      'sitemap priority': sitemap_priority
+      'page title': page_title
+      'page description': page_description
+      'page keywords': page_keywords
+      'page url': page_url
+      'organization': organization
+    variations:
+      - color
+    images: images
