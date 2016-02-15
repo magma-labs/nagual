@@ -20,10 +20,10 @@ RSpec.describe Nagual::API do
 
     it 'returns report' do
       expect(output).to eq(
-        "1 valid products\n" \
-        "1 invalid products\n" \
+        "Rows read from file: 2\n" \
+        "Errors found: 1\n" \
         "Errors:\n" \
-        'id: INVALID | errors: ["searchable_if_unavailable_flag is invalid.' \
+        'row #2 | errors: ["searchable_flag is invalid.' \
         " boolean expects values: true or false\"]\n")
     end
   end
