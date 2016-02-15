@@ -23,7 +23,7 @@ RSpec.describe Nagual::Output::XMLProduct do
   context 'product with single variation' do
     let(:values) { ['Blue graphite'] }
     let(:variation) do
-      Nagual::Models::ProductVariation.new(id: 'color', values: values)
+      { id: 'color', values: values }
     end
     let(:product) do
       Nagual::Models::Product.new(attributes: { product_id: 'id' },
@@ -57,10 +57,10 @@ RSpec.describe Nagual::Output::XMLProduct do
     let(:color_values) { %w(Blue Red) }
     let(:size_values)  { %w(Small Large) }
     let(:size_variation) do
-      Nagual::Models::ProductVariation.new(id: 'size', values: size_values)
+      { id: 'size', values: size_values }
     end
     let(:color_variation) do
-      Nagual::Models::ProductVariation.new(id: 'color', values: color_values)
+      { id: 'color', values: color_values }
     end
     let(:product) do
       Nagual::Models::Product.new(attributes: { product_id: 'id' },
