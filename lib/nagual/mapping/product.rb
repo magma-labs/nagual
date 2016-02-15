@@ -13,7 +13,7 @@ module Nagual
 
       def transformed_value(key, value)
         mapping = columns[key.to_s]
-        mapping ? { "#{mapping}": value } : {}
+        mapping ? { mapping.to_s => value } : {}
       end
 
       def columns

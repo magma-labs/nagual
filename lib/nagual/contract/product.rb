@@ -28,13 +28,14 @@ module Nagual
 
       def find_type_errors(row)
         row.map do |key, value|
-          validate(key, value, fields[key.to_s])
+          type = fields[key.to_s] || 'string'
+          validate(key, value, type)
         end.compact
       end
 
       def find_required_errors(row)
         required.map do |key, _value|
-          validate(key, row[key.to_sym], 'required')
+          validate(key, row[key], 'required')
         end.compact
       end
 

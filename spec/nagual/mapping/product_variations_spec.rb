@@ -5,7 +5,7 @@ RSpec.describe Nagual::Mapping::ProductVariations do
   subject { described_class.new(row) }
 
   context 'with mapped values' do
-    let(:row) { { 'color': 'Blue,Red' } }
+    let(:row) { { 'color' => 'Blue,Red' } }
 
     it 'has no errors' do
       expect(subject.transform)
@@ -14,7 +14,7 @@ RSpec.describe Nagual::Mapping::ProductVariations do
   end
 
   context 'with empty values' do
-    let(:row) { { 'color': '' } }
+    let(:row) { { 'color' => '' } }
 
     it 'has no errors' do
       expect(subject.transform).to eq([])
@@ -22,7 +22,7 @@ RSpec.describe Nagual::Mapping::ProductVariations do
   end
 
   context 'with not mapped values' do
-    let(:row) { { 'other': 'value' } }
+    let(:row) { { 'other' => 'value' } }
 
     it 'has no errors' do
       expect(subject.transform).to eq([])

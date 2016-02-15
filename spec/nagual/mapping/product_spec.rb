@@ -8,7 +8,7 @@ RSpec.describe Nagual::Mapping::Product do
     let(:row) { { id: 'id' } }
 
     it 'has no errors' do
-      expect(subject.transform).to eq(product_id: 'id')
+      expect(subject.transform).to eq('product_id' => 'id')
     end
   end
 

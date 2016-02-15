@@ -5,7 +5,7 @@ RSpec.describe Nagual::Mapping::Images do
   subject { described_class.new(row) }
 
   context 'with mapped values' do
-    let(:row) { { images: 'small,large' } }
+    let(:row) { { 'images' => 'small,large' } }
 
     it 'has no errors' do
       expect(subject.transform).to eq(%w(small large))
@@ -13,7 +13,7 @@ RSpec.describe Nagual::Mapping::Images do
   end
 
   context 'with empty values' do
-    let(:row) { { 'images': '' } }
+    let(:row) { { 'images' => '' } }
 
     it 'has no errors' do
       expect(subject.transform).to eq([])
@@ -21,7 +21,7 @@ RSpec.describe Nagual::Mapping::Images do
   end
 
   context 'with not mapped values' do
-    let(:row) { { other: 'value' } }
+    let(:row) { { 'other' => 'value' } }
 
     it 'has no errors' do
       expect(subject.transform).to eq([])

@@ -10,7 +10,7 @@ module Nagual
       private
 
       def variation_value(row, variation_name)
-        variation = row[variation_name.to_sym] || ''
+        variation = row[variation_name] || ''
         values    = variation.split(',')
         { id: variation_name.to_s, values: values } unless values.empty?
       end

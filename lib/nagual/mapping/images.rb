@@ -4,7 +4,7 @@ module Nagual
   module Mapping
     class Images < Base
       def transform
-        images = @row[images_name.to_sym] || ''
+        images = @row[images_name] || ''
         images.split(',')
       end
 

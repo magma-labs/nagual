@@ -16,9 +16,9 @@ RSpec.describe Nagual::Input::CSV do
 
     it 'returns array of valid products' do
       expect(subject.rows).to eq([
-        {'product_id' => '1234', 'ean' => 'EAN1'},
-        {'product_id' => '2345', 'ean' => 'EAN2'}
-      ])
+                                   { 'product_id' => '1234', 'ean' => 'EAN1' },
+                                   { 'product_id' => '2345', 'ean' => 'EAN2' }
+                                 ])
     end
   end
 end

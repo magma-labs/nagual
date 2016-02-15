@@ -5,7 +5,7 @@ RSpec.describe Nagual::Contract::Product do
   subject { described_class.new(row) }
 
   context 'with valid row' do
-    let(:row) { { product_id: 'id' } }
+    let(:row) { { 'product_id' => 'id' } }
 
     it 'has no errors' do
       expect(subject).to be_valid
@@ -14,7 +14,7 @@ RSpec.describe Nagual::Contract::Product do
   end
 
   context 'with invalid row' do
-    let(:row) { { product_id: 'id', available_flag: 'NOT' } }
+    let(:row) { { 'product_id' => 'id', 'available_flag' => 'NOT' } }
 
     it 'has expected errors' do
       expect(subject).not_to be_valid
