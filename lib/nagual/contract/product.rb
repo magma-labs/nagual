@@ -6,27 +6,24 @@ module Nagual
     class Product
       include Nagual::Configuration
 
-      attr_reader :errors, :valid_rows
+      attr_reader :errors
 
-      def initialize(rows)
-        @errors     = []
-        @valid_rows = []
-        filter_valid_rows(rows)
+      def initialize(row)
+        @errors = []
+        validate_row(row)
+      end
+
+      def valid?
+        @errors.empty?
       end
 
       private
 
-      def filter_valid_rows(rows)
-        rows.each do |row|
-          errors =  find_required_errors(row)
-          errors += find_type_errors(row)
+      def validate_row(row)
+        errors =  find_required_errors(row)
+        errors += find_type_errors(row)
 
-          if errors.empty?
-            @valid_rows << row
-          else
-            @errors += errors
-          end
-        end
+        @errors += errors
       end
 
       def find_type_errors(row)
