@@ -1,35 +1,36 @@
-require 'nagual/configuration'
-require 'nagual/contract/fields/validation'
 require 'nagual/models/product_variation'
 
 module Nagual
   module Models
     class Product
-      extend  Nagual::Configuration
-      include Nagual::Configuration
+      ATTRIBUTES  = [:product_id].freeze
+      FIELDS      = [:ean, :upc, :unit, :min_order_quantity,
+                     :step_quantity, :display_name, :short_description,
+                     :long_description, :online_flag, :online_from, :online_to,
+                     :available_flag, :searchable_flag,
+                     :searchable_if_unavailable_flag, :template, :tax_class_id,
+                     :brand, :manufacturer_name, :manufacturer_sku,
+                     :search_placement, :search_rank, :sitemap_included_flag,
+                     :sitemap_changefrequency, :sitemap_priority].freeze
+      PAGE_FIELDS = [:page_title, :page_description, :page_keywords,
+                     :page_url].freeze
+      PROPERTIES  = ATTRIBUTES + FIELDS + PAGE_FIELDS
 
-      ATTRIBUTES  = config['product']['attributes']
-      PAGE_FIELDS = config['product']['page_fields']
-      FIELDS      = config['product']['fields']
-      REQUIRED    = config['product']['required']
-
-      PROPERTIES = ATTRIBUTES.merge(FIELDS).merge(PAGE_FIELDS)
-
-      PROPERTIES.keys.each do |attribute|
+      PROPERTIES.each do |attribute|
         attr_reader attribute.to_sym
       end
 
-      attr_reader :variations, :images, :custom_attributes, :errors
+      attr_reader :variations, :images, :custom_attributes
+
       alias to_s inspect
 
       def initialize(attributes: {}, variations: [], images: [])
         @variations        = variations.map { |v| ProductVariation.new(v) }
         @images            = images
         @custom_attributes = {}
-        @errors            = []
 
         attributes.each do |key, value|
-          set_attribute(key.to_s, value)
+          set_attribute(key.to_sym, value)
         end
       end
 
@@ -49,48 +50,14 @@ module Nagual
         @variations.map { |variation| variation.values.count }.reduce(:*) || 1
       end
 
-      def valid?
-        @valid ||= validate
-      end
-
       private
 
-      def validate
-        validate_required
-        validate_by_type
-        @errors.empty?
-      end
-
-      def validate_required
-        REQUIRED.each { |name| validate_field(name, 'required') }
-      end
-
-      def validate_by_type
-        PROPERTIES.each do |name, type|
-          value = send(name.to_sym)
-          validate_field(name, type) if !value.nil? && !value.empty?
-        end
-      end
-
-      def validate_field(name, type)
-        value = send(name.to_sym)
-        field = Contract::Fields::Validation.new(value, type)
-        @errors << "#{name} is invalid. #{field.error}" unless field.valid?
-      end
-
       def set_attribute(key, value)
-        if PROPERTIES.keys.include?(key)
+        if PROPERTIES.include?(key)
           instance_variable_set("@#{key}", value)
         else
-          set_custom_attribute(key, value)
+          @custom_attributes[key] = value
         end
-      end
-
-      def set_custom_attribute(key, value)
-        return unless key.match(config['product']['custom_regex'])
-
-        name = key.gsub(config['product']['custom_regex'], '').to_sym
-        @custom_attributes[name] = value
       end
 
       def fields_hash(fields)

@@ -134,7 +134,7 @@ RSpec.describe Nagual::Output::XMLProduct do
   context 'product with custom attributes' do
     let(:product) do
       Nagual::Models::Product.new(attributes: { product_id: 'id',
-                                                'custom-other': 'value' })
+                                                'other': 'value' })
     end
 
     it 'has image settings with correct view type' do
