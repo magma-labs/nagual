@@ -31,7 +31,7 @@ module Nagual
 
       def find_type_errors(row)
         row.map do |key, value|
-          validate(key, value, properties[key.to_s])
+          validate(key, value, fields[key.to_s])
         end.compact
       end
 
@@ -50,13 +50,11 @@ module Nagual
       end
 
       def required
-        config['product']['required']
+        config['contract']['product']['required']
       end
 
-      def properties
-        config['product']['attributes']
-          .merge(config['product']['fields'])
-          .merge(config['product']['page_fields'])
+      def fields
+        config['contract']['product']['fields']
       end
     end
   end
