@@ -4,11 +4,11 @@ require 'nagual'
 nagual = Nagual::API.new
 
 if ARGV.first == 'export'
-  File.open(nagual.config['output_file'], 'w') do |file|
-    file.write(nagual.export(nagual.config['input_file']))
+  File.open('data/catalog.xml', 'w') do |file|
+    file.write(nagual.transform(:csv, :catalog_xml))
   end
 elsif ARGV.first == 'review'
-  puts nagual.review(nagual.config['input_file'])
+  puts nagual.transform(:csv, :catalog_xml)
 else
   puts 'Command not recognized'
 end

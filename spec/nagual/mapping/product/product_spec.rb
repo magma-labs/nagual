@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'nagual/mapping/product'
+require 'nagual/mapping/product/product'
 
 RSpec.describe Nagual::Mapping::Product do
   subject { described_class.new(row) }

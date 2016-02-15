@@ -1,12 +1,7 @@
 require 'spec_helper'
-require 'nagual/models/catalog'
 require 'nagual/output/xml_catalog'
 
 RSpec.describe Nagual::Output::XMLCatalog do
-  let(:catalog) { Nagual::Models::Catalog.new([]) }
-
-  subject { described_class.new(catalog) }
-
   it 'represents output correctly' do
     expected_xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" \
     '<catalog xmlns="http://www.demandware.com/xml/impex/catalog/2006-10-31"' \
@@ -26,6 +21,6 @@ RSpec.describe Nagual::Output::XMLCatalog do
     "  </header>\n" \
     "</catalog>\n"
 
-    expect(subject.read).to eq(expected_xml)
+    expect(subject.write!([], [])).to eq(expected_xml)
   end
 end

@@ -2,8 +2,6 @@ require 'spec_helper'
 require 'nagual/input/csv'
 
 RSpec.describe Nagual::Input::CSV do
-  subject { described_class.new('') }
-
   context 'with correct data' do
     before do
       allow(File)
@@ -15,7 +13,7 @@ RSpec.describe Nagual::Input::CSV do
     end
 
     it 'returns array of valid products' do
-      expect(subject.rows).to eq([
+      expect(subject.read).to eq([
                                    { 'product_id' => '1234', 'ean' => 'EAN1' },
                                    { 'product_id' => '2345', 'ean' => 'EAN2' }
                                  ])

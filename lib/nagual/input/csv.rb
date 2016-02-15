@@ -9,12 +9,15 @@ module Nagual
       include Nagual::Logging
       include Nagual::Configuration
 
-      attr_reader :rows
-
-      def initialize(file)
+      def initialize
+        file = config['input']['csv']['file']
         logger.info('Input::CSV') { "Opening #{file} to read csv content" }
-        content = File.read(file)
-        @rows   = parse(content)
+
+        @rows = File.read(file)
+      end
+
+      def read
+        parse(@rows)
       end
 
       private

@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'nagual/mapping/product_variations'
+require 'nagual/mapping/product/product_variations'
 
 RSpec.describe Nagual::Mapping::ProductVariations do
   subject { described_class.new(row) }

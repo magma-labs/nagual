@@ -1,19 +1,15 @@
 require 'nokogiri'
-require 'nagual/output/xml_product'
 require 'nagual/logging'
+require 'nagual/output/xml_product'
 
 module Nagual
   module Output
     class XMLCatalog
       include Nagual::Logging
 
-      def initialize(catalog)
-        @attributes = catalog.attributes
-        @products   = catalog.products
-      end
-
-      def read
-        @output ||= build_output
+      def write!(objects, _errors)
+        @products = objects
+        build_output
       end
 
       private
@@ -21,7 +17,7 @@ module Nagual
       def build_output
         logger.info('XMLCatalog') { 'Building xml output for catalog' }
         Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |xml|
-          xml.send('catalog', @attributes) do
+          xml.send('catalog', attributes) do
             add_header(xml)
             add_products(xml)
           end
@@ -52,6 +48,13 @@ module Nagual
           end
           xml << Nagual::Output::XMLProduct.new(product).read
         end
+      end
+
+      def attributes
+        {
+          xmlns:        'http://www.demandware.com/xml/impex/catalog/2006-10-31',
+          'catalog-id': 'nagual-catalog'
+        }
       end
     end
   end
