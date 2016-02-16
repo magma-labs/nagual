@@ -5,8 +5,10 @@ nagual = Nagual::API.new
 
 if ARGV.first == 'export'
   nagual.transform(:csv, :xml_catalog)
+  p 'Nagual xml catalog generated'
 elsif ARGV.first == 'review'
-  puts nagual.transform(:csv, :error_report)
+  nagual.transform(:csv, :error_report)
+  p 'Nagual error report generated'
 else
-  puts 'Command not recognized'
+  p 'Use one of the valid commands: `nagual export`, `nagual review`'
 end
