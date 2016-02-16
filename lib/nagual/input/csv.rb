@@ -11,7 +11,7 @@ module Nagual
 
       def initialize
         file = config['input']['csv']['file']
-        logger.info('Input::CSV') { "Opening #{file} to read csv content" }
+        info("Opening #{file} to read csv content")
 
         @rows = File.read(file)
       end
@@ -24,7 +24,7 @@ module Nagual
 
       def parse(content)
         column_names, *rows = *::CSV.parse(content, headers: true)
-        logger.debug('Input::CSV') { "Column names extracted: #{column_names}" }
+        debug("Column names extracted: #{column_names}")
         rows.map { |row| Hash[column_names.zip(row)] }
       end
     end

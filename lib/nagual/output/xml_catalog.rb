@@ -23,7 +23,7 @@ module Nagual
       private
 
       def build_output
-        logger.info('XmlCatalog') { 'Building xml output for catalog' }
+        info("Building xml output for catalog with #{@products.count} products")
         Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |xml|
           xml.send('catalog', attributes) do
             add_header(xml)
@@ -51,10 +51,9 @@ module Nagual
 
       def add_products(xml)
         @products.each do |product|
-          logger.debug('XmlCatalog') do
-            "Parsing product with id: #{product.product_id}"
-          end
-          xml << Nagual::Output::XMLProduct.new(product).read
+          product_xml = Nagual::Output::XMLProduct.new(product).read
+          debug("XML for product with id #{product.product_id}: #{product_xml}")
+          xml << product_xml
         end
       end
 
