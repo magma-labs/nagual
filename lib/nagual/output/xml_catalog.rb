@@ -1,15 +1,23 @@
 require 'nokogiri'
 require 'nagual/logging'
+require 'nagual/configuration'
 require 'nagual/output/xml_product'
 
 module Nagual
   module Output
     class XmlCatalog
       include Nagual::Logging
+      include Nagual::Configuration
 
-      def write!(objects, _errors)
+      def write(objects, _errors)
         @products = objects
         build_output
+      end
+
+      def write!(objects, errors)
+        File.open(config['output']['xml']['file'], 'w') do |file|
+          file.write(write(objects, errors))
+        end
       end
 
       private

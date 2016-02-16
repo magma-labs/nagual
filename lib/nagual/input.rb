@@ -1,3 +1,5 @@
+require 'nagual/input/csv'
+
 module Nagual
   module Input
     def self.from(origin)

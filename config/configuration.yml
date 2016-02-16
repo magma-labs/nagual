@@ -1,5 +1,4 @@
 ---
-output_file: data/catalog.xml
 log:
   file: /dev/null
   date_format: '%Y-%m-%d %H:%M:%S'
@@ -7,6 +6,11 @@ log:
 input:
   csv:
     file: data_examples/products.csv
+output:
+  xml:
+    file: data/catalog.xml
+  error_report:
+    file: data/error_report
 contract:
   product:
     required:

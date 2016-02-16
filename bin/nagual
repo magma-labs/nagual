@@ -4,9 +4,7 @@ require 'nagual'
 nagual = Nagual::API.new
 
 if ARGV.first == 'export'
-  File.open('data/catalog.xml', 'w') do |file|
-    file.write(nagual.transform(:csv, :xml_catalog))
-  end
+  nagual.transform(:csv, :xml_catalog)
 elsif ARGV.first == 'review'
   puts nagual.transform(:csv, :xml_catalog)
 else

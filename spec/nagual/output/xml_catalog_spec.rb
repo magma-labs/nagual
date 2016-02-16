@@ -21,6 +21,6 @@ RSpec.describe Nagual::Output::XmlCatalog do
     "  </header>\n" \
     "</catalog>\n"
 
-    expect(subject.write!([], [])).to eq(expected_xml)
+    expect(subject.write([], [])).to eq(expected_xml)
   end
 end
