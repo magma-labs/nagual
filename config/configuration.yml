@@ -8,9 +8,9 @@ input:
     file: data_examples/products.csv
 output:
   xml:
-    file: data/catalog.xml
+    file: data_examples/catalog.xml
   error_report:
-    file: data/error_report
+    file: data_examples/error_report
 contract:
   product:
     required:

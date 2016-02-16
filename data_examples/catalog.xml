@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<catalog xmlns="http://www.demandware.com/xml/impex/catalog/2006-10-31" catalog-id="nagual-catalog">
+  <header>
+    <image-settings>
+      <internal-location base-path="/"/>
+      <view-types>
+        <view-type>large</view-type>
+        <view-type>medium</view-type>
+        <view-type>small</view-type>
+        <view-type>swatch</view-type>
+      </view-types>
+      <alt-pattern>${productname}</alt-pattern>
+      <title-pattern>${productname}</title-pattern>
+    </image-settings>
+  </header>
+  <product product-id="ID">
+  <ean>EAN</ean>
+  <upc>UPC</upc>
+  <unit>UNIT</unit>
+  <min-order-quantity>10</min-order-quantity>
+  <step-quantity>1</step-quantity>
+  <display-name>Product</display-name>
+  <short-description>Very cool product</short-description>
+  <online-flag>true</online-flag>
+  <online-from>2015-09-01T09:00:00</online-from>
+  <online-to>2016-10-01T09:00:00</online-to>
+  <searchable-flag>true</searchable-flag>
+  <searchable-if-unavailable-flag>true</searchable-if-unavailable-flag>
+  <images>
+    <image-group view-type="small">
+      <image path="images/ID_small.png"/>
+    </image-group>
+    <image-group view-type="medium">
+      <image path="images/ID_medium.png"/>
+    </image-group>
+    <image-group view-type="large">
+      <image path="images/ID_large.png"/>
+    </image-group>
+  </images>
+  <template>TEMPLATE</template>
+  <tax-class-id>TX1</tax-class-id>
+  <brand>BRAND</brand>
+  <manufacturer-name>MANUFACTURER</manufacturer-name>
+  <manufacturer-sku>SKU</manufacturer-sku>
+  <search-placement>1</search-placement>
+  <search-rank>10</search-rank>
+  <sitemap-included-flag>true</sitemap-included-flag>
+  <sitemap-changefrequency>daily</sitemap-changefrequency>
+  <sitemap-priority>1</sitemap-priority>
+  <page-attributes>
+    <page-title>PAGE TITLE</page-title>
+    <page-description>PAGE DESCRIPTION</page-description>
+    <page-keywords>PAGE KEYWORDS</page-keywords>
+    <page-url>http://page_url.com</page-url>
+  </page-attributes>
+  <custom-attributes>
+    <custom-attribute attribute-id="organization">sawyer</custom-attribute>
+  </custom-attributes>
+  <variations>
+    <attributes>
+      <variation-attribute attribute-id="color" variation-attribute-id="color">
+        <variation-attribute-values>
+          <variation-attribute-value value="blue">
+            <display-value xml:lang="x-default">Blue</display-value>
+          </variation-attribute-value>
+          <variation-attribute-value value="red">
+            <display-value xml:lang="x-default">Red</display-value>
+          </variation-attribute-value>
+        </variation-attribute-values>
+      </variation-attribute>
+    </attributes>
+    <variants>
+      <variant product-id="ID_1"/>
+      <variant product-id="ID_2"/>
+    </variants>
+  </variations>
+</product>
+</catalog>

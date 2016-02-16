@@ -1,0 +1,4 @@
+Correct objects read from file: 1
+Errors found: 1
+Errors:
+row #2 | errors: ["searchable_flag is invalid. boolean expects values: true or false"]
