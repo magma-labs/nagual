@@ -8,7 +8,24 @@ input:
     file: data_examples/products.csv
 output:
   xml:
-    file: data_examples/catalog.xml
+    catalog:
+      file: data_examples/catalog.xml
+      encoding: UTF-8
+      id: nagual-catalog
+      xmlns: http://www.demandware.com/xml/impex/catalog/2006-10-31
+      images:
+        path: /
+        alt: ${productname}
+        title: ${productname}
+      view_types:
+        - large
+        - medium
+        - small
+        - swatch
+    product:
+      lang: x-default
+      image: 'images/%{id}_%{name}.png'
+      variant: '%{name}_%{modifier}'
   error_report:
     file: data_examples/error_report
 contract:

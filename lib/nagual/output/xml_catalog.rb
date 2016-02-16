@@ -15,16 +15,21 @@ module Nagual
       end
 
       def write!(objects, errors)
-        File.open(config['output']['xml']['file'], 'w') do |file|
+        File.open(catalog_config['file'], 'w') do |file|
           file.write(write(objects, errors))
         end
       end
 
       private
 
+      def catalog_config
+        config['output']['xml']['catalog']
+      end
+
       def build_output
         info("Building xml output for catalog with #{@products.count} products")
-        Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |xml|
+        Nokogiri::XML::Builder
+          .new(encoding: catalog_config['encoding']) do |xml|
           xml.send('catalog', attributes) do
             add_header(xml)
             add_products(xml)
@@ -35,16 +40,11 @@ module Nagual
       def add_header(xml)
         xml.send('header') do
           xml.send('image-settings') do
-            xml.send('internal-location', 'base-path': '/')
-            xml.send('view-types') do
-              xml.send('view-type', 'large')
-              xml.send('view-type', 'medium')
-              xml.send('view-type', 'small')
-              xml.send('view-type', 'swatch')
-            end
-
-            xml.send('alt-pattern', '${productname}')
-            xml.send('title-pattern', '${productname}')
+            xml.send('internal-location',
+                     'base-path': catalog_config['images']['path'])
+            add_view_types(xml)
+            xml.send('alt-pattern', catalog_config['images']['alt'])
+            xml.send('title-pattern', catalog_config['images']['title'])
           end
         end
       end
@@ -57,11 +57,16 @@ module Nagual
         end
       end
 
+      def add_view_types(xml)
+        xml.send('view-types') do
+          catalog_config['view_types'].each do |name|
+            xml.send('view-type', name)
+          end
+        end
+      end
+
       def attributes
-        {
-          xmlns:        'http://www.demandware.com/xml/impex/catalog/2006-10-31',
-          'catalog-id': 'nagual-catalog'
-        }
+        { xmlns: catalog_config['xmlns'], 'catalog-id': catalog_config['id'] }
       end
     end
   end

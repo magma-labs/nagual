@@ -1,8 +1,11 @@
 require 'nokogiri'
+require 'nagual/configuration'
 
 module Nagual
   module Output
     class XMLProduct
+      include Nagual::Configuration
+
       def initialize(product)
         @attributes        = product.attributes
         @fields            = product.fields
@@ -55,7 +58,8 @@ module Nagual
         xml.images do
           @images.each do |image|
             xml.send('image-group', 'view-type': image) do
-              xml.image(path: "images/#{@id}_#{image}.png")
+              path = product_config['image'] % { id: @id, name: image }
+              xml.image(path: path)
             end
           end
         end
@@ -81,7 +85,7 @@ module Nagual
         xml.send('variation-attribute-values') do
           values.each do |value|
             xml.send('variation-attribute-value', value: value.value) do
-              xml.send('display-value', { 'xml:lang': 'x-default' },
+              xml.send('display-value', { 'xml:lang': product_config['lang'] },
                        value.display)
             end
           end
@@ -91,10 +95,14 @@ module Nagual
       def add_variants(xml)
         xml.send('variants') do
           @variants_size.times do |index|
-            xml.send('variant',
-                     'product-id': "#{@id}_#{index + 1}")
+            id = product_config['variant'] % { name: @id, modifier: index + 1 }
+            xml.send('variant', 'product-id': id)
           end
         end
+      end
+
+      def product_config
+        config['output']['xml']['product']
       end
     end
   end
