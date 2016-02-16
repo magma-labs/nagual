@@ -6,7 +6,7 @@ RSpec.describe Nagual::API do
   context 'transform to xml catalog' do
     let(:xsd_path)   { 'schema/catalog.xsd' }
     let(:xsd)        { Nokogiri::XML::Schema(File.read(xsd_path)) }
-    let(:output)     { 'data/catalog.xml' }
+    let(:output)     { 'data_examples/catalog.xml' }
 
     subject! do
       described_class.new.transform(:csv, :xml_catalog)
@@ -18,7 +18,7 @@ RSpec.describe Nagual::API do
   end
 
   context 'transform to error report' do
-    let(:output) { File.read('data/error_report') }
+    let(:output) { File.read('data_examples/error_report') }
 
     subject! do
       described_class.new.transform(:csv, :error_report)
