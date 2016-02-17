@@ -9,6 +9,7 @@
         <view-type>small</view-type>
         <view-type>swatch</view-type>
       </view-types>
+      <variation-attribute-id>color</variation-attribute-id>
       <alt-pattern>${productname}</alt-pattern>
       <title-pattern>${productname}</title-pattern>
     </image-settings>

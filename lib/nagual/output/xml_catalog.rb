@@ -39,13 +39,23 @@ module Nagual
 
       def add_header(xml)
         xml.send('header') do
-          xml.send('image-settings') do
-            xml.send('internal-location',
-                     'base-path': catalog_config['images']['path'])
-            add_view_types(xml)
-            xml.send('alt-pattern', catalog_config['images']['alt'])
-            xml.send('title-pattern', catalog_config['images']['title'])
-          end
+          add_image_settings(xml)
+        end
+      end
+
+      def add_image_settings(xml)
+        xml.send('image-settings') do
+          xml.send('internal-location',
+                   'base-path': catalog_config['images']['path'])
+          add_view_types(xml)
+          xml.send('alt-pattern', catalog_config['images']['alt'])
+          xml.send('title-pattern', catalog_config['images']['title'])
+        end
+      end
+
+      def add_variation_attributes(xml)
+        catalog_config['variation_attributes'].each do |attribute|
+          xml.send('variation-attribute-id', attribute)
         end
       end
 

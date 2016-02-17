@@ -15,6 +15,7 @@ RSpec.describe Nagual::Output::XmlCatalog do
     "        <view-type>small</view-type>\n" \
     "        <view-type>swatch</view-type>\n" \
     "      </view-types>\n" \
+    "      <variation-attribute-id>color</variation-attribute-id>\n" \
     "      <alt-pattern>${productname}</alt-pattern>\n" \
     "      <title-pattern>${productname}</title-pattern>\n" \
     "    </image-settings>\n" \

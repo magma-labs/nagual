@@ -22,6 +22,8 @@ output:
         - medium
         - small
         - swatch
+      variation_attributes:
+        - color
     product:
       lang: x-default
       image: 'images/%{id}_%{name}.png'
