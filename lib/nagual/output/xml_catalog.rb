@@ -48,6 +48,7 @@ module Nagual
           xml.send('internal-location',
                    'base-path': catalog_config['images']['path'])
           add_view_types(xml)
+          add_variation_attributes(xml)
           xml.send('alt-pattern', catalog_config['images']['alt'])
           xml.send('title-pattern', catalog_config['images']['title'])
         end
