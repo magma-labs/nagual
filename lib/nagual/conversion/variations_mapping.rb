@@ -1,8 +1,14 @@
-require 'nagual/mapping/base'
+require 'nagual/configuration'
 
 module Nagual
-  module Mapping
-    class ProductVariations < Base
+  module Conversion
+    class VariationsMapping
+      include Nagual::Configuration
+
+      def initialize(row)
+        @row = row
+      end
+
       def transform
         variation_names.map { |name| variation_value(@row, name) }.compact
       end

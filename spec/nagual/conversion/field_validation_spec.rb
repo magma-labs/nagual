@@ -1,7 +1,7 @@
 require 'spec_helper'
-require 'nagual/contract/fields/validation'
+require 'nagual/conversion/field_validation'
 
-RSpec.describe Nagual::Contract::Fields::Validation do
+RSpec.describe Nagual::Conversion::FieldValidation do
   RSpec.shared_examples 'valid' do |validation|
     it 'is valid and with no errors' do
       expect(validation).to be_valid

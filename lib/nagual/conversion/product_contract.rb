@@ -1,9 +1,9 @@
 require 'nagual/configuration'
-require 'nagual/contract/fields/validation'
+require 'nagual/conversion/field_validation'
 
 module Nagual
-  module Contract
-    class Product
+  module Conversion
+    class ProductContract
       include Nagual::Configuration
 
       attr_reader :errors
@@ -40,7 +40,7 @@ module Nagual
       end
 
       def validate(key, value, type)
-        type_validation = Contract::Fields::Validation.new(value, type)
+        type_validation = FieldValidation.new(value, type)
 
         unless type_validation.valid?
           "#{key} is invalid. #{type_validation.error}"

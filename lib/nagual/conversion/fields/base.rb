@@ -1,5 +1,5 @@
 module Nagual
-  module Contract
+  module Conversion
     module Fields
       class Base
         def initialize(value)

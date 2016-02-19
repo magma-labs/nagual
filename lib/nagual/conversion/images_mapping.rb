@@ -1,8 +1,14 @@
-require 'nagual/mapping/base'
+require 'nagual/configuration'
 
 module Nagual
-  module Mapping
-    class Images < Base
+  module Conversion
+    class ImagesMapping
+      include Nagual::Configuration
+
+      def initialize(row)
+        @row = row
+      end
+
       def transform
         images = @row[images_name] || ''
         images.split(',')

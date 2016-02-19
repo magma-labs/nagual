@@ -1,7 +1,7 @@
 require 'spec_helper'
-require 'nagual/decoration/product'
+require 'nagual/conversion/product_decoration'
 
-RSpec.describe Nagual::Decoration::Product do
+RSpec.describe Nagual::Conversion::ProductDecoration do
   subject { described_class.new(row) }
 
   context 'for fixed values' do

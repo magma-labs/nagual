@@ -9,7 +9,7 @@ RSpec.describe Nagual::API do
     let(:output)     { 'data_examples/catalog.xml' }
 
     subject! do
-      described_class.new.transform(:csv, :xml_catalog)
+      described_class.new.transform(:catalog, :csv, :xml_catalog)
     end
 
     it 'conforms to catalog xsd' do
@@ -21,7 +21,7 @@ RSpec.describe Nagual::API do
     let(:output) { File.read('data_examples/error_report') }
 
     subject! do
-      described_class.new.transform(:csv, :error_report)
+      described_class.new.transform(:catalog, :csv, :error_report)
     end
 
     it 'writes to file' do

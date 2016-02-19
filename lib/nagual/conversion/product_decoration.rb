@@ -1,17 +1,22 @@
 require 'nagual/configuration'
 
 module Nagual
-  module Mapping
-    class Base
+  module Conversion
+    class ProductDecoration
       include Nagual::Configuration
 
       def initialize(row)
         @row = row
       end
 
+      def build
+        @row.merge(fixed_values)
+      end
+
       private
 
-      def transform
+      def fixed_values
+        config['decoration']['product']['values']
       end
     end
   end

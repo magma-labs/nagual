@@ -1,14 +1,14 @@
 require 'nagual/input'
-require 'nagual/mapping'
+require 'nagual/conversion'
 require 'nagual/output'
 
 module Nagual
   class API
-    def transform(origin, destination)
-      rows    = Input.from(origin).read
-      mapping = Mapping.parse(rows)
+    def transform(type, origin, destination)
+      rows = Input.from(origin).read
+      conversion = Conversion.for(type).parse(rows)
 
-      Output.to(destination).write!(mapping.objects, mapping.errors)
+      Output.to(destination).write!(conversion.objects, conversion.errors)
     end
   end
 end

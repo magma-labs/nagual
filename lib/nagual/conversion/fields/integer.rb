@@ -1,5 +1,5 @@
 module Nagual
-  module Contract
+  module Conversion
     module Fields
       class Integer < Base
         def valid?

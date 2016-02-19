@@ -1,9 +1,9 @@
-require 'nagual/mapping/product_transformation'
+require 'nagual/conversion/catalog'
 
 module Nagual
-  module Mapping
-    def self.parse(rows)
-      ProductTransformation.new(rows).parse
+  module Conversion
+    def self.for(type)
+      Conversion.const_get(type.to_s.capitalize).new
     end
 
     class Result

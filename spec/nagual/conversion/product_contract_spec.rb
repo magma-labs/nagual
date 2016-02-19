@@ -1,7 +1,7 @@
 require 'spec_helper'
-require 'nagual/contract/product'
+require 'nagual/conversion/product_contract'
 
-RSpec.describe Nagual::Contract::Product do
+RSpec.describe Nagual::Conversion::ProductContract do
   subject { described_class.new(row) }
 
   context 'with valid row' do

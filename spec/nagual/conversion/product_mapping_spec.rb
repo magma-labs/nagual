@@ -1,7 +1,7 @@
 require 'spec_helper'
-require 'nagual/mapping/product/product'
+require 'nagual/conversion/product_mapping'
 
-RSpec.describe Nagual::Mapping::Product do
+RSpec.describe Nagual::Conversion::ProductMapping do
   subject { described_class.new(row) }
 
   context 'with simple mapped values' do

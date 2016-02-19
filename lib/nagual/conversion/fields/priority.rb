@@ -1,5 +1,5 @@
 module Nagual
-  module Contract
+  module Conversion
     module Fields
       class Priority < Base
         def valid?

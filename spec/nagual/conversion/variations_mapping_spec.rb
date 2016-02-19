@@ -1,19 +1,20 @@
 require 'spec_helper'
-require 'nagual/mapping/product/images'
+require 'nagual/conversion/variations_mapping'
 
-RSpec.describe Nagual::Mapping::Images do
+RSpec.describe Nagual::Conversion::VariationsMapping do
   subject { described_class.new(row) }
 
   context 'with mapped values' do
-    let(:row) { { 'images' => 'small,large' } }
+    let(:row) { { 'color' => 'Blue,Red' } }
 
     it 'has no errors' do
-      expect(subject.transform).to eq(%w(small large))
+      expect(subject.transform)
+        .to eq([{ id: 'color', values: %w(Blue Red) }])
     end
   end
 
   context 'with empty values' do
-    let(:row) { { 'images' => '' } }
+    let(:row) { { 'color' => '' } }
 
     it 'has no errors' do
       expect(subject.transform).to eq([])

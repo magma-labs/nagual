@@ -1,8 +1,14 @@
-require 'nagual/mapping/base'
+require 'nagual/configuration'
 
 module Nagual
-  module Mapping
-    class Product < Base
+  module Conversion
+    class ProductMapping
+      include Nagual::Configuration
+
+      def initialize(row)
+        @row = row
+      end
+
       def transform
         @row.inject({}) do |transformed_row, map|
           transformed_row.merge(transformed_value(map[0], map[1]))
