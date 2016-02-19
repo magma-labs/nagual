@@ -71,7 +71,6 @@ mapping:
       ean: ean
       upc: upc
       unit: unit
-      'min order': min_order_quantity
       step: step_quantity
       name: display_name
       description: short_description
@@ -99,3 +98,7 @@ mapping:
     variations:
       - color
     images: images
+decoration:
+  product:
+    values:
+      min_order_quantity: 10

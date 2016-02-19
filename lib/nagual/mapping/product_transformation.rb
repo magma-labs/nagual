@@ -2,6 +2,7 @@ require 'nagual/mapping/product/product'
 require 'nagual/mapping/product/product_variations'
 require 'nagual/mapping/product/images'
 require 'nagual/contract/product'
+require 'nagual/decoration/product'
 require 'nagual/models/product'
 require 'nagual/logging'
 
@@ -20,6 +21,10 @@ module Nagual
           debug("##{index + 1} Fields to be parsed: #{row}")
           product_fields = Mapping::Product.new(row).transform
 
+          debug("##{index + 1} Mapped fields: #{row}")
+          product_fields = Decoration::Product.new(product_fields).build
+
+          debug("##{index + 1} Decorated fields: #{row}")
           validate(row, index + 1, product_fields)
         end
 
