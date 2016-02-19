@@ -77,7 +77,6 @@ mapping:
       online: online_flag
       from: online_from
       to: online_to
-      available?: available_flag
       searchable?: searchable_flag
       'searchable if unavailable?': searchable_if_unavailable_flag
       template: template
@@ -102,3 +101,4 @@ decoration:
   product:
     values:
       min_order_quantity: 10
+      available_flag: 'true'

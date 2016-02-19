@@ -25,6 +25,7 @@
   <online-flag>true</online-flag>
   <online-from>2015-09-01T09:00:00</online-from>
   <online-to>2016-10-01T09:00:00</online-to>
+  <available-flag>true</available-flag>
   <searchable-flag>true</searchable-flag>
   <searchable-if-unavailable-flag>true</searchable-if-unavailable-flag>
   <images>
