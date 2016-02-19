@@ -74,7 +74,6 @@ mapping:
       step: step_quantity
       name: display_name
       description: short_description
-      online: online_flag
       from: online_from
       to: online_to
       searchable?: searchable_flag
@@ -94,6 +93,11 @@ mapping:
       'page keywords': page_keywords
       'page url': page_url
       'organization': organization
+    mutations:
+      boolean:
+        status:
+          destination: online_flag
+          expected: online
     variations:
       - color
     images: images

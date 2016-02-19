@@ -4,7 +4,7 @@ require 'nagual/mapping/product/product'
 RSpec.describe Nagual::Mapping::Product do
   subject { described_class.new(row) }
 
-  context 'with mapped values' do
+  context 'with simple mapped values' do
     let(:row) { { id: 'id' } }
 
     it 'has no errors' do
@@ -12,11 +12,31 @@ RSpec.describe Nagual::Mapping::Product do
     end
   end
 
-  context 'with not mapped values' do
+  context 'with not simple mapped values' do
     let(:row) { { 'non-existent': 'value' } }
 
     it 'has no errors' do
       expect(subject.transform).to eq({})
+    end
+  end
+
+  context 'with mutation values' do
+    context 'boolean' do
+      context 'with expected value' do
+        let(:row) { { 'status' => 'online' } }
+
+        it 'returns true' do
+          expect(subject.transform).to eq('online_flag' => 'true')
+        end
+      end
+
+      context 'with other value' do
+        let(:row) { { 'status' => 'offline' } }
+
+        it 'returns true' do
+          expect(subject.transform).to eq('online_flag' => 'false')
+        end
+      end
     end
   end
 end
