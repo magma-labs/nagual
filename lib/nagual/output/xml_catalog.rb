@@ -9,8 +9,8 @@ module Nagual
       include Nagual::Logging
       include Nagual::Configuration
 
-      def write(objects, _errors)
-        @products = objects
+      def write(products, _errors)
+        @products = products
         build_output
       end
 
