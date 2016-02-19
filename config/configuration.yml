@@ -147,9 +147,11 @@ mapping:
       name: none
     - key: status
       to: online_flag
-      name: boolean
+      name: convert
       params:
-        expected: online
+        default: 'false'
+        values:
+          online: 'true'
     variations:
       - color
     images: images

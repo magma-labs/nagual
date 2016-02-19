@@ -28,7 +28,8 @@ module Nagual
       def mutate(name, value, params)
         case name
         when 'none' then value
-        when 'boolean' then (value == params['expected']).to_s
+        when 'convert'
+          params['values'][value] || params['default']
         end
       end
 
