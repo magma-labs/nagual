@@ -1,5 +1,3 @@
-require 'nagual/models/product_variation'
-
 module Nagual
   module Models
     class Product
@@ -25,7 +23,7 @@ module Nagual
       alias to_s inspect
 
       def initialize(attributes: {}, variations: [], images: [])
-        @variations        = variations.map { |v| ProductVariation.new(v) }
+        @variations        = variations.map { |v| Variation.new(v) }
         @images            = images
         @custom_attributes = {}
 
@@ -64,6 +62,27 @@ module Nagual
         fields.map do |field, _value|
           [field.to_s.tr('_', '-'), send(field)]
         end.to_h
+      end
+    end
+
+    class Variation
+      attr_reader :id, :values
+
+      def initialize(id: nil, values: [])
+        @id = id
+        @values = values.map { |v| Value.new(v) }
+      end
+
+      class Value
+        attr_reader :display
+
+        def initialize(display)
+          @display = display
+        end
+
+        def value
+          @display.tr(' ', '-').downcase
+        end
       end
     end
   end
