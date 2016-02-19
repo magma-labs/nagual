@@ -18,28 +18,22 @@ module Nagual
       private
 
       def transformed_value(key, value)
-        mapping       = columns[key.to_s]
-        bool_mutation = boolean_mutations[key.to_s]
+        mutation = product_mutations.find { |m| key == m['key'] }
+        return {} unless mutation
 
-        if mapping
-          { mapping.to_s => value }
-        elsif bool_mutation
-          mutate_to_boolean(bool_mutation, value)
-        else
-          {}
+        { mutation['to'] =>
+          mutate(mutation['name'], value, mutation['params']) }
+      end
+
+      def mutate(name, value, params)
+        case name
+        when 'none' then value
+        when 'boolean' then (value == params['expected']).to_s
         end
       end
 
-      def mutate_to_boolean(mutation, value)
-        { mutation['destination'] => (value == mutation['expected']).to_s }
-      end
-
-      def columns
-        config['mapping']['product']['columns']
-      end
-
-      def boolean_mutations
-        config['mapping']['product']['mutations']['boolean']
+      def product_mutations
+        config['mapping']['product']['mutations']
       end
     end
   end

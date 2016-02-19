@@ -66,38 +66,90 @@ contract:
       page_url: string
 mapping:
   product:
-    columns:
-      id: product_id
-      ean: ean
-      upc: upc
-      unit: unit
-      step: step_quantity
-      name: display_name
-      description: short_description
-      from: online_from
-      to: online_to
-      searchable?: searchable_flag
-      'searchable if unavailable?': searchable_if_unavailable_flag
-      template: template
-      'tax class id': tax_class_id
-      brand: brand
-      manufacturer: manufacturer_name
-      SKU: manufacturer_sku
-      placement: search_placement
-      rank: search_rank
-      sitemap?: sitemap_included_flag
-      'sitemap change frequency': sitemap_changefrequency
-      'sitemap priority': sitemap_priority
-      'page title': page_title
-      'page description': page_description
-      'page keywords': page_keywords
-      'page url': page_url
-      'organization': organization
     mutations:
-      boolean:
-        status:
-          destination: online_flag
-          expected: online
+    - key: id
+      to: product_id
+      name: none
+    - key: ean
+      to: ean
+      name: none
+    - key: upc
+      to: upc
+      name: none
+    - key: unit
+      to: unit
+      name: none
+    - key: step
+      to: step_quantity
+      name: none
+    - key: name
+      to: display_name
+      name: none
+    - key: description
+      to: short_description
+      name: none
+    - key: from
+      to: online_from
+      name: none
+    - key: to
+      to: online_to
+      name: none
+    - key: searchable?
+      to: searchable_flag
+      name: none
+    - key: 'searchable if unavailable?'
+      to: searchable_if_unavailable_flag
+      name: none
+    - key: template
+      to: template
+      name: none
+    - key: 'tax class id'
+      to: tax_class_id
+      name: none
+    - key: brand
+      to: brand
+      name: none
+    - key: manufacturer
+      to: manufacturer_name
+      name: none
+    - key: SKU
+      to: manufacturer_sku
+      name: none
+    - key: placement
+      to: search_placement
+      name: none
+    - key: rank
+      to: search_rank
+      name: none
+    - key: sitemap?
+      to: sitemap_included_flag
+      name: none
+    - key: 'sitemap change frequency'
+      to: sitemap_changefrequency
+      name: none
+    - key: 'sitemap priority'
+      to: sitemap_priority
+      name: none
+    - key: 'page title'
+      to: page_title
+      name: none
+    - key: 'page description'
+      to: page_description
+      name: none
+    - key: 'page keywords'
+      to: page_keywords
+      name: none
+    - key: 'page url'
+      to: page_url
+      name: none
+    - key: 'organization'
+      to: organization
+      name: none
+    - key: status
+      to: online_flag
+      name: boolean
+      params:
+        expected: online
     variations:
       - color
     images: images

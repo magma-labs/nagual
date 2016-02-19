@@ -5,7 +5,7 @@ RSpec.describe Nagual::Conversion::ProductMapping do
   subject { described_class.new(row) }
 
   context 'with simple mapped values' do
-    let(:row) { { id: 'id' } }
+    let(:row) { { 'id' => 'id' } }
 
     it 'has no errors' do
       expect(subject.transform).to eq('product_id' => 'id')
