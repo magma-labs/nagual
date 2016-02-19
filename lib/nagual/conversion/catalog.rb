@@ -1,4 +1,4 @@
-require 'nagual/logging'
+require 'nagual/util/logging'
 require 'nagual/conversion/product_mapping'
 require 'nagual/conversion/variations_mapping'
 require 'nagual/conversion/images_mapping'

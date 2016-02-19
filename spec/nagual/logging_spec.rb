@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'nagual/logging'
+require 'nagual/util/logging'
 
 RSpec.describe Nagual::Logging do
   context 'included' do

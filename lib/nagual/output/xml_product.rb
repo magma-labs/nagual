@@ -1,5 +1,5 @@
 require 'nokogiri'
-require 'nagual/configuration'
+require 'nagual/util/configuration'
 
 module Nagual
   module Output

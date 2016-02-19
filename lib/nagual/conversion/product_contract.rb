@@ -1,4 +1,4 @@
-require 'nagual/configuration'
+require 'nagual/util/configuration'
 require 'nagual/conversion/field_validation'
 
 module Nagual

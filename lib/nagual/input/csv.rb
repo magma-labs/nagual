@@ -1,7 +1,7 @@
 require 'csv'
 require 'nagual/models/product'
-require 'nagual/configuration'
-require 'nagual/logging'
+require 'nagual/util/configuration'
+require 'nagual/util/logging'
 
 module Nagual
   module Input

@@ -1,6 +1,6 @@
 require 'nokogiri'
-require 'nagual/logging'
-require 'nagual/configuration'
+require 'nagual/util/logging'
+require 'nagual/util/configuration'
 require 'nagual/output/xml_product'
 
 module Nagual
