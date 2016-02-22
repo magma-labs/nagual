@@ -1,9 +1,5 @@
-# Catalog tools to improve the work we do with Demandware
 [![Build Status](https://travis-ci.org/sawyer-effect/nagual.svg?branch=master)](https://travis-ci.org/sawyer-effect/nagual)
 [![Code Climate](https://codeclimate.com/github/sawyer-effect/nagual/badges/gpa.svg)](https://codeclimate.com/github/sawyer-effect/nagual)
-
-For help running this code you can get the [Nagual VM](https://github.com/sawyer-effect/nagual-vm).
-
 
 # Usage
 
@@ -29,17 +25,53 @@ For help running this code you can get the [Nagual VM](https://github.com/sawyer
 
 ```ruby
 nagual = Nagual::API.new
-puts nagual.transform(:csv, :xml_catalog)
-puts nagual.transform(:csv, :error_report)
+puts nagual.transform(:catalog, :csv, :xml_catalog)
+puts nagual.transform(:catalog, :csv, :error_report)
 ```
 
 ## Mapping
 
-## Product attributes
-
 All valid product attributes can be mapped from a csv file using the
-mapping section of the `configuration.yml` file, the key is the
-expected column name in input file and value is the product field name.
+mapping section of the `configuration.yml` file, for that you need to
+define a mutation for each expected columns:
+
+* key: expected name in the input
+* to: product field name to where values will be saved
+* name: mutation name, can be either:
+    * 'none' to copy the values as it is
+    * 'convert' to modify the value and it has the following params:
+        * default: if value is not found this value will be used
+        * values: it's a map to convert a field value to another one.
+
+In example configuration file we convert a column named status with values
+'online' or 'offline' to the product field 'online_flag' with values 'true'
+or 'false'
+
+## Decoration
+
+In ths configuration section you can add additional values or enrich the input
+values with different options:
+
+### Fixed
+
+All products will be created with a default fixed value, key represents
+the product field name to be used.
+
+### Copy
+
+The value from one product field will be copied as it is to another value.
+
+* key: product field name that will be copied
+* to: product field name that will be the destination
+
+### Merge
+
+You can use one or more input keys to generate an output pattern to be
+saved in an specific product field
+
+* keys: name of the fields to be used in pattern
+* pattern: string with the expected output (keys can be used with %{} notation)
+* to: name of the field that will be used to save the output
 
 ## Ignore columns
 
@@ -92,7 +124,14 @@ are expected to be present.
 
 # Nagual development
 
+## Install
+
 * Install ruby
 * Install bundler
 * Install dependencies with bundler: `bundle install`
 * User `rspec` command to run tests
+
+## Build
+
+* `gem build nagual.gemspec`
+* To push to rubygems follow this guide: http://guides.rubygems.org/publishing/
