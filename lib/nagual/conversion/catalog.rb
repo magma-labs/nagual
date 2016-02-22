@@ -16,11 +16,11 @@ module Nagual
       def parse(rows)
         result = Result.new
         fields = rows
-          .map {|row| ProductMapping.new(row).transform }
-          .map {|row| ProductDecoration.new(row).build }
-          .map {|row| ProductDivision.new(row, division_strategy, {}).split }
+                 .map { |row| ProductMapping.new(row).transform }
+                 .map { |row| ProductDecoration.new(row).build }
+                 .map { |row| ProductDivision.new(row, division_strategy, {}).split }
 
-        fields.each_with_index {|row, i| validate(row, rows[i], result) }
+        fields.each_with_index { |row, i| validate(row, rows[i], result) }
         result
       end
 
