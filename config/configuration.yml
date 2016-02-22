@@ -133,14 +133,8 @@ mapping:
     - key: 'page title'
       to: page_title
       name: none
-    - key: 'page description'
-      to: page_description
-      name: none
     - key: 'page keywords'
       to: page_keywords
-      name: none
-    - key: 'page url'
-      to: page_url
       name: none
     - key: 'organization'
       to: organization
@@ -157,6 +151,15 @@ mapping:
     images: images
 decoration:
   product:
-    values:
+    fixed:
       min_order_quantity: 10
       available_flag: 'true'
+    copy:
+      - key: short_description
+        to: page_description
+    merge:
+      - keys:
+          - product_id
+          - organization
+        pattern: 'http://host/%{organization}/%{product_id}'
+        to: page_url

@@ -51,9 +51,9 @@
   <sitemap-priority>1</sitemap-priority>
   <page-attributes>
     <page-title>PAGE TITLE</page-title>
-    <page-description>PAGE DESCRIPTION</page-description>
+    <page-description>Very cool product</page-description>
     <page-keywords>PAGE KEYWORDS</page-keywords>
-    <page-url>http://page_url.com</page-url>
+    <page-url>http://host/sawyer/ID</page-url>
   </page-attributes>
   <custom-attributes>
     <custom-attribute attribute-id="organization">sawyer</custom-attribute>
