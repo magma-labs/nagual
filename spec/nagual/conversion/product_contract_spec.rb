@@ -2,7 +2,12 @@ require 'spec_helper'
 require 'nagual/conversion/product_contract'
 
 RSpec.describe Nagual::Conversion::ProductContract do
-  subject { described_class.new(row) }
+  let(:required) { ['product_id'] }
+  let(:fields) do
+    { 'product_id' => 'string.100', 'available_flag' => 'boolean' }
+  end
+
+  subject { described_class.new(row, required, fields) }
 
   context 'with valid row' do
     let(:row) { { 'product_id' => 'id' } }

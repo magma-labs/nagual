@@ -41,9 +41,15 @@ module Nagual
         ProductMapping.new(row, mutations).transform
       end
 
+      def build_contract(fields)
+        required   = config['contract']['product']['required']
+        definition = config['contract']['product']['fields']
+        ProductContract.new(fields, required, definition)
+      end
+
       def validate(fields, row, result)
-        contract   = ProductContract.new(fields)
         product_id = fields['product_id']
+        contract   = build_contract(fields)
 
         debug("Product fields: #{fields}")
         if contract.valid?
