@@ -163,3 +163,6 @@ decoration:
           - organization
         pattern: 'http://host/%{organization}/%{product_id}'
         to: page_url
+division:
+  product:
+    strategy: none

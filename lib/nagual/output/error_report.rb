@@ -16,7 +16,7 @@ module Nagual
         report << "Errors found: #{errors.count}\n"
         report << "Errors:\n"
         errors.each do |error|
-          report << "row ##{error[:index]} | errors: #{error[:errors]}\n"
+          report << "id: #{error[:id]} | errors: #{error[:errors]}\n"
         end
         report
       end

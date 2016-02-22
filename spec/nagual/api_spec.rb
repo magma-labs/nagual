@@ -29,7 +29,7 @@ RSpec.describe Nagual::API do
         "Correct objects read from file: 1\n" \
         "Errors found: 1\n" \
         "Errors:\n" \
-        'row #2 | errors: ["searchable_flag is invalid.' \
+        'id: INVALID | errors: ["searchable_flag is invalid.' \
         " boolean expects values: true or false\"]\n"
       )
     end
