@@ -15,16 +15,30 @@ module Nagual
 
       def parse(rows)
         result = Result.new
-        fields = rows
-                 .map { |row| ProductMapping.new(row).transform }
-                 .map { |row| ProductDecoration.new(row).build }
-                 .map { |row| ProductDivision.new(row, division_strategy, {}).split }
+        rows
+          .map { |row| mappings(row) }
+          .map { |row| decorate(row) }
+          .map { |row| split(row) }
+          .each_with_index { |row, i| validate(row, rows[i], result) }
 
-        fields.each_with_index { |row, i| validate(row, rows[i], result) }
         result
       end
 
       private
+
+      def decorate(row)
+        ProductDecoration.new(row).build
+      end
+
+      def split(row)
+        strategy = config['division']['product']['strategy']
+        ProductDivision.new(row, strategy, {}).split
+      end
+
+      def mappings(row)
+        mutations = config['mapping']['product']['mutations']
+        ProductMapping.new(row, mutations).transform
+      end
 
       def validate(fields, row, result)
         contract   = ProductContract.new(fields)
@@ -47,10 +61,6 @@ module Nagual
         debug("Variations: #{variations}, Images: #{images}")
         Models::Product.new(attributes: attributes, variations: variations,
                             images: images)
-      end
-
-      def division_strategy
-        config['division']['product']['strategy']
       end
     end
   end

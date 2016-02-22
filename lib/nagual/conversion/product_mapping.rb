@@ -1,12 +1,9 @@
-require 'nagual/util/configuration'
-
 module Nagual
   module Conversion
     class ProductMapping
-      include Nagual::Configuration
-
-      def initialize(row)
-        @row = row
+      def initialize(row, mutations)
+        @row       = row
+        @mutations = mutations
       end
 
       def transform
@@ -18,7 +15,7 @@ module Nagual
       private
 
       def transformed_value(key, value)
-        mutation = product_mutations.find { |m| key == m['key'] }
+        mutation = @mutations.find { |m| key == m['key'] }
         return {} unless mutation
 
         { mutation['to'] =>
@@ -31,10 +28,6 @@ module Nagual
         when 'convert'
           params['values'][value] || params['default']
         end
-      end
-
-      def product_mutations
-        config['mapping']['product']['mutations']
       end
     end
   end

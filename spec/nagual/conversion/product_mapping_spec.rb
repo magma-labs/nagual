@@ -2,7 +2,18 @@ require 'spec_helper'
 require 'nagual/conversion/product_mapping'
 
 RSpec.describe Nagual::Conversion::ProductMapping do
-  subject { described_class.new(row) }
+  let(:mutations) do
+    [
+      { 'key' => 'id', 'to' => 'product_id', 'name' => 'none' },
+      { 'key' => 'status', 'to' => 'online_flag', 'name' => 'convert',
+        'params' => {
+          'default' => 'false',
+          'values'  => { 'online' => 'true' }
+        } }
+    ]
+  end
+
+  subject { described_class.new(row, mutations) }
 
   context 'with simple mapped values' do
     let(:row) { { 'id' => 'id' } }
