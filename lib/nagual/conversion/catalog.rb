@@ -27,7 +27,8 @@ module Nagual
       private
 
       def decorate(row)
-        ProductDecoration.new(row).build
+        configuration = config['decoration']['product']
+        ProductDecoration.new(row, configuration).build
       end
 
       def split(row)

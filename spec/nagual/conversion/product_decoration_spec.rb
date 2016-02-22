@@ -2,12 +2,24 @@ require 'spec_helper'
 require 'nagual/conversion/product_decoration'
 
 RSpec.describe Nagual::Conversion::ProductDecoration do
-  subject { described_class.new(row) }
-
-  let(:fixed_values) do
-    { 'min_order_quantity' => 10, 'available_flag' => 'true' }
+  let(:config) do
+    {
+      'fixed' => { 'available_flag' => 'true' },
+      'copy'  => [{ 'key' => 'short_description', 'to' => 'page_description' }],
+      'merge' => [
+        {
+          'to'   => 'page_url',
+          'keys' => %w(product_id organization),
+          'pattern' => 'http://host/%{organization}/%{product_id}'
+        }
+      ]
+    }
   end
-  let(:expected) { fixed_values.merge(row) }
+
+  let(:fixed_values) { { 'available_flag' => 'true' } }
+  let(:expected)     { fixed_values.merge(row) }
+
+  subject { described_class.new(row, config) }
 
   context 'for fixed values' do
     let(:row) { {} }
