@@ -33,7 +33,8 @@ module Nagual
 
       def split(row)
         strategy = config['division']['product']['strategy']
-        ProductDivision.new(row, strategy, {}).split
+        params   = config['division']['product']['params']
+        ProductDivision.new(row, strategy, params).split
       end
 
       def mappings(row)

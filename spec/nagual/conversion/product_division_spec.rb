@@ -15,8 +15,8 @@ RSpec.describe Nagual::Conversion::ProductDivision do
   context 'with none strategy for division' do
     let(:row) do
       {
-        'product_id' => 'anything',
-        'sizes' => 'S,M,L',
+        'product_id'       => 'anything',
+        'sizes'            => 'S,M,L',
         'manufacturer_sku' => '0015311C'
       }
     end
