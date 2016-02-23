@@ -18,7 +18,7 @@ module Nagual
         rows
           .map { |row| mappings(row) }
           .map { |row| decorate(row) }
-          .map { |row| split(row) }
+          .map { |row| split(row) }.flatten
           .each_with_index { |row, i| validate(row, rows[i], result) }
 
         result
