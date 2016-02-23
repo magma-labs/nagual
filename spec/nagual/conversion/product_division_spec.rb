@@ -16,7 +16,7 @@ RSpec.describe Nagual::Conversion::ProductDivision do
     let(:row) do
       {
         'product_id' => 'anything',
-        'sizes' => %w(S M L),
+        'sizes' => 'S,M,L',
         'manufacturer_sku' => '0015311C'
       }
     end

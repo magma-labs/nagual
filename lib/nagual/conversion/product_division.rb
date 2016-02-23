@@ -38,7 +38,7 @@ module Nagual
       end
 
       def variations
-        @row[@params['variations']]
+        @row[@params['variations']].split(',')
       end
     end
   end
