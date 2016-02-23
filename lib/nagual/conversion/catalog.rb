@@ -5,6 +5,7 @@ require 'nagual/conversion/product_mapping'
 require 'nagual/conversion/variations_mapping'
 require 'nagual/conversion/images_mapping'
 require 'nagual/conversion/product_decoration'
+require 'nagual/conversion/product_division'
 require 'nagual/conversion/product_contract'
 
 module Nagual
