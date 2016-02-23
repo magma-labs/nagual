@@ -17,6 +17,7 @@ module Nagual
       def transformed_value(key, value)
         mutation = @mutations.find { |m| key == m['key'] }
         return {} unless mutation
+        return {} unless value
 
         { mutation['to'] =>
           mutate(mutation['name'], value, mutation['params']) }

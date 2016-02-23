@@ -23,6 +23,14 @@ RSpec.describe Nagual::Conversion::ProductMapping do
     end
   end
 
+  context 'with empty values' do
+    let(:row) { { 'id' => nil } }
+
+    it 'removes value' do
+      expect(subject.transform).to eq({})
+    end
+  end
+
   context 'with not simple mapped values' do
     let(:row) { { 'non-existent': 'value' } }
 
