@@ -22,7 +22,7 @@ module Nagual
 
       alias to_s inspect
 
-      def initialize(attributes: {}, variations: [], images: [])
+      def initialize(attributes: {}, variations: [], images: {})
         @variations        = variations.map { |v| Variation.new(v) }
         @images            = images
         @custom_attributes = {}

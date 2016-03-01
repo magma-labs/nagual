@@ -56,10 +56,15 @@ module Nagual
 
       def add_images(xml)
         xml.images do
-          @images.each do |image|
-            xml.send('image-group', 'view-type': image) do
-              path = product_config['image'] % { id: @id, name: image }
-              xml.image(path: path)
+          catalog_config['view_types'].each do |view_type|
+            names = @images[view_type]
+            next unless names
+            xml.send('image-group', 'view-type': view_type) do
+              names.each do |name|
+                path = product_config['image'] %
+                       { id: @id, type: view_type, name: name }
+                xml.image(path: path)
+              end
             end
           end
         end
@@ -103,6 +108,10 @@ module Nagual
 
       def product_config
         config['output']['xml']['product']
+      end
+
+      def catalog_config
+        config['output']['xml']['catalog']
       end
     end
   end

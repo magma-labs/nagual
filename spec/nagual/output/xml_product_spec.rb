@@ -112,18 +112,15 @@ RSpec.describe Nagual::Output::XMLProduct do
 
   context 'product with images' do
     let(:product) do
-      Nagual::Models::Product.new(attributes: { product_id: 'id' },
-                                  images: %w(small medium))
+      Nagual::Models::Product.new(attributes: { 'product_id' => 'id' },
+                                  images: { 'small' => ['standard'] })
     end
 
     it 'has image settings with correct view type' do
       expected_xml =
         "  <images>\n" \
         "    <image-group view-type=\"small\">\n" \
-        "      <image path=\"images/id_small.png\"/>\n" \
-        "    </image-group>\n" \
-        "    <image-group view-type=\"medium\">\n" \
-        "      <image path=\"images/id_medium.png\"/>\n" \
+        "      <image path=\"images/small/id_standard.png\"/>\n" \
         "    </image-group>\n" \
         "  </images>\n"
 

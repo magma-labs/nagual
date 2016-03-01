@@ -30,13 +30,7 @@
   <searchable-if-unavailable-flag>true</searchable-if-unavailable-flag>
   <images>
     <image-group view-type="small">
-      <image path="images/ID_small.png"/>
-    </image-group>
-    <image-group view-type="medium">
-      <image path="images/ID_medium.png"/>
-    </image-group>
-    <image-group view-type="large">
-      <image path="images/ID_large.png"/>
+      <image path="images/small/ID_standard.png"/>
     </image-group>
   </images>
   <template>TEMPLATE</template>

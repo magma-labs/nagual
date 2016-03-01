@@ -3,7 +3,6 @@ require 'nagual/util/configuration'
 
 require 'nagual/conversion/product_mapping'
 require 'nagual/conversion/variations_mapping'
-require 'nagual/conversion/images_mapping'
 require 'nagual/conversion/product_decoration'
 require 'nagual/conversion/product_division'
 require 'nagual/conversion/product_contract'
@@ -68,7 +67,7 @@ module Nagual
 
       def create_product(attributes, row)
         variations = VariationsMapping.new(row).transform
-        images     = ImagesMapping.new(row).transform
+        images     = attributes.delete('images')
 
         debug("Product to be created with attributes: #{attributes},"\
               " images: #{images}, variations: #{variations}")

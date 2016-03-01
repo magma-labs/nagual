@@ -26,7 +26,7 @@ output:
         - color
     product:
       lang: x-default
-      image: 'images/%{id}_%{name}.png'
+      image: 'images/%{type}/%{id}_%{name}.png'
       variant: '%{name}_%{modifier}'
   error_report:
     file: data_examples/error_report
@@ -152,7 +152,6 @@ mapping:
           online: 'true'
     variations:
       - color
-    images: images
 decoration:
   product:
     fixed:
@@ -167,6 +166,12 @@ decoration:
           - organization
         pattern: 'http://host/%{organization}/%{product_id}'
         to: page_url
+    images:
+      - view_type: 'small'
+        filter_key: 'online_flag'
+        filter_value: 'true'
+        names:
+          - 'standard'
 division:
   product:
     strategy: none

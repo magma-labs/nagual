@@ -6,18 +6,22 @@ RSpec.describe Nagual::Conversion::ProductDecoration do
     {
       'fixed' => { 'available_flag' => 'true' },
       'copy'  => [{ 'key' => 'short_description', 'to' => 'page_description' }],
-      'merge' => [
-        {
-          'to'   => 'page_url',
-          'keys' => %w(product_id organization),
-          'pattern' => 'http://host/%{organization}/%{product_id}'
-        }
-      ]
+      'merge' => [{
+        'to'   => 'page_url',
+        'keys' => %w(product_id organization),
+        'pattern' => 'http://host/%{organization}/%{product_id}'
+      }],
+      'images' => [{
+        'view_type'    => 'hi-res',
+        'filter_key'   => 'productType',
+        'filter_value' => 'regular',
+        'names'        => %w(standard shot1 shot2)
+      }]
     }
   end
 
   let(:fixed_values) { { 'available_flag' => 'true' } }
-  let(:expected)     { fixed_values.merge(row) }
+  let(:base)         { fixed_values.merge(row).merge('images' => {}) }
 
   subject { described_class.new(row, config) }
 
@@ -25,7 +29,7 @@ RSpec.describe Nagual::Conversion::ProductDecoration do
     let(:row) { {} }
 
     it 'adds as expected' do
-      expect(subject.build).to eq(expected)
+      expect(subject.build).to eq(base)
     end
   end
 
@@ -33,7 +37,7 @@ RSpec.describe Nagual::Conversion::ProductDecoration do
     let(:row) { { 'short_description' => 'nice description' } }
 
     it 'adds as expected' do
-      expect(subject.build).to eq(expected.merge(
+      expect(subject.build).to eq(base.merge(
                                     'page_description' => 'nice description'))
     end
   end
@@ -42,8 +46,28 @@ RSpec.describe Nagual::Conversion::ProductDecoration do
     let(:row) { { 'product_id' => 'id', 'organization' => 'sawyer' } }
 
     it 'adds as expected' do
-      expect(subject.build).to eq(expected.merge(
+      expect(subject.build).to eq(base.merge(
                                     'page_url' => 'http://host/sawyer/id'))
+    end
+  end
+
+  context 'for images values' do
+    context 'with filter values' do
+      let(:row) { { 'some' => 'value' } }
+
+      it 'adds as expected' do
+        expect(subject.build).to eq(base)
+      end
+    end
+
+    context 'with filter values' do
+      let(:row) { { 'productType' => 'regular' } }
+
+      it 'adds as expected' do
+        expect(subject.build).to eq(base.merge(
+                                      'images' => {
+                                        'hi-res' => %w(standard shot1 shot2) }))
+      end
     end
   end
 end
