@@ -12,7 +12,7 @@ RSpec.describe Nagual::Conversion::ProductDivision do
     end
   end
 
-  context 'with none strategy for division' do
+  context 'with variation strategy for division' do
     let(:row) do
       {
         'product_id'       => 'anything',
