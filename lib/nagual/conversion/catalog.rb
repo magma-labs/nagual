@@ -27,20 +27,23 @@ module Nagual
 
       private
 
+      def mappings(row)
+        debug("Row to be mapped: #{row}")
+        mutations = config['mapping']['product']['mutations']
+        ProductMapping.new(row, mutations).transform
+      end
+
       def decorate(row)
+        debug("Row to be decorated: #{row}")
         configuration = config['decoration']['product']
         ProductDecoration.new(row, configuration).build
       end
 
       def split(row)
+        debug("Row to be splitted: #{row}")
         strategy = config['division']['product']['strategy']
         params   = config['division']['product']['params']
         ProductDivision.new(row, strategy, params).split
-      end
-
-      def mappings(row)
-        mutations = config['mapping']['product']['mutations']
-        ProductMapping.new(row, mutations).transform
       end
 
       def build_contract(fields)
@@ -50,10 +53,10 @@ module Nagual
       end
 
       def validate(fields, row, result)
+        debug("Row to be validated: #{row}")
         product_id = fields['product_id']
         contract   = build_contract(fields)
 
-        debug("Product fields: #{fields}")
         if contract.valid?
           info("#{product_id} follows product contract")
           result.objects << create_product(fields, row)
@@ -67,7 +70,8 @@ module Nagual
         variations = VariationsMapping.new(row).transform
         images     = ImagesMapping.new(row).transform
 
-        debug("Variations: #{variations}, Images: #{images}")
+        debug("Product to be created with attributes: #{attributes},"\
+              " images: #{images}, variations: #{variations}")
         Models::Product.new(attributes: attributes, variations: variations,
                             images: images)
       end
