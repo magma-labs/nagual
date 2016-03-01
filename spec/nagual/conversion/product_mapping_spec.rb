@@ -78,5 +78,21 @@ RSpec.describe Nagual::Conversion::ProductMapping do
         expect(subject.transform).to eq('online_flag' => 'offline')
       end
     end
+
+    context 'with date conversion' do
+      let(:mutations) do
+        [{
+          'key' => 'onlineTo', 'to' => 'online_to', 'name' => 'date',
+          'params' => { 'format' => '%m/%d/%Y' }
+        }]
+      end
+      let(:row) { { 'onlineTo' => '11/23/2016' } }
+
+      subject { described_class.new(row, mutations) }
+
+      it 'returns same value' do
+        expect(subject.transform).to eq('online_to' => '2016-11-23T00:00:00')
+      end
+    end
   end
 end

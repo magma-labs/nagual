@@ -90,10 +90,14 @@ mapping:
       name: none
     - key: from
       to: online_from
-      name: none
+      name: date
+      params:
+        format: '%Y-%m-%d'
     - key: to
       to: online_to
-      name: none
+      name: date
+      params:
+        format: '%Y-%m-%d'
     - key: searchable?
       to: searchable_flag
       name: none

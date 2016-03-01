@@ -39,6 +39,8 @@ define a mutation for each expected columns:
 * to: product field name to where values will be saved
 * name: mutation name, can be either:
     * 'none' to copy the values as it is
+    * 'date' to parse a date column
+      * format: string format to parse input value
     * 'convert' to modify the value and it has the following params:
         * default: if value is not found this value will be used
         * values: it's a map to convert a field value to another one.

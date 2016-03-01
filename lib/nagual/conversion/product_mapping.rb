@@ -26,6 +26,8 @@ module Nagual
       def mutate(name, value, params)
         case name
         when 'none' then value
+        when 'date'
+          date(name, value, params)
         when 'convert'
           convert(name, value, params)
         end
@@ -35,6 +37,10 @@ module Nagual
         return params['values'][value] if params['values'][value]
 
         params['default'] == 'NONE' ? value : params['default']
+      end
+
+      def date(_name, value, params)
+        DateTime.strptime(value, params['format']).strftime '%Y-%m-%dT%H:%M:%S'
       end
     end
   end
