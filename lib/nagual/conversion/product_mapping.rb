@@ -19,8 +19,8 @@ module Nagual
         return {} unless mutation
         return {} unless value
 
-        { mutation['to'] =>
-          mutate(mutation['name'], value, mutation['params']) }
+        { mutation['to'] => mutate(mutation['name'], value,
+                                   mutation['params']).strip }
       end
 
       def mutate(name, value, params)

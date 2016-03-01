@@ -24,6 +24,14 @@ RSpec.describe Nagual::Conversion::ProductMapping do
       end
     end
 
+    context 'with blank spaces on the sides' do
+      let(:row) { { 'id' => ' id 1 ' } }
+
+      it 'trims the value' do
+        expect(subject.transform).to eq('product_id' => 'id 1')
+      end
+    end
+
     context 'with empty values' do
       let(:row) { { 'id' => nil } }
 
