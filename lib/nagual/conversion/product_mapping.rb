@@ -40,6 +40,7 @@ module Nagual
       end
 
       def date(_name, value, params)
+        return unless value
         DateTime.strptime(value, params['format']).strftime '%Y-%m-%dT%H:%M:%S'
       end
     end
