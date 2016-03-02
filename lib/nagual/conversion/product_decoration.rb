@@ -1,9 +1,9 @@
 module Nagual
   module Conversion
     class ProductDecoration
-      def initialize(row, params)
+      def initialize(row, config)
         @row    = row
-        @params = params
+        @config = config
       end
 
       def build
@@ -13,28 +13,28 @@ module Nagual
       private
 
       def images
-        @params['images'].map do |params|
-          if @row[params['filter_key']] == params['filter_value']
-            ['images', { params['view_type'] => params['names'] }]
-          else
-            ['images', {}]
-          end
-        end.to_h
+        config = @config['images'].find do |params|
+          @row[params['filter_key']] == params['filter_value']
+        end
+
+        img_hash = config ? { config['view_type'] => config['names'] } : {}
+
+        { 'images' => img_hash }
       end
 
       def fixed
-        @params['fixed']
+        @config['fixed']
       end
 
       def copied
-        @params['copy']
+        @config['copy']
           .select { |copy| @row[copy['key']] }
           .map    { |copy| [copy['to'], @row[copy['key']]] }
           .to_h
       end
 
       def merged
-        @params['merge'].map do |merge|
+        @config['merge'].map do |merge|
           values = prepare_values(merge['keys'])
           [merge['to'], merge['pattern'] % values] unless values.empty?
         end.compact.to_h

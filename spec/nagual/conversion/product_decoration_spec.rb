@@ -16,6 +16,11 @@ RSpec.describe Nagual::Conversion::ProductDecoration do
         'filter_key'   => 'productType',
         'filter_value' => 'regular',
         'names'        => %w(standard shot1 shot2)
+      }, {
+        'view_type'    => 'hi-res',
+        'filter_key'   => 'productType',
+        'filter_value' => 'dyo',
+        'names'        => %w(standard)
       }]
     }
   end
@@ -52,21 +57,31 @@ RSpec.describe Nagual::Conversion::ProductDecoration do
   end
 
   context 'for images values' do
-    context 'with filter values' do
+    context 'with filter values not matching' do
       let(:row) { { 'some' => 'value' } }
 
-      it 'adds as expected' do
+      it 'images is empty' do
         expect(subject.build).to eq(base)
       end
     end
 
-    context 'with filter values' do
+    context 'with filter values matching first' do
       let(:row) { { 'productType' => 'regular' } }
 
       it 'adds as expected' do
         expect(subject.build).to eq(base.merge(
                                       'images' => {
                                         'hi-res' => %w(standard shot1 shot2) }))
+      end
+    end
+
+    context 'with filter values matching second' do
+      let(:row) { { 'productType' => 'dyo' } }
+
+      it 'adds as expected' do
+        expect(subject.build).to eq(base.merge(
+                                      'images' => {
+                                        'hi-res' => %w(standard) }))
       end
     end
   end
