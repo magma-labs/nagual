@@ -75,6 +75,44 @@ saved in an specific product field
 * pattern: string with the expected output (keys can be used with %{} notation)
 * to: name of the field that will be used to save the output
 
+### Images
+
+You can add configuration to add images links to specified products.
+
+* view_type: name for the image type, must be one of the catalog
+view_types defined.
+* filter_key and filter_value are used to select the rows that will
+contain the images defined.
+* names: this are a list of images that you want to add.
+
+
+For example:
+```
+images:
+  - view_type: large
+    filter_key: online_flag
+    filter_value: true
+    names:
+      - standard
+      - shot1
+```
+
+Will create 2 large images for each product with `online_flag=true`, the names
+for those images will be: `images/large/id_standard.png` and `images/large/id_shot1.png`
+
+Images will be expected to exist in the specified location.
+
+To modify where images are stored or name pattern, modify
+`ouput.xml.product.image` value in configuration file.
+
+For example:
+
+If we want product with id "123" to have medium and swatch images then on the
+column for images in the products row, `medium,swatch` value will be added.
+
+And then on `images` folder `123_medium.png` and `123_swatch.png` files
+are expected to be present.
+
 ## Division
 
 ### Variation
@@ -146,25 +184,6 @@ values are defined, for example if a product contains 3 different variation
 values, then 9 variants will be generated, considering all the possible
 combination of values.
 
-## Images
-
-We support 4 different types of images: `large,medium,small,swatch`
-
-To set an image to a product, image sizes need to be listed in `images`
-column of `products.csv`
-
-The column name for images can be modified in mapping section of `configuration.yml`
-
-And then image is expected to be located in `images` folder with this format:
-`<PRODUCT_ID>_<SIZE>.png`
-
-For example:
-
-If we want product with id "123" to have medium and swatch images then on the
-column for images in the products row, `medium,swatch` value will be added.
-
-And then on `images` folder `123_medium.png` and `123_swatch.png` files
-are expected to be present.
 
 # Nagual development
 

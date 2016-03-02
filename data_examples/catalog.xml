@@ -28,11 +28,7 @@
   <available-flag>true</available-flag>
   <searchable-flag>true</searchable-flag>
   <searchable-if-unavailable-flag>true</searchable-if-unavailable-flag>
-  <images>
-    <image-group view-type="small">
-      <image path="images/small/ID_standard.png"/>
-    </image-group>
-  </images>
+  <images/>
   <template>TEMPLATE</template>
   <tax-class-id>TX1</tax-class-id>
   <brand>BRAND</brand>
