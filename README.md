@@ -85,7 +85,6 @@ view_types defined.
 contain the images defined.
 * names: this are a list of images that you want to add.
 
-
 For example:
 ```
 images:
@@ -105,13 +104,18 @@ Images will be expected to exist in the specified location.
 To modify where images are stored or name pattern, modify
 `ouput.xml.product.image` value in configuration file.
 
-For example:
+### Variations
 
-If we want product with id "123" to have medium and swatch images then on the
-column for images in the products row, `medium,swatch` value will be added.
+To generate a new variation for products in the catalog a column needs to be
+added in the csv file and then added to the `variations` section for decoration
 
-And then on `images` folder `123_medium.png` and `123_swatch.png` files
-are expected to be present.
+```
+  variations:
+    - color
+```
+
+For example to set a color variation a input values can have values
+such as "blue,green" or "red"
 
 ## Division
 
@@ -163,16 +167,6 @@ If a column is not mapped in configuration file it will be ignored.
 
 If a column is mapped but there is not product field with that name,
 then a custom attribute will be generated for that value.
-
-## Variations
-
-To generate a new variation for products in the catalog a column needs to be
-added in the csv file and then added to the `variations` section for mapping
-the expected value for each row is either a comma separated list of values
-or blank.
-
-For example to set a color variation a new column will be added as
-`color` and row can have values such as "blue,green" or "red"
 
 ### Variants
 
