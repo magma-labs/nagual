@@ -7,20 +7,12 @@ module Nagual
       end
 
       def build
-        @row.merge(fixed).merge(copied).merge(merged).merge(images)
+        [fixed, copied, merged, images, variations]
+          .inject(@row, &:merge)
+          .reject { |key, _| @config['variations'].include?(key) }
       end
 
       private
-
-      def images
-        config = @config['images'].find do |params|
-          @row[params['filter_key']] == params['filter_value']
-        end
-
-        img_hash = config ? { config['view_type'] => config['names'] } : {}
-
-        { 'images' => img_hash }
-      end
 
       def fixed
         @config['fixed']
@@ -38,6 +30,24 @@ module Nagual
           values = prepare_values(merge['keys'])
           [merge['to'], merge['pattern'] % values] unless values.empty?
         end.compact.to_h
+      end
+
+      def images
+        config = @config['images'].find do |params|
+          @row[params['filter_key']] == params['filter_value']
+        end
+
+        config ? { 'images' => { config['view_type'] => config['names'] } } : {}
+      end
+
+      def variations
+        variations = @config['variations'].map do |variation_key|
+          if @row[variation_key] && !@row[variation_key].empty?
+            { id: variation_key, values: @row[variation_key].split(',') }
+          end
+        end.compact
+
+        variations.empty? ? {} : { 'variations' => variations }
       end
 
       def prepare_values(keys)

@@ -21,12 +21,13 @@ RSpec.describe Nagual::Conversion::ProductDecoration do
         'filter_key'   => 'productType',
         'filter_value' => 'dyo',
         'names'        => %w(standard)
-      }]
+      }],
+      'variations' => %w(color)
     }
   end
 
   let(:fixed_values) { { 'available_flag' => 'true' } }
-  let(:base)         { fixed_values.merge(row).merge('images' => {}) }
+  let(:base)         { fixed_values.merge(row) }
 
   subject { described_class.new(row, config) }
 
@@ -82,6 +83,19 @@ RSpec.describe Nagual::Conversion::ProductDecoration do
         expect(subject.build).to eq(base.merge(
                                       'images' => {
                                         'hi-res' => %w(standard) }))
+      end
+    end
+
+    context 'for variation values' do
+      context 'with mapped values' do
+        let(:row) { { 'color' => 'Blue,Red' } }
+        let(:variations) do
+          { 'variations' => [{ id: 'color', values: %w(Blue Red) }] }
+        end
+
+        it 'has no errors' do
+          expect(subject.build).to eq(fixed_values.merge(variations))
+        end
       end
     end
   end

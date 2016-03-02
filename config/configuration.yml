@@ -140,8 +140,11 @@ mapping:
     - key: 'page keywords'
       to: page_keywords
       name: none
-    - key: 'organization'
+    - key: organization
       to: organization
+      name: none
+    - key: color
+      to: color
       name: none
     - key: status
       to: online_flag
@@ -150,8 +153,6 @@ mapping:
         default: 'false'
         values:
           online: 'true'
-    variations:
-      - color
 decoration:
   product:
     fixed:
@@ -172,6 +173,8 @@ decoration:
         filter_value: true
         names:
           - standard
+    variations:
+      - color
 division:
   product:
     strategy: none
