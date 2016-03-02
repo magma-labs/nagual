@@ -53,7 +53,7 @@ RSpec.describe Nagual::Conversion::ProductMapping do
         context 'with expected value' do
           let(:row) { { 'status' => 'online' } }
 
-          it 'returns true' do
+          it 'returns mapping' do
             expect(subject.transform).to eq('online_flag' => 'true')
           end
         end
@@ -61,7 +61,15 @@ RSpec.describe Nagual::Conversion::ProductMapping do
         context 'with other value' do
           let(:row) { { 'status' => 'offline' } }
 
-          it 'returns true' do
+          it 'returns default' do
+            expect(subject.transform).to eq('online_flag' => 'false')
+          end
+        end
+
+        context 'with nil value' do
+          let(:row) { { 'status' => nil } }
+
+          it 'returns default' do
             expect(subject.transform).to eq('online_flag' => 'false')
           end
         end
